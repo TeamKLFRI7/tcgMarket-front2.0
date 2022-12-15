@@ -1,13 +1,10 @@
-import { Link } from "react-router-dom"
 
-const card = () => {
+
+const card = props => {
   return (
     <div style={styles.card}>
-        <img style={styles.img} src="./fixtures/card.png"/>
-        <h2 style={styles.name}>Dracaufeu</h2>
-        <div>
-            <Link to="#"/>
-        </div>
+        <img style={styles.img} src={props.card.img} alt={"Carte " + props.card.name}/>
+        <h2 style={styles.name}>{props.card.name}</h2>
     </div>
   )
 }
