@@ -1,6 +1,7 @@
 
 
 const card = props => {
+    console.log(props)
   return (
     <div style={styles.card}>
         <img style={styles.img} src={props.card.img} alt={"Carte " + props.card.name}/>
@@ -11,10 +12,9 @@ const card = props => {
 
 const styles = {
     card: {
-        padding: '5px',
+        padding: '.5rem',
         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 0px 8px',
-        borderRadius: '10px',
-        width: '48%',
+        borderRadius: '3%',
         gap: '5px',
         display: 'flex',
         justifyContent: 'center',
@@ -22,13 +22,14 @@ const styles = {
         flexDirection: 'column'
     },
     img: {
-        width: '100%'
+        width: '100%',
+        borderRadius: '3%',
     },
     name: {
         fontSize: '14px',
         margin: 0,
         padding: 0,
-        textAlign: 'center'
+        textAlign: 'center',
     }
 }
 

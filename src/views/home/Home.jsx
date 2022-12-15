@@ -1,14 +1,10 @@
-import Card from "../components/Card";
+
 
 const Home = () => {
   return (
     <div>
         <h1 style={styles.title}>Dernières cartes mises en ligne :</h1>
         <div style={styles.cardsContainer}>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
         </div>
     </div>
   )
