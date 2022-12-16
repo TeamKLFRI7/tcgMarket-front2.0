@@ -15,7 +15,7 @@ const styles = {
         padding: '.5rem',
         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 0px 8px',
         borderRadius: '3%',
-        gap: '5px',
+        gap: '.5rem',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
