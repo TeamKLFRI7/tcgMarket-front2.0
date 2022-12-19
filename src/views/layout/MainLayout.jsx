@@ -31,7 +31,7 @@ const styles = {
         borderRadius: '62px',
         border: 'none',
         boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
-        marginBottom: '5px'
+        margin: '.5rem 0 .5rem'
     },
     contentContainer: {
         backgroundColor: 'rgb(100, 106, 234)',

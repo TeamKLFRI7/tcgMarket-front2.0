@@ -1,32 +1,27 @@
-import Card from "../components/Card";
+import Seriecard from "../../components/Seriecard";
+import {useGetGame} from "../../axios";
+
 
 const Home = () => {
+    const {
+        data,
+        loading,
+    } = useGetGame();
+    //console.log(data);
   return (
     <div>
-        <h1 style={styles.title}>Dernières cartes mises en ligne :</h1>
-        <div style={styles.cardsContainer}>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-        </div>
+        {loading && <div>Chargement</div>}
+        {!loading && (
+            <>
+                <h1 className={'title'}>Dernières cartes mises en ligne :</h1>
+                <h1 className={'title'}>Séries pokémons :</h1>
+                {data.cardSeries.map((serie, index) => (
+                    <Seriecard key={index} serieData={serie} />
+                ))}
+            </>
+        )}
     </div>
   )
-}
-
-const styles = {
-    cardsContainer: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexBasis: 'auto',
-        justifyContent: 'space-between',
-        gap: '10px',
-    },
-    title: {
-        fontSize: '14px',
-        margin: '0',
-        marginBottom: '20px',
-    }
 }
 
 export default Home
