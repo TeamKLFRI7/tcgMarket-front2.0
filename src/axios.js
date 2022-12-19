@@ -1,5 +1,6 @@
-import {useEffect, useState} from "react";
 import axios from 'axios';
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
 let baseUrl = 'http://127.0.0.1:8000/api';
 
@@ -18,11 +19,35 @@ getSeries();
 export let useGetCards = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
+    const {id} = useParams()
 
     useEffect(() => {
         const fetchData = async() => {
             try {
-                const {data: response} = await  axios.get(baseUrl + '/card_sets/1');
+                const {data: response} = await  axios.get(baseUrl + `/card_sets/${id}`);
+                setData(response);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+        fetchData();
+    }, []);
+
+    return {
+        data,
+        loading,
+    };
+};
+
+export let useGetGame = () => {
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async() => {
+            try {
+                const {data: response} = await  axios.get(baseUrl + '/games/1');
                 setData(response);
             } catch (error) {
                 console.log(error);
