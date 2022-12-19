@@ -7,7 +7,6 @@ const Cards = () => {
         data,
         loading,
     } = useGetCards();
-    console.log(data)
     return (
         <div>
             {loading && <div>Chargement</div>}
