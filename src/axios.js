@@ -2,12 +2,12 @@ import axios from 'axios';
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
-let baseUrl = 'http://127.0.0.1:8008/api';
+let baseUrl = process.env.REACT_APP_URL_API;
 
 const getSeries = () => {
     axios.get(baseUrl + '/card_series?page=1')
     .then(function(response) {
-        console.log(response.data['hydra:member']);
+        //console.log(response.data['hydra:member']);
     })
     .catch(function(error) {
         console.log(error);
