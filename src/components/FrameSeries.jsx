@@ -1,13 +1,14 @@
 import {useState} from "react";
-import Setcard from "./Setcard";
+import Set from "./Set";
 
-const Seriecard = (props, {children}) => {
+const FrameSeries = (props, {children}) => {
     const [show, setShow] = useState();
 
     function toggleShow() {
         setShow(!show);
     }
 
+    console.log(props)
     return (
         <div style={styles.cardContainer} onClick={toggleShow}>
             <div style={styles.card}>
@@ -15,7 +16,7 @@ const Seriecard = (props, {children}) => {
                 <span>{props.serieData.serieName}</span>
             </div>
             <div>
-                {show && <Setcard setData={props.serieData.fkIdCardSet}/>}
+                {show && <Set setData={props.serieData.fkIdCardSet}/>}
             </div>
         </div>
     )
@@ -49,4 +50,4 @@ const styles = {
     }
 };
 
-export default Seriecard
+export default FrameSeries
