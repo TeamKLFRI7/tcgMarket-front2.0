@@ -1,5 +1,3 @@
-
-
 const card = props => {
     console.log(props)
   return (

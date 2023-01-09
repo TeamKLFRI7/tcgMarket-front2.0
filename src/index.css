@@ -1,6 +1,8 @@
 * {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
+    text-decoration: none;
+    color: black;
 }
 
 body {
