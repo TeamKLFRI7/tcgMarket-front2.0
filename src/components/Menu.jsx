@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
 import { NavLink } from "react-router-dom"
-import { IcPlus } from '../../icons/IcPlus'
-import { IcUser } from '../../icons/IcUser'
-import { IcMesAnnonces } from '../../icons/IcMesAnnonces'
-import { IcCatalogue } from '../../icons/IcCatalogue'
-import { IcSold } from '../../icons/IcSold'
-import { IcLogin } from '../../icons/IcLogin'
-import { IcXMark } from '../../icons/IcXMark'
+import { IcPlus } from '../icons/IcPlus'
+import { IcUser } from '../icons/IcUser'
+import { IcMesAnnonces } from '../icons/IcMesAnnonces'
+import { IcCatalogue } from '../icons/IcCatalogue'
+import { IcSold } from '../icons/IcSold'
+import { IcLogin } from '../icons/IcLogin'
+import { IcXMark } from '../icons/IcXMark'
 
 const NavBar = (props) => {
   let navigate = useNavigate();
