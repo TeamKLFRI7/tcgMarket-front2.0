@@ -1,9 +1,10 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Home from "./views/home/Home";
+import Game from "./views/home/Game";
 import Cards from "./views/home/Cards";
-import Menu from "./views/components/Menu";
+import Menu from "./components/Menu";
 import Auth from "./views/auth/Auth"
 import MainLayout from "./views/layout/MainLayout";
+import Home from "./views/home/Home";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Route path="/login" element={<Auth/>} />
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home/>} />
-          <Route path="set/:id/cartes" element={<Cards/>} />
+          <Route path="/jeux/:id" element={<Game/>} />
+          <Route path="/set/:id/cartes" element={<Cards/>} />
           <Route path="/ajouter-une-annonce" element={<p>Vendre une carte</p>} />
           <Route path="/profil" element={<p>Mon profil</p>} />
           <Route path="/mes-annonces" element={<p>Mes annonces</p>} />

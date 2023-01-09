@@ -1,22 +1,30 @@
-import Seriecard from "../../components/Seriecard";
-import {useGetGame} from "../../axios";
+import {useGetAllGames} from "../../axios";
+import FrameGames from "../../components/FrameGames";
+import {Link} from "react-router-dom";
 
 
 const Home = () => {
     const {
         data,
         loading,
-    } = useGetGame();
-    //console.log(data);
+    } = useGetAllGames();
+    console.log(data['hydra:member']);
   return (
     <div>
         {loading && <div>Chargement</div>}
         {!loading && (
             <>
-                <h1 className={'title'}>Dernières cartes mises en ligne :</h1>
-                <h1 className={'title'}>Séries pokémons :</h1>
-                {data.cardSeries.map((serie, index) => (
-                    <Seriecard key={index} serieData={serie} />
+                {data['hydra:member'].map((game, index) => (
+                    <>
+                        {game.name !== 'Pokemon'
+                            ?
+                            <FrameGames data={game} />
+                            :
+                            <Link to={'jeux/' + game.id} key={index}>
+                                <FrameGames data={game} />
+                            </Link>
+                        }
+                    </>
                 ))}
             </>
         )}
