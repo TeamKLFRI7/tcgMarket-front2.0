@@ -47,7 +47,9 @@ const styles = {
   quit: {
     marginTop: '20px',
     marginLeft: '280px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    background: 'transparent',
+    border: 'none'
   },
   menuPart1: {
     display: 'flex',

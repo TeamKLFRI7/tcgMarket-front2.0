@@ -21,6 +21,9 @@ export const Login = (props) => {
         }}
       >
         <div className='formContainer'>
+
+        {/* <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p> */}
+
           <h1 className='connexionTitle'>CONNECTION</h1>
           <Form className='formContainerLog'> 
             {/* <label htmlFor="email" className='formLabel'>Email</label> */}
