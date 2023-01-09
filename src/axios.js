@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
 let baseUrl = process.env.REACT_APP_URL_API;
+console.log(baseUrl)
 
 const getSeries = () => {
     axios.get(baseUrl + '/card_series?page=1')
@@ -47,7 +48,7 @@ export let useGetGame = () => {
     useEffect(() => {
         const fetchData = async() => {
             try {
-                const {data: response} = await  axios.get(baseUrl + '/games/1');
+                const {data: response} = await  axios.get(baseUrl + '/games/5');
                 setData(response);
             } catch (error) {
                 console.log(error);
