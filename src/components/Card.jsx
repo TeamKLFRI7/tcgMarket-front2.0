@@ -1,4 +1,4 @@
-const card = props => {
+const Card = props => {
     console.log(props)
   return (
     <div style={styles.card}>
@@ -31,4 +31,4 @@ const styles = {
     }
 }
 
-export default card
+export default Card
