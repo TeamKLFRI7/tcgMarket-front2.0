@@ -1,19 +1,26 @@
-import {Outlet, useLocation} from "react-router-dom"
-import home from "../../img/home.png"
-import NavBar from "./NavBar"
+import {useEffect, useState} from "react";
+import {Outlet, useLocation} from "react-router-dom";
+import home from "../../img/home.png";
+import NavBar from "./NavBar";
 
 const MainLayout = () => {
 
+    const hiddenPages = ['/', '/login'];
     const location = useLocation();
+    const [isVisible, setIsVisible] = useState(!hiddenPages.includes(location.pathname));
+
+    useEffect(() => {
+        setIsVisible(!hiddenPages.includes(location.pathname));
+    }, [location]);
 
   return (
     <div style={styles.container}>
-        <input style={styles.searchBar} placeholder="SearchBar"/>
+        {isVisible ? <input style={styles.searchBar} placeholder="SearchBar"/> : null}
         <div style={styles.contentContainer}>
             <div style={location.pathname === '/' ? styles.mainHome : styles.main}>
                 <Outlet/>
             </div>
-            <NavBar style={styles.navBar} />
+            {isVisible ? <NavBar style={styles.navBar}/> : null}
         </div>
     </div>
   )

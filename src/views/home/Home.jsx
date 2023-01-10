@@ -1,6 +1,7 @@
 import {useGetAllGames} from "../../axios";
 import FrameGames from "../../components/FrameGames";
-import {Link} from "react-router-dom";
+import WhiteButton from "../../components/buttons/WhiteButton";
+import DisabledButton from "../../components/buttons/DisabledButton";
 
 
 const Home = () => {
@@ -8,28 +9,38 @@ const Home = () => {
         data,
         loading,
     } = useGetAllGames();
-    console.log(data['hydra:member']);
+
   return (
     <div>
         {loading && <div>Chargement</div>}
         {!loading && (
-            <>
+            <div style={styles.container}>
                 {data['hydra:member'].map((game, index) => (
                     <>
                         {game.name !== 'Pokemon'
                             ?
-                            <FrameGames data={game} />
+                            <DisabledButton type={'button'} children={game.name} key={game.id}/>
                             :
-                            <Link to={'jeux/' + game.id} key={index}>
-                                <FrameGames data={game} />
-                            </Link>
+                            <WhiteButton path={`/jeux/${game.id}`} type={'button'} children={game.name} key={game.id}/>
                         }
                     </>
                 ))}
-            </>
+            </div>
         )}
     </div>
   )
+}
+
+const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    btn: {
+        width: '80%',
+    }
 }
 
 export default Home
