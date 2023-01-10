@@ -8,7 +8,6 @@ import Home from "./views/home/Home";
 
 function App() {
   return (
-    <BrowserRouter>
       <Routes>
         <Route path="/menu" element={<Menu/>} />
         <Route path="/login" element={<Auth/>} />
@@ -20,10 +19,15 @@ function App() {
           <Route path="/profil" element={<p>Mon profil</p>} />
           <Route path="/mes-annonces" element={<p>Mes annonces</p>} />
           <Route path="/catalogue" element={<p>Catalogue de cartes</p>} />
+          <Route path="set/:id/cartes" element={<Cards/>} />
           <Route path="/cartes-en-stock" element={<p>Cartes en stock (en vente)</p>} />
+           {/* <Route element={<RequireAuth />}> */}
+            <Route path="/ajouter-une-annonce" element={<p>Vendre une carte</p>} />
+            <Route path="/profil" element={<p>Mon profil</p>} />
+            <Route path="/mes-annonces" element={<p>Mes annonces</p>} />
+           {/* </Route> */}
         </Route>
       </Routes>
-    </BrowserRouter>
   )
 }
 
