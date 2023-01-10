@@ -1,5 +1,5 @@
 const FrameGames = (props) => {
-    console.log(props)
+
     return (
         <div style={styles.cardContainer}>
             <div style={props.data.name !== 'pokemon' ? styles.disabledCard : styles.card}>

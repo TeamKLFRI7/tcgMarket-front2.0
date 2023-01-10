@@ -7,7 +7,7 @@ const Game = () => {
         data,
         loading,
     } = useGetGame();
-    console.log(data);
+
   return (
     <div>
         {loading && <div>Chargement</div>}

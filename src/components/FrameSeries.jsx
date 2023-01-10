@@ -8,7 +8,6 @@ const FrameSeries = (props, {children}) => {
         setShow(!show);
     }
 
-    console.log(props)
     return (
         <div style={styles.cardContainer} onClick={toggleShow}>
             <div style={styles.card}>
