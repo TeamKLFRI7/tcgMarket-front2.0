@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './Connexion.css'
+import WhiteButton from "../../components/buttons/WhiteButton";
 
 export const Register = (props) => {
   return (
@@ -46,7 +47,8 @@ export const Register = (props) => {
                 <ErrorMessage name="password" />
         
                 <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Vous avez un compte? <span className='span-btn'>Connectez vous.</span></button>
-                <button type="submit" className='formBtnInsc'>S'INSCRIRE</button>
+                <WhiteButton path={'#'} type={"submit"} children={"s'inscrire"}/>
+
             </Form>
         </div>
       </Formik>
