@@ -1,11 +1,11 @@
 import {Link} from "react-router-dom";
 
-const Setcard = props => {
-    console.log(props)
+const Set = props => {
+    //console.log(props)
     return (
         <>
         {props.setData.map((set, index) => (
-            <Link to={'set/' + set.id + '/cartes'} key={index}>
+            <Link to={'/set/' + set.id + '/cartes'} key={index}>
                 <div style={styles.setContainer}>
                         <img src={set.img} alt={'set icone'} style={styles.setImg}/>
                         <img src={set.logo} alt={'set logo'} style={styles.setImg}/>
@@ -36,4 +36,4 @@ const styles = {
 
 
 
-export default Setcard
+export default Set

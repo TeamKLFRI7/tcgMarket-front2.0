@@ -40,14 +40,38 @@ export let useGetCards = () => {
     };
 };
 
-export let useGetGame = () => {
+export let useGetAllGames = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async() => {
             try {
-                const {data: response} = await  axios.get(baseUrl + '/games/1');
+                const {data: response} = await  axios.get(baseUrl + '/games?page=1');
+                setData(response);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+        fetchData();
+    }, []);
+
+    return {
+        data,
+        loading,
+    };
+};
+
+export let useGetGame = () => {
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const {id} = useParams()
+
+    useEffect(() => {
+        const fetchData = async() => {
+            try {
+                const {data: response} = await  axios.get(baseUrl + `/games/${id}`);
                 setData(response);
             } catch (error) {
                 console.log(error);

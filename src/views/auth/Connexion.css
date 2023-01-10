@@ -89,27 +89,3 @@
     border: 1px solid #6C6C6C;
     box-shadow: 0px 5px 5px rgb(188, 188, 188);
 }
-
-.formBtn {
-    background-color: #E5CD24;
-    color: white;
-    font-size: 22px;
-    margin: 20px 0;
-    padding: 20px 10px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0px 5px 5px rgb(188, 188, 188);
-    cursor: pointer;
-}
-
-.formBtnInsc {
-    background-color: white;
-    color: #B49F11;
-    font-size: 22px;
-    margin: 20px 0;
-    padding: 20px 10px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0px 5px 5px rgb(73, 73, 73);
-    cursor: pointer;
-}

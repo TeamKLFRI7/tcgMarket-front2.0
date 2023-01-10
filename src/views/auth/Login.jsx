@@ -1,7 +1,8 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import './Connexion.css'
+import './Connexion.css';
+import YellowButton from "../../components/buttons/YellowButton";
 
 export const Login = (props) => {
   return (
@@ -32,7 +33,7 @@ export const Login = (props) => {
             <ErrorMessage name="password" />
     
             <button className="link-btn" onClick={() => props.onFormSwitch('register')}>Vous n'avez pas de compte? <span className='span-btn'>En créer un.</span></button>
-            <button type="submit" className='formBtn'>SE CONNECTER</button>
+            <YellowButton path={'#'} type={'submit'} children={'se connecter'}/>
           </Form>
         </div>
       </Formik>
