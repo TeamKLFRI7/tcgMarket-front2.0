@@ -1,5 +1,4 @@
 import {useGetAllGames} from "../../axios";
-import FrameGames from "../../components/FrameGames";
 import WhiteButton from "../../components/buttons/WhiteButton";
 import DisabledButton from "../../components/buttons/DisabledButton";
 

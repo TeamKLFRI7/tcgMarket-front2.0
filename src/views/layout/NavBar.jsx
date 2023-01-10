@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom"
-import { IcHome } from '../../icons/IcHome'
-import { IcMenu } from '../../icons/IcMenu'
-import { IcPlus } from '../../icons/IcPlus'
+import { IcHome } from '../../assets/icons/IcHome'
+import { IcMenu } from '../../assets/icons/IcMenu'
+import { IcPlus } from '../../assets/icons/IcPlus'
 
 const NavBar = (props) => {
   return (

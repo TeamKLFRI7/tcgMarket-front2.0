@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Outlet, useLocation} from "react-router-dom";
-import home from "../../img/home.png";
+import home from "../../assets/img/home.png";
 import NavBar from "./NavBar";
 
 const MainLayout = () => {

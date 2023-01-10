@@ -11,7 +11,7 @@ const FrameSeries = (props, {children}) => {
     return (
         <div style={styles.cardContainer} onClick={toggleShow}>
             <div style={styles.card}>
-                <img style={styles.serieCardImg} src={require('../img/pokeball.png')} alt={'pokéball'} />
+                <img style={styles.serieCardImg} src={require('../assets/img/pokeball.png')} alt={'pokéball'} />
                 <span>{props.serieData.serieName}</span>
             </div>
             <div>

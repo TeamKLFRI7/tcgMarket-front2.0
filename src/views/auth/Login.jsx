@@ -8,6 +8,7 @@ import YellowButton from "../../components/buttons/YellowButton";
 
 export const Login = (props) => {
   const navigate = useNavigate();
+  const loginUrl = process.env.REACT_APP_URL_LOGIN;
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
@@ -21,9 +22,8 @@ export const Login = (props) => {
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     axios
-      .post("http://localhost:8008/authentication_token", values)
+      .post(loginUrl, values)
       .then((res) => {
-        console.log(res)
         setApiError(null);
         localStorage.setItem("token", res.data.token);
         navigate("/profil");
