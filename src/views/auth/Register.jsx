@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import "./Connexion.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import WhiteButton from "../../components/buttons/WhiteButton";
 
 export const Register = (props) => {
   let apiUrl = process.env.REACT_APP_URL_API;
@@ -19,7 +20,7 @@ export const Register = (props) => {
     email: Yup.string().email("Adresse mail invalide").required("Required"),
     password: Yup.string()
       .min(8, "Votre mot de passe doit faire au mnimum 8 charactères")
-      .required("Required")
+      .required("Required"),
   });
 
   const [apiError, setApiError] = useState(null);
@@ -58,7 +59,7 @@ export const Register = (props) => {
         pseudo: "",
         phone: "",
         email: "",
-        password: ""
+        password: "",
       }}
       validationSchema={validationSchema}
       onSubmit={handleSubmitRegister}
@@ -107,9 +108,7 @@ export const Register = (props) => {
             <span className="span-btn">Connectez vous.</span>
           </p>
           <p className="error-connection">{apiError}</p>
-          <button type="submit" className="formBtnInsc">
-            S'INSCRIRE
-          </button>
+          <WhiteButton path={"#"} type={"submit"} children={"s'inscrire"} />
         </Form>
       </div>
     </Formik>

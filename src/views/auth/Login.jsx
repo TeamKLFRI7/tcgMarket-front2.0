@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import "./Connexion.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import YellowButton from "../../components/buttons/YellowButton";
 
 export const Login = (props) => {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ export const Login = (props) => {
           />
           <ErrorMessage name="email" />
 
-          {/* <label htmlFor="password" className='formLabel'>Password</label> */}
+            {/* <label htmlFor="password" className='formLabel'>Password</label> */}
           <Field
             name="password"
             type="text"
@@ -81,11 +82,9 @@ export const Login = (props) => {
             <span className="span-btn">En créer un.</span>
           </p>
           <p className="error-connection">{apiError}</p>
-          <button type="submit" className="formBtn">
-            SE CONNECTER
-          </button>
-        </Form>
-      </div>
-    </Formik>
+            <YellowButton path={'#'} type={'submit'} children={'se connecter'}/>
+          </Form>
+        </div>
+      </Formik>
   );
 };
