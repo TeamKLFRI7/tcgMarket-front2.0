@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./Connexion.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import YellowButton from "../../components/buttons/YellowButton";
+import "./Connexion.css";
 
 export const Login = (props) => {
   const navigate = useNavigate();
@@ -23,23 +23,27 @@ export const Login = (props) => {
     setSubmitting(true);
     axios
       .post(loginUrl, values)
-      .then((res) => {
+      .then( async (res) => {
+        console.log(res)
         setApiError(null);
-        localStorage.setItem("token", res.data.token);
-        navigate("/profil");
+        await localStorage.setItem("refresh_token", res.data.refresh_token);
+        await localStorage.setItem("token", res.data.token);
+        props.setToken(res.data.token)
+        navigate("/profil")
         setSubmitting(false);
         // handle success
       })
       .catch((err) => {
-        if (err.response.data.code === 401) {
-          setApiError("Lidentifiant ou le mot de passe est invalide.");
-        } else if (err.response.data.code === 403) {
-          setApiError("Vous n'avez pas accès à ces informations.");
-        } else if (err.response.data.code === 404) {
-          setApiError("Page innaccessible.");
-        } else if (err.response.data.code >= 500) {
-          setApiError("Erreur serveur. Veuillez réassyer ultérieurement.");
-        }
+        console.log(err)
+        // if (err.response.data.code === 401) {
+        //   setApiError("Lidentifiant ou le mot de passe est invalide.");
+        // } else if (err.response.data.code === 403) {
+        //   setApiError("Vous n'avez pas accès à ces informations.");
+        // } else if (err.response.data.code === 404) {
+        //   setApiError("Page innaccessible.");
+        // } else if (err.response.data.code >= 500) {
+        //   setApiError("Erreur serveur. Veuillez réassyer ultérieurement.");
+        // }
         setSubmitting(false);
         // handle error
       });

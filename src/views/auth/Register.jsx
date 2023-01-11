@@ -33,6 +33,7 @@ export const Register = (props) => {
         console.log(res);
         setApiError(null);
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("refresh_token", res.data.refresh_token);
         navigate("/");
         setSubmitting(false);
         // handle success
