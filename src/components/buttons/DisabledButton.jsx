@@ -4,7 +4,7 @@ const DisabledButton = props => {
 
     return (
         <>
-            <button type={props.type} className='btn whiteBtn'><span style={styles.disabled}></span>{props.children}</button>
+            <button disabled={true} type={props.type} className='btn whiteBtn'><span style={styles.disabled}></span>{props.children}</button>
         </>
     )
 }
