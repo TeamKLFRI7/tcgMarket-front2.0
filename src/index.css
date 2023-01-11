@@ -1,6 +1,8 @@
 * {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
+    text-decoration: none;
+    color: black;
 }
 
 body {
@@ -13,4 +15,10 @@ body {
 
 .active {
     color: #eee;
+}
+
+.title {
+    font-size: 1rem;
+    margin: 0;
+    margin-bottom: 1rem;
 }

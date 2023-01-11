@@ -1,31 +1,59 @@
-import Card from './components/Card'
+import {useGetAllGames} from "../../axios";
+import WhiteButton from "../../components/buttons/WhiteButton";
+import DisabledButton from "../../components/buttons/DisabledButton";
+import home from "../../assets/img/home.png";
+
 
 const Home = () => {
+    const {
+        data,
+        loading,
+    } = useGetAllGames();
+
   return (
-    <div>
-        <h1 style={styles.title}>Dernières cartes mises en ligne :</h1>
-        <div style={styles.cardsContainer}>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-        </div>
+    <div style={styles.mainHome}>
+        {loading && <div>Chargement</div>}
+        {!loading && (
+            <div style={styles.container}>
+                {data['hydra:member'].map((game, index) => (
+                    <>
+                        {game.name !== 'Pokemon'
+                            ?
+                            <DisabledButton type={'button'} children={game.name} key={game.id}/>
+                            :
+                            <WhiteButton path={`/jeux/${game.id}`} type={'button'} children={game.name} key={game.id}/>
+                        }
+                    </>
+                ))}
+            </div>
+        )}
     </div>
   )
 }
 
 const styles = {
-    cardsContainer: {
+    mainHome: {
+        backgroundImage: `url(${home}), radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(99,106,242,1) 53%)`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'fill',
+        backgroundPosition: '0% 100%',
         display: 'flex',
-        flexWrap: 'wrap',
-        flexBasis: 'auto',
-        justifyContent: 'space-between',
-        gap: '10px',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        border: 'none',
+        marginBottom: '5px',
+        padding: '20px',
+        fontSize: '18px',
+        flexGrow: '1',
+        boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
+        minHeight: '100vh'
     },
-    title: {
-        fontSize: '14px',
-        margin: '0',
-        marginBottom: '20px',
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    btn: {
+        width: '80%',
     }
 }
 

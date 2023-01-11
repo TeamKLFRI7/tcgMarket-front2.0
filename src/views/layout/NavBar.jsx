@@ -1,12 +1,14 @@
 import { NavLink } from "react-router-dom"
-import { FaDollarSign, FaEllipsisH, FaHome } from 'react-icons/fa'
+import { IcHome } from '../../assets/icons/IcHome'
+import { IcMenu } from '../../assets/icons/IcMenu'
+import { IcPlus } from '../../assets/icons/IcPlus'
 
 const NavBar = (props) => {
   return (
-    <div style={{...props.style, display: 'flex', justifyContent: 'space-around', fontSize: '30px'}}>
-        <NavLink to={'/sell'} className={({ isActive }) => (isActive ? 'active' : 'inactive')}><FaDollarSign /></NavLink>
-        <NavLink to={'/'} className={({ isActive }) => (isActive ? 'active' : 'inactive')}><FaHome /></NavLink>
-        <NavLink to={'/menu'} className={({ isActive }) => (isActive ? 'active' : 'inactive')}><FaEllipsisH /></NavLink>
+    <div style={{...props.style, display: 'flex', justifyContent: 'space-around', fontSize: '30px'}} id={'navBar'}>
+        <NavLink to={'/ajouter-une-annonce'} className={({ isActive }) => (isActive ? 'active' : 'inactive')}><IcPlus /></NavLink>
+        <NavLink to={'/'} className={({ isActive }) => (isActive ? 'active' : 'inactive')}><IcHome /></NavLink>
+        <NavLink to={'/menu'} className={({ isActive }) => (isActive ? 'active' : 'inactive')}><IcMenu /></NavLink>
     </div>
   )
 }
