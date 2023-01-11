@@ -16,10 +16,10 @@ function App() {
 
   return (
       <Routes>
+        <Route path="/" element={<Home/>}/>
         <Route path="/menu" element={<Menu/>} />
         <Route path="/login" element={<Auth setToken={setToken}/>} />
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home/>} />
+        <Route element={<MainLayout />}>
           <Route path="/jeux/:id" element={<Game/>} />
           <Route path="/set/:id/cartes" element={<Cards/>} />
           <Route path="/catalogue" element={<p>Catalogue de cartes</p>} />

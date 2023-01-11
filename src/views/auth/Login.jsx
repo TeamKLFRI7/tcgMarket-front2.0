@@ -21,10 +21,8 @@ export const Login = (props) => {
 
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
-    axios
-      .post(loginUrl, values)
+    axios.post(loginUrl, values)
       .then( async (res) => {
-        console.log(res)
         setApiError(null);
         await localStorage.setItem("refresh_token", res.data.refresh_token);
         await localStorage.setItem("token", res.data.token);
@@ -34,16 +32,15 @@ export const Login = (props) => {
         // handle success
       })
       .catch((err) => {
-        console.log(err)
-        // if (err.response.data.code === 401) {
-        //   setApiError("Lidentifiant ou le mot de passe est invalide.");
-        // } else if (err.response.data.code === 403) {
-        //   setApiError("Vous n'avez pas accès à ces informations.");
-        // } else if (err.response.data.code === 404) {
-        //   setApiError("Page innaccessible.");
-        // } else if (err.response.data.code >= 500) {
-        //   setApiError("Erreur serveur. Veuillez réassyer ultérieurement.");
-        // }
+        if (err.response.data.code === 401) {
+          setApiError("Lidentifiant ou le mot de passe est invalide.");
+        } else if (err.response.data.code === 403) {
+          setApiError("Vous n'avez pas accès à ces informations.");
+        } else if (err.response.data.code === 404) {
+          setApiError("Page innaccessible.");
+        } else if (err.response.data.code >= 500) {
+          setApiError("Erreur serveur. Veuillez réassyer ultérieurement.");
+        }
         setSubmitting(false);
         // handle error
       });

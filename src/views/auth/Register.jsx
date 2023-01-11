@@ -27,10 +27,8 @@ export const Register = (props) => {
 
   const handleSubmitRegister = (values, { setSubmitting }) => {
     setSubmitting(true);
-    axios
-      .post(apiUrl + "/users", values)
+    axios.post(apiUrl + "/users", values)
       .then((res) => {
-        console.log(res);
         setApiError(null);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("refresh_token", res.data.refresh_token);
