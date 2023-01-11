@@ -1,26 +1,17 @@
-import {useEffect, useState} from "react";
-import {Outlet, useLocation} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import home from "../../assets/img/home.png";
 import NavBar from "./NavBar";
 
 const MainLayout = () => {
 
-    const hiddenPages = ['/', '/login'];
-    const location = useLocation();
-    const [isVisible, setIsVisible] = useState(!hiddenPages.includes(location.pathname));
-
-    useEffect(() => {
-        setIsVisible(!hiddenPages.includes(location.pathname));
-    }, [location]);
-
   return (
     <div style={styles.container}>
-        {isVisible ? <input style={styles.searchBar} placeholder="SearchBar"/> : null}
+        <input style={styles.searchBar} placeholder="SearchBar" id={'searchBar'}/>
         <div style={styles.contentContainer}>
-            <div style={location.pathname === '/' ? styles.mainHome : styles.main}>
+            <div style={styles.main}>
                 <Outlet/>
             </div>
-            {isVisible ? <NavBar style={styles.navBar}/> : null}
+            <NavBar style={styles.navBar} />
         </div>
     </div>
   )
@@ -33,7 +24,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'strech',
-        minHeight: '100vh'
+        maxHeight: '100vh'
     },
     searchBar: {
         backgroundColor: '#fff',
@@ -42,7 +33,7 @@ const styles = {
         borderRadius: '62px',
         border: 'none',
         boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
-        margin: '.5rem 0 .5rem'
+        margin: '.5rem 0 .5rem',
     },
     contentContainer: {
         backgroundColor: 'rgb(100, 106, 234)',
@@ -60,7 +51,8 @@ const styles = {
         border: 'none',
         flexGrow: '1',
         boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
-        marginBottom: '5px'
+        marginBottom: '5px',
+        maxHeight: 'calc(100vh - searchBar.offsetHeight - navBar.offsetHeight) !important',
     },
     mainHome: {
         backgroundImage: `url(${home}), radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(99,106,242,1) 53%)`,
@@ -84,7 +76,7 @@ const styles = {
         fontSize: '18px',
         border: 'none',
         borderRadius: '30px',
-        marginBottom: '5px'
+        marginBottom: '5px',
     },
 }
 
