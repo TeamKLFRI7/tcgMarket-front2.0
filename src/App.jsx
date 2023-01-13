@@ -6,13 +6,10 @@ import Auth from "./views/auth/Auth"
 import MainLayout from "./views/layout/MainLayout";
 import Home from "./views/home/Home";
 import Profil from "./views/profil/Profil";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
-  // const token = localStorage.getItem('token')
   const [token, setToken] = useState(localStorage.getItem('token'))
-  console.log(token);
-
 
   return (
       <Routes>

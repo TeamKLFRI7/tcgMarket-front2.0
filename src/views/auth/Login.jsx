@@ -5,13 +5,14 @@ import * as Yup from "yup";
 import axios from "axios";
 import YellowButton from "../../components/buttons/YellowButton";
 import "./Connexion.css";
+import { api } from './AuthService';
 
 export const Login = (props) => {
   const navigate = useNavigate();
-  const loginUrl = process.env.REACT_APP_URL_LOGIN;
+  const basicUrl = process.env.REACT_APP_URL_API;
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Required"),
+    userName: Yup.string().required("Required"),
     password: Yup.string()
       .max(15, "Must be 15 characters or less")
       .required("Required"),
@@ -21,13 +22,30 @@ export const Login = (props) => {
 
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
-    axios.post(loginUrl, values)
-      .then( async (res) => {
+    api
+      .post('/authentication_token', values)
+      .then((res) => {
         setApiError(null);
-        await localStorage.setItem("refresh_token", res.data.refresh_token);
-        await localStorage.setItem("token", res.data.token);
-        props.setToken(res.data.token)
-        navigate("/profil")
+        localStorage.setItem("token", res.data.token);
+        props.setToken(res.data.token);
+
+        // -------------------- Récupère le profil utilisateur --------------------
+        axios
+          .get(basicUrl + "/me", {
+            headers: {
+              Authorization: `Bearer ${res.data.token}`,
+              "Content-Type": `application/json`,
+            },
+          })
+          .then((res) => {
+            localStorage.setItem("user", res.data.id);
+          })
+          .catch((err) => {
+            // console.log(err)
+          });
+        // -------------------- END --------------------
+
+        navigate("/profil");
         setSubmitting(false);
         // handle success
       })
@@ -48,7 +66,7 @@ export const Login = (props) => {
 
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ userName: "", password: "" }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
@@ -59,17 +77,17 @@ export const Login = (props) => {
         <Form className="formContainerLog">
           {/* <label htmlFor="email" className='formLabel'>Email</label> */}
           <Field
-            name="email"
-            type="email"
-            placeholder="Email"
+            name="userName"
+            type="text"
+            placeholder="Username"
             className="field"
           />
-          <ErrorMessage name="email" />
+          <ErrorMessage name="username" />
 
-            {/* <label htmlFor="password" className='formLabel'>Password</label> */}
+          {/* <label htmlFor="password" className='formLabel'>Password</label> */}
           <Field
             name="password"
-            type="text"
+            type="password"
             placeholder="Mot de passe"
             className="field"
           />
@@ -83,9 +101,9 @@ export const Login = (props) => {
             <span className="span-btn">En créer un.</span>
           </p>
           <p className="error-connection">{apiError}</p>
-            <YellowButton path={'#'} type={'submit'} children={'se connecter'}/>
-          </Form>
-        </div>
-      </Formik>
+          <YellowButton path={"#"} type={"submit"} children={"se connecter"} />
+        </Form>
+      </div>
+    </Formik>
   );
 };

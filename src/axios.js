@@ -47,7 +47,7 @@ export let useGetAllGames = () => {
     useEffect(() => {
         const fetchData = async() => {
             try {
-                const {data: response} = await  axios.get(baseUrl + '/games/1'); ///games?page=1
+                const {data: response} = await  axios.get(baseUrl + '/games?page=1');
                 setData(response);
             } catch (error) {
                 console.log(error);
