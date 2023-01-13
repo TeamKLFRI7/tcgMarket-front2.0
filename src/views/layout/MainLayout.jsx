@@ -1,17 +1,28 @@
 import {Outlet} from "react-router-dom";
 import home from "../../assets/img/home.png";
 import NavBar from "./NavBar";
+import {useEffect, useRef, useState} from "react";
 
 const MainLayout = () => {
 
+    const searchBarRef = useRef(null);
+    const mainRef = useRef(null);
+    const [navBarHeight, setNavBarHeight] = useState(0);
+
+    useEffect(() => {
+        const searchBarHeight = searchBarRef.current.getBoundingClientRect().height;
+        const viewportHeight = window.innerHeight;
+        mainRef.current.style.height = `calc(${viewportHeight - searchBarHeight - navBarHeight}px - 2rem)`;
+    }, [navBarHeight]);
+
   return (
     <div style={styles.container}>
-        <input style={styles.searchBar} placeholder="SearchBar" id={'searchBar'}/>
+        <input ref={searchBarRef} style={styles.searchBar} placeholder="SearchBar" id={'searchBar'}/>
         <div style={styles.contentContainer}>
-            <div style={styles.main}>
+            <div ref={mainRef} style={styles.main}>
                 <Outlet/>
             </div>
-            <NavBar style={styles.navBar} />
+            <NavBar setHeight={setNavBarHeight} style={styles.navBar} />
         </div>
     </div>
   )
@@ -52,7 +63,8 @@ const styles = {
         flexGrow: '1',
         boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
         marginBottom: '5px',
-        maxHeight: 'calc(100vh - searchBar.offsetHeight - navBar.offsetHeight) !important',
+        height: '',
+        overflow: 'scroll',
     },
     mainHome: {
         backgroundImage: `url(${home}), radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(99,106,242,1) 53%)`,
