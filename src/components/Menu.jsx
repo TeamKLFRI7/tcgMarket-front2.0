@@ -8,25 +8,44 @@ import { IcCatalogue } from '../assets/icons/IcCatalogue'
 import { IcSold } from '../assets/icons/IcSold'
 import { IcLogin } from '../assets/icons/IcLogin'
 import { IcXMark } from '../assets/icons/IcXMark'
+import { useEffect, useState } from "react";
 
 const NavBar = (props) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const [token, setToken] = useState()
+    const getToken = async () => {
+        const localToken = await localStorage.getItem('token');
+        if(localToken) setToken(localToken)
+    }
+    useEffect(() => {
+        getToken()
+    }, [])
+
   
   return (
     <div style={styles.menuContainer}>
         <button style={styles.quit} onClick={() => navigate(-1)} >
             <IcXMark />
         </button>
+         
         <div style={styles.menuPart1}>
+        { token && 
+          <>
             <NavLink to={'/ajouter-une-annonce'} style={styles.link}><h2 style={styles.title}>AJOUTER UNE ANNONCE </h2><IcPlus /></NavLink>
             <NavLink to={'/profil'} style={styles.link}><h2 style={styles.title}>PROFIL PERSONNEL </h2><IcUser /></NavLink>
             <NavLink to={'/mes-annonces'} style={styles.link}><h2 style={styles.title}>MES ANNONCES </h2><IcMesAnnonces /></NavLink>
+          </>
+        }
             <NavLink to={'/catalogue'} style={styles.link}><h2 style={styles.title}>CATALOGUE DES CARTES </h2><IcCatalogue /></NavLink>
-            <NavLink to={'/cartes-en-stock'} style={styles.link}><h2 style={styles.title}>CARTES EN STOCK </h2><IcSold /></NavLink>
+            <NavLink to={'/cartes-en-stock'} style={styles.link}><h2 style={styles.title}>CARTES EN VENTE </h2><IcSold /></NavLink>
         </div>
-        <div style={styles.menuPart2}>
-          <NavLink to={'/login'} style={styles.link}><h2 style={styles.title}>INSCRIPTION / CONNEXION </h2><IcLogin /></NavLink>
-        </div>
+        <div style={styles.menuPart2}></div>
+        { !token && 
+          <div style={styles.menuPart2}>
+            <NavLink to={'/login'} style={styles.link}><h2 style={styles.title}>INSCRIPTION / CONNEXION </h2><IcLogin /></NavLink>
+          </div>
+        }
     </div>
   )
 }

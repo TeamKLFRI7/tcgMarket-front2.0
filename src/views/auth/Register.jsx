@@ -31,7 +31,7 @@ export const Register = (props) => {
       .then((res) => {
         setApiError(null);
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("refresh_token", res.data.refresh_token);
+        // localStorage.setItem("refresh_token", res.data.refresh_token);
         navigate("/");
         setSubmitting(false);
         // handle success
@@ -96,7 +96,7 @@ export const Register = (props) => {
           {/* <label htmlFor="password">Password</label> */}
           <Field
             name="password"
-            type="text"
+            type="password"
             className="field"
             placeholder="Mot de passe"
           />
