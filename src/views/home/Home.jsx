@@ -17,7 +17,7 @@ const Home = () => {
             <div style={styles.container}>
                 {data['hydra:member'].map((game, index) => (
                     <>
-                        {game.name !== 'Pokemon'
+                        {game.isActive === false
                             ?
                             <DisabledButton type={'button'} children={game.name} key={game.id}/>
                             :
