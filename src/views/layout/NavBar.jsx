@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom"
 import { IcHome } from '../../assets/icons/IcHome'
 import { IcMenu } from '../../assets/icons/IcMenu'
 import { IcPlus } from '../../assets/icons/IcPlus'
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 
 
 const NavBar = (props) => {
@@ -11,7 +11,7 @@ const NavBar = (props) => {
     useEffect(() => {
         const LocalHeight= ref.current.getBoundingClientRect().height;
         props.setHeight(LocalHeight);
-    }, [ref, props.setHeight]);
+    }, [ref, props]);
 
 
   return (

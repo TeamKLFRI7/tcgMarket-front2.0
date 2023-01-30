@@ -32,7 +32,7 @@ export let useGetCards = () => {
             setLoading(false);
         };
         fetchData();
-    }, []);
+    }, [id]);
 
     return {
         data,
@@ -79,7 +79,7 @@ export let useGetGame = () => {
             setLoading(false);
         };
         fetchData();
-    }, []);
+    }, [id]);
 
     return {
         data,
