@@ -1,5 +1,4 @@
 const Card = props => {
-    console.log(props)
   return (
     <div style={styles.card}>
         <img style={styles.img} src={props.card.img} alt={"Carte " + props.card.name}/>
