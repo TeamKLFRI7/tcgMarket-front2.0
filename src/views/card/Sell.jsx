@@ -11,7 +11,7 @@ const Sell = () => {
       {loading && <div>Chargement</div>}
       {!loading && (
         <>
-          <PageHeader title={data.setName} img={data.logo} />
+          <h1>{data.name}</h1>
           {data.fkIdCardUser.map((card, index) => (
             <div style={styles.cardsContainer} key={index}>
               <Card
