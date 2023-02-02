@@ -14,23 +14,19 @@ const Cards = () => {
           <PageHeader title={data.setName} img={data.logo} />
           <div style={styles.mainContainer}>
             {data.fkIdCar.map((card, index) => (
-              <>
-                {console.log(card.fkIdCardUser)}
+              <div key={index} style={styles.content}>
                 {card.fkIdCardUser.length !== 0 ? (
-                  <Link to={"/boutique/iddelacarte"} style={styles.link}>
-                    <div style={styles.cardsContainer} key={index}>
-                      <Card card={card} />
+                  <Link to={"/boutique/" + card.id} style={styles.content}>
+                    <div style={styles.cardsContainer}>
+                      <Card img={card.img} name={card.name} />
                     </div>
                   </Link>
                 ) : (
-                  <div
-                    style={{ ...styles.cardsContainer, ...styles.noSell }}
-                    key={index}
-                  >
-                    <Card card={card} />
+                  <div style={{ ...styles.cardsContainer, ...styles.noSell }}>
+                    <Card img={card.img} name={card.name} />
                   </div>
                 )}
-              </>
+              </div>
             ))}
           </div>
         </>
@@ -56,7 +52,7 @@ const styles = {
     opacity: "0.6",
   },
 
-  link: {
+  content: {
     display: "contents",
   },
 };
