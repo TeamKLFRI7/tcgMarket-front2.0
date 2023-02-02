@@ -53,8 +53,6 @@ const styles = {
       display: "flex",
       flexDirection: "column",
       width: "calc(50% - 1rem)",
-      minHeight: "100%",
-      maxHeight: "100%",
     },
     sellInfo: {
       display: "flex",
