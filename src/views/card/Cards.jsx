@@ -19,6 +19,18 @@ const Cards = () => {
                   <Link to={"/boutique/" + card.id} style={styles.content}>
                     <div style={styles.cardsContainer}>
                       <Card img={card.img} name={card.name} />
+                      <div style={styles.cardCountContainer}>
+                        <div style={styles.cardCount}>
+                          <img
+                            src={require("../../assets/img/pokeball.png")}
+                            alt={"pokeball"}
+                            style={styles.cardCountImg}
+                          />
+                          <div style={styles.cardCountText}>
+                            {card.fkIdCardUser.length}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 ) : (
@@ -42,16 +54,38 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-around",
   },
-
   cardsContainer: {
     width: "calc(100% / 2 - 1rem)",
     marginBottom: "1.5rem",
+    position: "relative",
   },
-
+  cardCountContainer: {
+    position: "absolute",
+    top: -16,
+    right: -16,
+    textAlign: "center",
+    borderRadius: "51%",
+  },
+  cardCount: {
+    position: "relative",
+    height: "2.5rem",
+  },
+  cardCountImg: {
+    width: "2.5rem",
+    height: "2.5rem",
+  },
+  cardCountText: {
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
+    fontWeight: "bold",
+    fontSize: "2rem",
+    webkitTextStroke: "1.5px white",
+  },
   noSell: {
     opacity: "0.6",
   },
-
   content: {
     display: "contents",
   },
