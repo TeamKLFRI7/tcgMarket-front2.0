@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import { api } from './views/auth/AuthService';
 
 let baseUrl = process.env.REACT_APP_URL_API;
 
@@ -86,3 +87,27 @@ export let useGetGame = () => {
         loading,
     };
 };
+
+export let useGetUserMe = () => {
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const userId = localStorage.getItem('user');
+
+    useEffect(() => {
+        const fetchData = async() => {
+            try {
+                const {data: response} = await api.get(baseUrl + `/users/${userId}`);
+                setData(response);
+            } catch (error) {
+                console.log(error);
+            }
+            setLoading(false);
+        };
+        fetchData();
+    }, [])
+
+    return {
+        data,
+        loading
+    }
+}

@@ -1,29 +1,37 @@
 import {Outlet} from "react-router-dom";
 import home from "../../assets/img/home.png";
 import NavBar from "./NavBar";
+import SearchBar from "../../components/SearchBar";
+import ModalForm from "../../components/ModalForm";
+
 import {useEffect, useRef, useState} from "react";
 
-const MainLayout = () => {
+const MainLayout = ({modalOpen, setModalOpen}) => {
 
-    const searchBarRef = useRef(null);
     const mainRef = useRef(null);
     const [navBarHeight, setNavBarHeight] = useState(0);
+    const [searchBarHeight, setSearchBarHeight] = useState(0);
 
     useEffect(() => {
-        const searchBarHeight = searchBarRef.current.getBoundingClientRect().height;
         const viewportHeight = window.innerHeight;
         mainRef.current.style.height = `calc(${viewportHeight - searchBarHeight - navBarHeight}px - 2rem)`;
-    }, [navBarHeight]);
+    }, [navBarHeight, searchBarHeight]);    
+
+    
 
   return (
     <div style={styles.container}>
-        <input ref={searchBarRef} style={styles.searchBar} placeholder="SearchBar" id={'searchBar'}/>
-        <div style={styles.contentContainer}>
-            <div ref={mainRef} style={styles.main}>
-                <Outlet/>
+        { modalOpen ? <ModalForm setModalOpen={setModalOpen} /> : 
+        <>
+            <SearchBar setSearchHeight={setSearchBarHeight} />
+            <div style={styles.contentContainer}>
+                <div ref={mainRef} style={styles.main}>
+                    <Outlet/>
+                </div>
+                <NavBar setHeight={setNavBarHeight} style={styles.navBar} />
             </div>
-            <NavBar setHeight={setNavBarHeight} style={styles.navBar} />
-        </div>
+        </>
+        }
     </div>
   )
 }
