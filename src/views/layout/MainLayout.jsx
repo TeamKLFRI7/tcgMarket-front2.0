@@ -20,9 +20,9 @@ const MainLayout = ({modalOpen, setModalOpen}) => {
     
 
   return (
-    <div style={styles.container}>
-        { modalOpen ? <ModalForm setModalOpen={setModalOpen} /> : 
-        <>
+    <>
+        <div style={styles.container}>
+            { modalOpen && <ModalForm setModalOpen={setModalOpen} /> }
             <SearchBar setSearchHeight={setSearchBarHeight} />
             <div style={styles.contentContainer}>
                 <div ref={mainRef} style={styles.main}>
@@ -30,9 +30,8 @@ const MainLayout = ({modalOpen, setModalOpen}) => {
                 </div>
                 <NavBar setHeight={setNavBarHeight} style={styles.navBar} />
             </div>
-        </>
-        }
-    </div>
+        </div>
+    </>
   )
 }
 

@@ -93,11 +93,12 @@ const styles = {
         justifyContent: 'center'
     },
     infoContent: {
-        marginBottom: '50px'
+        marginBottom: '20px'
     },
     buttonContent: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        zIndex: '2'
     }
 }
 

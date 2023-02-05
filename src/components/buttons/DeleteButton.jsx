@@ -19,7 +19,6 @@ const DeleteButton = props => {
     }, [])
 
     const [apiError, setApiError] = useState(null);
-    console.log(props.path)
     const handleDeleteUser = (id) => {
         if (id) {
             console.log(apiUrl + "/users/" + id)

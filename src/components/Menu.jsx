@@ -26,7 +26,7 @@ const NavBar = (props) => {
   return (
     <div style={styles.menuContainer}>
         <button style={styles.quit} onClick={() => navigate(-1)} >
-            <IcXMark />
+            <IcXMark color="white"/>
         </button>
          
         <div style={styles.menuPart1}>

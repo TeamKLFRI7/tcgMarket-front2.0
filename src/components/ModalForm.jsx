@@ -4,14 +4,15 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ModifyButton from './buttons/ModifyButton';
 import axios from 'axios';
-
-    
+import './css/modalForm.css';
+import { IcXMark } from '../assets/icons/IcXMark';
 
 
 const ModalForm = ({setModalOpen}) => {
     let apiUrl = process.env.REACT_APP_URL_API;
-
     const [token, setToken] = useState()
+    const [apiError, setApiError] = useState(null);
+    const id = localStorage.getItem('user');
 
     const getToken = async () => {
         const localToken = await localStorage.getItem('token');
@@ -22,7 +23,6 @@ const ModalForm = ({setModalOpen}) => {
     useEffect(() => {
         getToken()
     }, [])
-
 
     const {
         data,
@@ -43,16 +43,12 @@ const ModalForm = ({setModalOpen}) => {
         //   .required("Required"),
         // email: Yup.string().email("Adresse mail invalide").required("Required"),
     });
-    
-    const [apiError, setApiError] = useState(null);
 
-    const id = localStorage.getItem('user');
+    
     const handleSubmitModifications = (values, { setSubmitting }) => {
         values.userInfo['id'] = infoSup.id;
         setSubmitting(true);
-        console.log(values)
         if (id) {
-            console.log(apiUrl + "/users/" + id)
             axios.put(apiUrl + "/users/" + id, values, {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -61,11 +57,11 @@ const ModalForm = ({setModalOpen}) => {
               })
                 .then((res) => {
                     console.log(res)
-                    setApiError(null);
                     setSubmitting(false);
+                    setModalOpen(false);
+                    window.location.reload(true);
                 })
                 .catch((err) => {
-                    console.log(err);
                     if (err.response.data.code === 401) {
                         setApiError("Lidentifiant ou le mot de passe est invalide.");
                     }
@@ -74,8 +70,6 @@ const ModalForm = ({setModalOpen}) => {
         }
     };
 
-    
-        
     return ( 
             <Formik 
                 initialValues={{
@@ -90,169 +84,138 @@ const ModalForm = ({setModalOpen}) => {
                         country: "",
                         deliveryAddress: ""
                     }
-            }}
+                }}
                 onSubmit={handleSubmitModifications}
             >
-                <div style={styles.modalBackground}>
-                    <div style={styles.modalContainer}>
-                        <div style={styles.titleCloseBtn}>
-                            <h3 style={styles.title} >Modal</h3>
+                <div className="modalBackground">
+                    <div className='modalContainer'>
+                        <div className='modalHeader'>
+                            <h3 className='heading' >Modifier mon profil</h3>
                             <button
                                 onClick={() => {
                                     setModalOpen(false);
                                 }}
                                 id="cancelBtn"
-                                style={styles.titleCloseBtn}
+                                className='closeBtn'
                             >
-                                X
+                                <IcXMark color="black"/>
                             </button>
-                            
-                            <div style={styles.modalBody} className='row'>
-                                <Form>
-                                    <div className="col">
+                        </div>
+                        <div className='modal, row' >
+                            <Form>
+                                <div className="modalContent">
+                                    <div className="col mobileFields">
                                         <label htmlFor="userName">Pseudo : </label>
                                         <Field
                                             name="userName"
                                             type="text"
-                                            className="field"
+                                            className="myField"
                                             placeholder={data.userName}
                                         />
                                         <ErrorMessage name="userName" />
                                     </div>
 
-                                    <div className="col">
+                                    <div className="col mobileFields">
                                         <label htmlFor="email">Email : </label>
                                         <Field
                                             name="email"
                                             type="email"
-                                            className="field"
+                                            className="myField"
                                             placeholder={data.email}
                                         />
                                         <ErrorMessage name="email" />
                                     </div>
 
-                                    <div className="col">
+                                    <div className="col mobileFields">
                                         <label htmlFor="phoneNumber">Téléphone : </label>
                                         <Field
                                             name="phoneNumber"
                                             type="numbers"
-                                            className="field"
+                                            className="myField"
                                             placeholder={data.phoneNumber}
                                         />
                                         <ErrorMessage name="phoneNumber" />
                                     </div>
 
-                                    <div className="col">
+                                    <div className="col mobileFields">
                                         <label htmlFor="userInfo.description">Description : </label>
                                         <Field
                                             name="userInfo.description"
                                             type="text"
-                                            className="field"
+                                            className="myField"
                                             placeholder={infoSup.description}
                                         />
                                         <ErrorMessage name="description" />
                                     </div>
 
-                                    <div className="col">
+                                    <div className="col mobileFields">
                                         <label htmlFor="userInfo.address">Adresse : </label>
                                         <Field
                                             name="userInfo.address"
                                             type="text"
-                                            className="field"
+                                            className="myField"
                                             placeholder={infoSup.address}
                                         />
                                         <ErrorMessage name="address" />
                                     </div>
 
-                                    <div className="col">
+                                    <div className="col mobileFields">
                                         <label htmlFor="userInfo.city">Ville : </label>
                                         <Field
                                             name="userInfo.city"
                                             type="text"
-                                            className="field"
+                                            className="myField"
                                             placeholder={infoSup.city}
                                         />
                                         <ErrorMessage name="city" />
                                     </div>
 
-                                    <div className="col">
+                                    <div className="col mobileFields">
                                         <label htmlFor="userInfo.postalCode">Code postal : </label>
                                         <Field
                                             name="userInfo.postalCode"
                                             type="text"
-                                            className="field"
+                                            className="myField"
                                             placeholder={infoSup.postalCode}
                                         />
                                         <ErrorMessage name="postalCode" />
                                     </div>
 
-                                    <div className="col">
+                                    <div className="col mobileFields">
                                         <label htmlFor="userInfo.country">Pays : </label>
                                         <Field
                                             name="userInfo.country"
                                             type="text"
-                                            className="field"
+                                            className="myField"
                                             placeholder={infoSup.country}
                                         />
                                         <ErrorMessage name="country" />
                                     </div>
                                     
-                                    <div className="col">
+                                    <div className="col mobileFields">
                                         <label htmlFor="userInfo.deliveryAddress">Adresse de livraison : </label>
                                         <Field
                                             name="userInfo.deliveryAddress"
                                             type="text"
-                                            className="field"
+                                            className="myField"
                                             placeholder={infoSup.deliveryAddress}
                                         />
                                         <ErrorMessage name="deliveryAddress" />
                                     </div>
-                                    <ModifyButton path={() => console.log()} type={"submit"} children={"modifier"} />
-                                </Form>
-                            </div>
+                                </div>
+                                <div className="modalActions">
+                                    <div className="actionsContainer">
+                                        <ModifyButton path={() => console.log()} type={"submit"} children={"Modifier mon profil"} />
+                                    </div>
+                                </div>
+                            </Form>
                         </div>
+                        
                     </div>
                 </div>
             </Formik>
     )
 
-}
-
-const styles = {
-    modalBackground: {
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: 'red',
-        
-      },
-      modalContainer: {
-        width: '90vw',
-        // height: '70vh',
-        borderRadius: '10px',
-        backgroundColor: 'white',
-        boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '25px',
-      },
-      title: {
-        display: 'inline-block',
-        textAlign: 'center',
-        marginTop: '10px',
-      },
-      titleCloseBtn: {
-        backgroundColor: 'transparent',
-        border: 'none',
-        fontSize: '25px',
-        cursor: 'pointer'
-      },
-      modalBody: {
-        fontSize: '1.2rem',
-      },
-      modalFooter: {
-        flex: '20%',
-        fontSize: '1.2rem'
-      }
 }
 
 
