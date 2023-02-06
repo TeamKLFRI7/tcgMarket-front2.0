@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_URL;
+const loginUrl = process.env.REACT_APP_URL_LOGIN;
 
 export const api = axios.create({
   baseURL: apiUrl,
@@ -28,7 +29,7 @@ api.interceptors.response.use(
       if (error.response.status === 401) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        window.location.replace("http://127.0.0.1:3000/login");
+        window.location.replace(loginUrl);
       }
     }
   }

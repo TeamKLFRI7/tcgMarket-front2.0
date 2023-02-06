@@ -1,11 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useGetUserMe } from "../../axios";
-
-import ModalForm from "../../components/ModalForm";
 import ModifyButton from "../../components/buttons/ModifyButton";
 import DeleteButton from "../../components/buttons/DeleteButton";
-import axios from "axios";
 
 const Profil = ({ setModalOpen }) => {
   const id = localStorage.getItem("user");
@@ -64,7 +61,6 @@ const Profil = ({ setModalOpen }) => {
             <DeleteButton path={id} type={"submit"} children={"suprprimer"} />
           </div>
         </div>
-      )}
       )}
     </>
   );
