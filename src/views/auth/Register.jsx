@@ -12,7 +12,7 @@ export const Register = (props) => {
 
   const validationSchema = Yup.object({
     pseudo: Yup.string()
-      .max(15, "Le pseudo doit être d'au moins 15 charactères")
+      .max(15, "Le pseudo doit comporter 15 charactères maximum")
       .required("Required"),
     phone: Yup.string()
       .max(13, "Le numéro doit commencer par 06 ou 07 ou +33")
@@ -27,7 +27,8 @@ export const Register = (props) => {
 
   const handleSubmitRegister = (values, { setSubmitting }) => {
     setSubmitting(true);
-    axios.post(apiUrl + "/users", values)
+    axios
+      .post(apiUrl + "/users", values)
       .then((res) => {
         setApiError(null);
         localStorage.setItem("token", res.data.token);
