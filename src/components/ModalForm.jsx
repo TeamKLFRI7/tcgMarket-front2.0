@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useGetUserMe } from "../axios";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import ModifyButton from "./buttons/ModifyButton";
+import PurpleButton from "./buttons/PurpleButton";
 import axios from "axios";
 import "./css/modalForm.css";
 import { IcXMark } from "../assets/icons/IcXMark";
@@ -208,7 +208,7 @@ const ModalForm = ({ setModalOpen }) => {
                   </div>
                   <div className="modalActions">
                     <div className="actionsContainer">
-                      <ModifyButton
+                      <PurpleButton
                         path={() => console.log()}
                         type={"submit"}
                         children={"Modifier mon profil"}

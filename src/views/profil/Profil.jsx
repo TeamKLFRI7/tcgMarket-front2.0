@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useGetUserMe } from "../../axios";
-import ModifyButton from "../../components/buttons/ModifyButton";
-import DeleteButton from "../../components/buttons/DeleteButton";
+import PurpleButton from "../../components/buttons/PurpleButton";
+import RedButton from "../../components/buttons/RedButton";
 
 const Profil = ({ setModalOpen }) => {
   const id = localStorage.getItem("user");
@@ -53,12 +53,12 @@ const Profil = ({ setModalOpen }) => {
             <p>Addresse de livraison : {infoSup.deliveryAddress}</p>
           </div>
           <div style={styles.buttonContent}>
-            <ModifyButton
+            <PurpleButton
               path={() => setModalOpen(true)}
               type={"submit"}
               children={"modifier"}
             />
-            <DeleteButton path={id} type={"submit"} children={"suprprimer"} />
+            <RedButton path={id} type={"submit"} children={"suprprimer"} />
           </div>
         </div>
       )}
