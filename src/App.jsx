@@ -7,7 +7,8 @@ import MainLayout from "./views/layout/MainLayout";
 import Home from "./views/home/Home";
 import Profil from "./views/profil/Profil";
 import { useState } from "react";
-import Sell from "./views/card/Sell";
+import CardSell from "./views/sell/CardSell";
+import FormSell from "./views/sell/FormSell";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -20,7 +21,8 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path="/jeux/:id" element={<Game />} />
         <Route path="/set/:id/cartes" element={<Cards />} />
-        <Route path="boutique/:id" element={<Sell />} />
+        <Route path="boutique/:id" element={<CardSell />} />
+        <Route path="vendre-mes-cartes" element={<FormSell />} />
         {/* Routes protégées début */}
         <Route
           path="/ajouter-une-annonce"

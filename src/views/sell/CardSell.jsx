@@ -1,9 +1,7 @@
 import { useGetSell } from "../../axios";
-import PageHeader from "../../components/PageHeader";
-import { Link } from "react-router-dom";
 import Card from "../../components/Card";
 
-const Sell = () => {
+const CardSell = () => {
   const { data, loading } = useGetSell();
   //console.log(data);
   return (
@@ -66,4 +64,4 @@ const styles = {
   },
 };
 
-export default Sell;
+export default CardSell;
