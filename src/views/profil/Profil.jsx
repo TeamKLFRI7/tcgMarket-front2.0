@@ -1,8 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useGetCards, useGetUserMe } from '../../axios';
-import React from "react";
-import { useState, useEffect } from "react";
 import { useGetUserMe } from "../../axios";
 import PurpleButton from "../../components/buttons/PurpleButton";
 import RedButton from "../../components/buttons/RedButton";

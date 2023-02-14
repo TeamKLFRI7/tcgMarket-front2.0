@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const basicUrl = process.env.REACT_APP_URL;
+const loginUrl = process.env.REACT_APP_URL_LOGIN;
 
 export const api = axios.create({
     baseURL : basicUrl,
