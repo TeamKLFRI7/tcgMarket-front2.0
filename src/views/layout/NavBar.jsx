@@ -14,7 +14,7 @@ const NavBar = (props) => {
     useEffect(() => {
         const LocalHeight= ref.current.getBoundingClientRect().height;
         props.setHeight(LocalHeight);
-    }, [ref, props.setHeight]);
+    }, [ref, props]);
 
 
   return (

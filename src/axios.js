@@ -6,85 +6,105 @@ import { api } from './views/auth/AuthService';
 let baseUrl = process.env.REACT_APP_URL_API;
 
 const getSeries = () => {
-    axios.get(baseUrl + '/card_series?page=1')
+  axios
+    .get(baseUrl + '/card_series?page=1')
     .then((response) => {
         // console.log(response.data['hydra:member']);
     })
     .catch((error) => {
         console.log(error);
     })
-}
+};
 
 getSeries();
 
 export let useGetCards = () => {
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
-    const {id} = useParams()
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
 
-    useEffect(() => {
-        const fetchData = async() => {
-            try {
-                const {data: response} = await  axios.get(baseUrl + `/card_sets/${id}`);
-                setData(response);
-            } catch (error) {
-                console.log(error);
-            }
-            setLoading(false);
-        };
-        fetchData();
-    }, []);
-
-    return {
-        data,
-        loading,
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: response } = await axios.get(
+          baseUrl + `/card_sets/${id}`
+        );
+        setData(response);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
     };
+    fetchData();
+  }, [id]);
+
+  return {
+    data,
+    loading,
+  };
 };
 
 export let useGetAllGames = () => {
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async() => {
-            try {
-                const {data: response} = await  axios.get(baseUrl + '/games?page=1');
-                setData(response);
-            } catch (error) {
-                console.log(error);
-            }
-            setLoading(false);
-        };
-        fetchData();
-    }, []);
-
-    return {
-        data,
-        loading,
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: response } = await axios.get(baseUrl + "/games?page=1");
+        setData(response);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
     };
+    fetchData();
+  }, []);
+
+  return {
+    data,
+    loading,
+  };
 };
 
 export let useGetGame = () => {
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
-    const {id} = useParams()
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
 
-    useEffect(() => {
-        const fetchData = async() => {
-            try {
-                const {data: response} = await  axios.get(baseUrl + `/games/${id}`);
-                setData(response);
-            } catch (error) {
-                console.log(error);
-            }
-            setLoading(false);
-        };
-        fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: response } = await axios.get(baseUrl + `/games/${id}`);
+        setData(response);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [id]);
 
-    return {
-        data,
-        loading,
+  return {
+    data,
+    loading,
+  };
+};
+
+export let useGetSell = () => {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: response } = await axios.get(baseUrl + `/cards/${id}`);
+        setData(response);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
     };
 };
 
@@ -105,10 +125,11 @@ export let useGetUserMe = () => {
         };
         
         fetchData()
-    }, [])
+    }, [id])
 
     return {
         data,
         loading
     }
 }
+
