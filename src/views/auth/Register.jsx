@@ -5,16 +5,18 @@ import "./Connexion.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import WhiteButton from "../../components/buttons/WhiteButton";
+import { api } from './AuthService';
+
 
 export const Register = (props) => {
-  let apiUrl = process.env.REACT_APP_URL_API;
+  const apiUrl = process.env.REACT_APP_URL_API;
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
-    pseudo: Yup.string()
-      .max(15, "Le pseudo doit être d'au moins 15 charactères")
+    userName: Yup.string()
+      .max(15, "Le pseudo ne doit pas dépasser 15 charactères")
       .required("Required"),
-    phone: Yup.string()
+    phoneNumber: Yup.string()
       .max(13, "Le numéro doit commencer par 06 ou 07 ou +33")
       .required("Required"),
     email: Yup.string().email("Adresse mail invalide").required("Required"),
@@ -26,20 +28,48 @@ export const Register = (props) => {
   const [apiError, setApiError] = useState(null);
 
   const handleSubmitRegister = (values, { setSubmitting }) => {
+    console.log(values)
     setSubmitting(true);
-    axios.post(apiUrl + "/users", values)
+    axios.post(apiUrl + "/register", values)
       .then((res) => {
+        console.log(res)
+        let newUser = {
+          "userName": values.userName,
+          "password": values.password
+          
+        }
+        console.log(newUser);
         setApiError(null);
-        localStorage.setItem("token", res.data.token);
-        // localStorage.setItem("refresh_token", res.data.refresh_token);
-        navigate("/");
+        api
+          .post('/authentication_token', newUser)
+          .then((res) => {
+            setApiError(null);
+            localStorage.setItem("token", res.data.token);
+            props.setToken(res.data.token);
+            // -------------------- Récupère le profil utilisateur --------------------
+            api
+              .get("/api/me", {
+                headers: {
+                  Authorization: `Bearer ${res.data.token}`,
+                  "Content-Type": `application/json`,
+                },
+              })
+              .then((res) => {
+                localStorage.setItem("user", res.data.id);
+                navigate("/profil");
+              })
+              .catch((err) => {
+              });
+            // -------------------- END --------------------
+            setSubmitting(false);
+            // handle success
+        })
         setSubmitting(false);
         // handle success
       })
       .catch((err) => {
-        console.log(err);
         if (err.response.data.code === 401) {
-          setApiError("Lidentifiant ou le mot de passe est invalide.");
+          setApiError("L'identifiant et/ou le mot de passe sont invalides.");
         } else if (err.response.data.code === 403) {
           setApiError("Vous n'avez pas accès à ces informations.");
         } else if (err.response.data.code === 404) {
@@ -55,8 +85,8 @@ export const Register = (props) => {
   return (
     <Formik
       initialValues={{
-        pseudo: "",
-        phone: "",
+        userName: "",
+        phoneNumber: "",
         email: "",
         password: "",
       }}
@@ -66,25 +96,22 @@ export const Register = (props) => {
       <div className="formContainerInsc">
         <h1 className="inscriptionTitle">INSCRIPTION</h1>
         <Form className="formContainerLog">
-          {/* <label htmlFor="pseudo">Pseudo</label> */}
           <Field
-            name="pseudo"
+            name="userName"
             type="text"
             className="field"
             placeholder="Pseudo"
           />
-          <ErrorMessage name="pseudo" />
+          <ErrorMessage name="userName" />
 
-          {/* <label htmlFor="phone">Téléphone</label> */}
           <Field
-            name="phone"
+            name="phoneNumber"
             type="text"
             className="field"
             placeholder="Téléphone"
           />
-          <ErrorMessage name="phone" />
+          <ErrorMessage name="phoneNumber" />
 
-          {/* <label htmlFor="email">Email</label> */}
           <Field
             name="email"
             type="email"
@@ -93,7 +120,6 @@ export const Register = (props) => {
           />
           <ErrorMessage name="email" />
 
-          {/* <label htmlFor="password">Password</label> */}
           <Field
             name="password"
             type="password"

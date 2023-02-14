@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useGetUserMe } from '../../axios';
+import { useGetCards, useGetUserMe } from '../../axios';
 
 import ModalForm from '../../components/ModalForm';
 import ModifyButton from '../../components/buttons/ModifyButton';

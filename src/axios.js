@@ -7,10 +7,10 @@ let baseUrl = process.env.REACT_APP_URL_API;
 
 const getSeries = () => {
     axios.get(baseUrl + '/card_series?page=1')
-    .then(function(response) {
-        //console.log(response.data['hydra:member']);
+    .then((response) => {
+        // console.log(response.data['hydra:member']);
     })
-    .catch(function(error) {
+    .catch((error) => {
         console.log(error);
     })
 }
@@ -103,7 +103,8 @@ export let useGetUserMe = () => {
             }
             setLoading(false);
         };
-        fetchData();
+        
+        fetchData()
     }, [])
 
     return {
