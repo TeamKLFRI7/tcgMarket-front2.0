@@ -92,21 +92,29 @@ export let useGetGame = () => {
 };
 
 export let useGetSell = () => {
-  const [data, setData] = useState({});
-  const [loading, setLoading] = useState(true);
-  const { id } = useParams();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data: response } = await axios.get(baseUrl + `/cards/${id}`);
-        setData(response);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const { id } = useParams();
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data: response } = await axios.get(baseUrl + `/cards/${id}`);
+          setData(response);
+        } catch (error) {
+          console.log(error);
+        }
+        setLoading(false);
+      };
+  
+      fetchData();
+    }, [id]);
+  
+    return {
+      data,
+      loading,
     };
-};
+  };
 
 export let useGetUserMe = () => {
     const [data, setData] = useState({});
@@ -125,7 +133,7 @@ export let useGetUserMe = () => {
         };
         
         fetchData()
-    }, [id])
+    }, [])
 
     return {
         data,
