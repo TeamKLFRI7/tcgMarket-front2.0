@@ -12,12 +12,14 @@ import Sell from "./views/card/Sell";
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/menu" element={<Menu />} />
-      <Route path="/login" element={<Auth setToken={setToken} />} />
-      <Route element={<MainLayout />}>
+      <Route path="/login" element={<Auth setToken={setToken}/>} />
+      <Route element={<MainLayout modalOpen={modalOpen} setModalOpen={setModalOpen}/>}>
         <Route path="/jeux/:id" element={<Game />} />
         <Route path="/set/:id/cartes" element={<Cards />} />
         <Route path="boutique/:id" element={<Sell />} />
@@ -28,7 +30,7 @@ function App() {
         />
         <Route
           path="/profil"
-          element={token ? <Profil /> : <Navigate to="/login" />}
+          element={token ? <Profil setModalOpen={setModalOpen}/> : <Navigate to="/login" />}
         />
         <Route
           path="/mes-annonces"

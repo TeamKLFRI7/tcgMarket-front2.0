@@ -16,7 +16,7 @@ const Auth = ({setToken}) => {
     <div className='connexion'>
         <img className='tcg-logo' src={tcgLogo} alt='pokemon'/>
         {
-            currentForm === "login" ? <Login onFormSwitch={toggleForm} setToken={setToken} /> : <Register onFormSwitch={toggleForm} />
+            currentForm === "login" ? <Login onFormSwitch={toggleForm} setToken={setToken} /> : <Register onFormSwitch={toggleForm} setToken={setToken} />
         }
         <img className='img-dresseurs' src={pokemonImg} alt='pokemon'/>
     </div>

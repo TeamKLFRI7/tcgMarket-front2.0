@@ -14,7 +14,7 @@ export const Login = (props) => {
   const validationSchema = Yup.object({
     userName: Yup.string().required("Required"),
     password: Yup.string()
-      .max(15, "Must be 15 characters or less")
+      .min(8, "Votre mot de passe doit faire au mnimum 8 charactères")
       .required("Required"),
   });
 
@@ -39,19 +39,18 @@ export const Login = (props) => {
           })
           .then((res) => {
             localStorage.setItem("user", res.data.id);
+            navigate("/profil");
           })
           .catch((err) => {
-            // console.log(err)
           });
         // -------------------- END --------------------
-
-        navigate("/profil");
+        
         setSubmitting(false);
         // handle success
       })
       .catch((err) => {
         if (err.response.data.code === 401) {
-          setApiError("Lidentifiant ou le mot de passe est invalide.");
+          setApiError("L'identifiant et/ou le mot de passe sont invalides.");
         } else if (err.response.data.code === 403) {
           setApiError("Vous n'avez pas accès à ces informations.");
         } else if (err.response.data.code === 404) {
@@ -75,7 +74,6 @@ export const Login = (props) => {
 
         <h1 className="connexionTitle">CONNECTION</h1>
         <Form className="formContainerLog">
-          {/* <label htmlFor="email" className='formLabel'>Email</label> */}
           <Field
             name="userName"
             type="text"
@@ -84,7 +82,6 @@ export const Login = (props) => {
           />
           <ErrorMessage name="username" />
 
-          {/* <label htmlFor="password" className='formLabel'>Password</label> */}
           <Field
             name="password"
             type="password"
