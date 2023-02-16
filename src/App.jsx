@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Game from "./views/card/Game";
 import Cards from "./views/card/Cards";
-import Menu from "./components/Menu";
 import Auth from "./views/auth/Auth";
 import MainLayout from "./views/layout/MainLayout";
 import Home from "./views/home/Home";
@@ -17,7 +16,6 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/menu" element={<Menu />} />
       <Route path="/login" element={<Auth setToken={setToken}/>} />
       <Route element={<MainLayout modalOpen={modalOpen} setModalOpen={setModalOpen}/>}>
         <Route path="/jeux/:id" element={<Game />} />

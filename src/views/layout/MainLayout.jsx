@@ -3,6 +3,7 @@ import home from "../../assets/img/home.png";
 import NavBar from "./NavBar";
 import SearchBar from "../../components/SearchBar";
 import ModalForm from "../../components/ModalForm";
+import Menu from "../../components/Menu";
 
 import {useEffect, useRef, useState} from "react";
 
@@ -15,12 +16,13 @@ const MainLayout = ({modalOpen, setModalOpen}) => {
     useEffect(() => {
         const viewportHeight = window.innerHeight;
         mainRef.current.style.height = `calc(${viewportHeight - searchBarHeight - navBarHeight}px - 2rem)`;
-    }, [navBarHeight, searchBarHeight]);    
-
+    }, [navBarHeight, searchBarHeight]);  
     
+    const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
+        { menuOpen && <Menu setMenuOpen={setMenuOpen} /> }
         <div style={styles.container}>
             { modalOpen && <ModalForm setModalOpen={setModalOpen} /> }
             <SearchBar setSearchHeight={setSearchBarHeight} />
@@ -28,7 +30,7 @@ const MainLayout = ({modalOpen, setModalOpen}) => {
                 <div ref={mainRef} style={styles.main}>
                     <Outlet/>
                 </div>
-                <NavBar setHeight={setNavBarHeight} style={styles.navBar} />
+                <NavBar setHeight={setNavBarHeight} setMenuOpen={setMenuOpen} style={styles.navBar} />
             </div>
         </div>
     </>
