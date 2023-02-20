@@ -35,6 +35,8 @@ const styles = {
   pageHeadImg: {
     height: "100%",
     width: "100%",
+    borderRadius: ".625rem",
+    objectFit: "contain",
   },
 };
 

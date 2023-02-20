@@ -113,3 +113,27 @@ export let useGetSell = () => {
     loading,
   };
 };
+
+export let useGetSelling = () => {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: response } = await axios.get(baseUrl + `/sell`);
+        setData(response);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [id]);
+
+  return {
+    data,
+    loading,
+  };
+};
