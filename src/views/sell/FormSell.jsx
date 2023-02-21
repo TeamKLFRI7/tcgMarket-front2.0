@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PageHeader from "../../components/PageHeader";
-import {useGetSelling} from "../../axios";
+import { useGetSelling } from "../../axios";
 
 const FormSell = () => {
   const cover = require("../../assets/img/sellCover.png");
@@ -14,24 +14,26 @@ const FormSell = () => {
     set: "",
     cardIndex: "",
     card: "",
-    cardImage : "",
+    cardImage: "",
     description: "",
     price: "",
-    image: "",
+    imageFiles: [],
+    images: [],
   });
-  const {
-    data,
-    loading,
-  } = useGetSelling();
+  const { data, loading } = useGetSelling();
+  const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'game') {
+    if (name === "game") {
       // Si le champ modifié est le champ de sélection de jeu
       // on cherche l'index du jeu sélectionné dans le tableau de jeux récupéré de l'API
-      const gameIndex = data['hydra:member'].findIndex((game) => game.id === parseInt(value));
+      const gameIndex = data["hydra:member"].findIndex(
+        (game) => game.id === parseInt(value)
+      );
       setFormData({
         ...formData,
-        [name]: parseInt(value), gameIndex,
+        [name]: parseInt(value),
+        gameIndex,
         // Empeche un comportement non désiré: disparition du formulaire si changement de jeu avec plusieurs champs remplis
         seriesIndex: "",
         series: "",
@@ -40,25 +42,57 @@ const FormSell = () => {
         cardIndex: "",
         card: "",
       });
-    } else if (name === 'series') {
-      const seriesIndex = data["hydra:member"][formData.gameIndex].cardSeries.findIndex((series) => series.id === parseInt(value));
+    } else if (name === "series") {
+      const seriesIndex = data["hydra:member"][
+        formData.gameIndex
+      ].cardSeries.findIndex((series) => series.id === parseInt(value));
       setFormData({
         ...formData,
-        [name]: parseInt(value), seriesIndex
+        [name]: parseInt(value),
+        seriesIndex,
       });
-    } else if (name === 'set') {
-      const setIndex = data['hydra:member'][formData.gameIndex].cardSeries[formData.seriesIndex].fkIdCardSet.findIndex((set) => set.id === parseInt(value));
+    } else if (name === "set") {
+      const setIndex = data["hydra:member"][formData.gameIndex].cardSeries[
+        formData.seriesIndex
+      ].fkIdCardSet.findIndex((set) => set.id === parseInt(value));
       setFormData({
         ...formData,
-        [name]: parseInt(value), setIndex
+        [name]: parseInt(value),
+        setIndex,
       });
-    } else if (name === 'card') {
-      const cardIndex = data['hydra:member'][formData.gameIndex].cardSeries[formData.seriesIndex].fkIdCardSet[formData.setIndex].fkIdCar.findIndex((set) => set.id === parseInt(value));
-      const cardImage = data['hydra:member'][formData.gameIndex].cardSeries[formData.seriesIndex].fkIdCardSet[formData.setIndex].fkIdCar[cardIndex].img;
+    } else if (name === "card") {
+      const cardIndex = data["hydra:member"][formData.gameIndex].cardSeries[
+        formData.seriesIndex
+      ].fkIdCardSet[formData.setIndex].fkIdCar.findIndex(
+        (set) => set.id === parseInt(value)
+      );
+      const cardImage =
+        data["hydra:member"][formData.gameIndex].cardSeries[
+          formData.seriesIndex
+        ].fkIdCardSet[formData.setIndex].fkIdCar[cardIndex].img;
       setFormData({
         ...formData,
-        [name]: value, cardIndex, cardImage
+        [name]: value,
+        cardIndex,
+        cardImage,
       });
+    } else if (name === "imageFiles") {
+      const { files } = event.target;
+      const ValidImageFiles = [...formData.imageFiles];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.match(imageTypeRegex)) {
+          ValidImageFiles.push(file);
+        }
+      }
+      if (ValidImageFiles.length) {
+        setFormData({
+          ...formData,
+          imageFiles: ValidImageFiles,
+        });
+        return;
+      }
+      alert("Le format de l'image sélectionné n'est pas valide!");
     } else {
       // Si le champ modifié est autre chose que le champ de sélection de jeu
       // on met à jour le state formData avec la nouvelle valeur
@@ -72,121 +106,242 @@ const FormSell = () => {
     event.preventDefault();
     setStep(step + 1);
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+
+  console.log(formData);
   switch (step) {
     case 1:
       return (
         <>
-          <PageHeader title="Vendez vos cartes" img={cover} />
+          <PageHeader
+            title="Vendez vos cartes"
+            img={cover}
+            style={styles.style}
+          />
           <div style={styles.formContainer}>
             <p>1. Sélectionnez une carte :</p>
             <form onSubmit={nextStep} style={styles.form}>
               <div>
-                <select name="game" id="game" onChange={handleChange} style={styles.formElement}>
+                <select
+                  name="game"
+                  id="game"
+                  onChange={handleChange}
+                  style={styles.formElement}
+                >
                   <option value="">Sélectionnez un jeu</option>
-                  {data['hydra:member']?.map((game, index) => (
-                    <option value={game.id} key={index}>{game.name}</option>
+                  {data["hydra:member"]?.map((game, index) => (
+                    <option value={game.id} key={index}>
+                      {game.name}
+                    </option>
                   ))}
                 </select>
               </div>
               <div>
-                <select name="series" id="series" onChange={handleChange} disabled={!formData.game} style={styles.formElement}>
+                <select
+                  name="series"
+                  id="series"
+                  onChange={handleChange}
+                  disabled={!formData.game}
+                  style={styles.formElement}
+                >
                   <option value="">Sélectionnez une série</option>
-                  {formData.game && !loading ? data["hydra:member"][formData.gameIndex].cardSeries.map((serie, index) => (
-                    <option value={serie.id} key={index}>{serie.serieName}</option>
-                  )) : null}
+                  {formData.game && !loading
+                    ? data["hydra:member"][formData.gameIndex].cardSeries.map(
+                        (serie, index) => (
+                          <option value={serie.id} key={index}>
+                            {serie.serieName}
+                          </option>
+                        )
+                      )
+                    : null}
                 </select>
               </div>
               <div>
-                <select name="set" id="set" onChange={handleChange} disabled={!formData.series} style={styles.formElement}>
+                <select
+                  name="set"
+                  id="set"
+                  onChange={handleChange}
+                  disabled={!formData.series}
+                  style={styles.formElement}
+                >
                   <option value="">Sélectionnez un set</option>
-                  {formData.series && !loading ? data["hydra:member"][formData.gameIndex].cardSeries[formData.seriesIndex].fkIdCardSet.map((set, index) => (
-                      <option value={set.id} key={index}>{set.setName}</option>
-                  )) : null}
+                  {formData.series && !loading
+                    ? data["hydra:member"][formData.gameIndex].cardSeries[
+                        formData.seriesIndex
+                      ].fkIdCardSet.map((set, index) => (
+                        <option value={set.id} key={index}>
+                          {set.setName}
+                        </option>
+                      ))
+                    : null}
                 </select>
               </div>
               <div>
-                <select name="card" id="card" onChange={handleChange} disabled={!formData.set} style={styles.formElement}>
+                <select
+                  name="card"
+                  id="card"
+                  onChange={handleChange}
+                  disabled={!formData.set}
+                  style={styles.formElement}
+                >
                   <option value="">Sélectionnez une carte</option>
-                  {formData.set && !loading ? data["hydra:member"][formData.gameIndex].cardSeries[formData.seriesIndex].fkIdCardSet[formData.setIndex].fkIdCar.map((card, index) => (
-                      <option value={card.id} key={index}>{card.name}</option>
-                  )) : null}
+                  {formData.set && !loading
+                    ? data["hydra:member"][formData.gameIndex].cardSeries[
+                        formData.seriesIndex
+                      ].fkIdCardSet[formData.setIndex].fkIdCar.map(
+                        (card, index) => (
+                          <option value={card.id} key={index}>
+                            {card.name}
+                          </option>
+                        )
+                      )
+                    : null}
                 </select>
               </div>
-              {formData.cardImage ?
-                  <img src={formData.cardImage} style={styles.cardImage} alt={'carte sélectionnée'}/> :
-                  null
-              }
-              <button type="submit" style={styles.step} disabled={!formData.cardImage}>Étape suivante</button>
+              {formData.cardImage ? (
+                <img
+                  src={formData.cardImage}
+                  style={styles.cardImage}
+                  alt={"carte sélectionnée"}
+                />
+              ) : null}
+              <button
+                type="submit"
+                style={styles.step}
+                // disabled={!formData.cardImage}
+              >
+                Étape suivante
+              </button>
             </form>
           </div>
         </>
-        );
+      );
     case 2:
       return (
         <>
-          <PageHeader title="Vendez vos cartes" img={cover} />
-          <form>
-            <div>
-              <label htmlFor="description">Description:</label>
-              <textarea name="description" id="description" onChange={handleChange} value={formData.description} />
-            </div>
-            <div>
-              <label htmlFor="quality">Qualité:</label>
-              <input type="text" name="quality" id="quality" onChange={handleChange} value={formData.quality} />
-            </div>
-            <div>
-              <label htmlFor="price">Prix:</label>
-              <input type="number" name="price" id="price" onChange={handleChange} value={formData.price} />
-            </div>
-            <div>
-              <label htmlFor="image">Image:</label>
-              <input type="file" name="image" id="image" onChange={handleChange} />
-            </div>
-            <button type="submit">Envoyer</button>
-          </form>
+          <PageHeader
+            title="Vendez vos cartes"
+            img={cover}
+            style={styles.style}
+          />
+          <div style={styles.formContainer}>
+            <p>2. Informations de ventes :</p>
+            <form>
+              <div>
+                <input
+                  name="description"
+                  id="description"
+                  onChange={handleChange}
+                  value={formData.description}
+                  placeholder={"description : ex: carte gradé, sous sleeve..."}
+                  style={styles.formElement}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="quality"
+                  id="quality"
+                  onChange={handleChange}
+                  value={formData.quality}
+                  placeholder={"Qualitée"}
+                  style={styles.formElement}
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  name="price"
+                  id="price"
+                  onChange={handleChange}
+                  value={formData.price}
+                  placeholder={"Prix"}
+                  style={styles.formElement}
+                />
+              </div>
+              {formData.imageFiles?.map((image, index) => (
+                <img src={image} key={index} alt={"..."} />
+              ))}
+              <div>
+                <input
+                  type="file"
+                  name="imageFiles"
+                  id="image"
+                  accept="image/png, image/jpeg, image/jpg"
+                  multiple
+                  onChange={handleChange}
+                  style={styles.inputFile}
+                />
+                <label htmlFor="image" style={styles.inputLabel}>
+                  Ajouter une image
+                </label>
+              </div>
+              <button type="submit">Envoyer</button>
+            </form>
+          </div>
         </>
-      )
+      );
     default:
-      return (<h1>Une erreur est survenue</h1>)
+      return <h1>Une erreur est survenue</h1>;
   }
 };
 
 const styles = {
+  style: {
+    headImg: {
+      objectFit: "cover",
+    },
+  },
   formContainer: {
-    margin : '0 1rem',
+    margin: "0 1rem",
   },
   form: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
   formElement: {
-    width: '100%',
-    minHeight: '2rem',
-    marginBottom: '1rem',
-    padding: '.5rem',
-    color: 'grey',
-    border: 'none',
-    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-    borderRadius: '.625rem',
+    width: "100%",
+    minHeight: "2rem",
+    marginBottom: "1rem",
+    padding: ".5rem",
+    color: "grey",
+    border: "none",
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    borderRadius: ".625rem",
   },
   step: {
-    border: 'none',
-    background: 'none',
-    color: '#636AF2',
-    fontWeight: 'bold',
+    border: "none",
+    background: "none",
+    color: "#636AF2",
+    fontWeight: "bold",
   },
   cardImage: {
-    width: '70%',
-    margin: '0 auto 1rem',
+    width: "70%",
+    margin: "0 auto 1rem",
   },
   icon: {
-    color: '#636AF2',
+    color: "#636AF2",
   },
-}
+  inputFile: {
+    width: "0.1px",
+    height: "0.1px",
+    opacity: "0",
+    overflow: "hidden",
+    position: "absolute",
+    zIndex: "-1",
+  },
+  inputLabel: {
+    display: "block",
+    padding: ".5rem",
+    width: "100%",
+    borderRadius: ".625rem",
+    textAlign: "center",
+    color: "white",
+    backgroundColor: "#636AF2",
+  },
+};
 
 export default FormSell;

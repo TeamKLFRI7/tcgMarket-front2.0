@@ -4,7 +4,7 @@ const PageHeader = (props) => {
       <h3>{props.title}</h3>
       <div style={styles.pageHeadImgContainer}>
         <img
-          style={styles.pageHeadImg}
+          style={{ ...styles.pageHeadImg, ...props.style?.headImg }}
           src={props.img}
           alt={"Couverture de page"}
         />
