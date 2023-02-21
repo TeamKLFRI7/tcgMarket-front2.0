@@ -1,12 +1,15 @@
 import FrameSeries from "../../components/FrameSeries";
 import {useGetGame} from "../../axios";
+import Card from "../../components/Card";
 
 
-const Game = () => {
+const Game = ({ searchResults }) => {
     const {
         data,
-        loading,
+        loading
     } = useGetGame();
+
+    const cards = searchResults;
 
   return (
     <div>
@@ -20,6 +23,15 @@ const Game = () => {
                 ))}
             </>
         )}
+
+        {cards && 
+            <>  
+                <h1 className={'title'}>Résultat de recherche</h1>
+                {cards.map((card, index) => (
+                    <Card img={card.img} name={card.name} key={index} />
+                ))}
+            </>
+        }
     </div>
   )
 }

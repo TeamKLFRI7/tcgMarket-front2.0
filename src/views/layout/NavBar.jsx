@@ -4,7 +4,6 @@ import { IcMenu } from '../../assets/icons/IcMenu';
 import { IcPlus } from '../../assets/icons/IcPlus';
 import { IcArrowLeft } from '../../assets/icons/IcArrowLeft';
 import {useEffect, useRef, useState} from "react";
-import Menu from "../../components/Menu";
 import { useNavigate, useLocation } from "react-router-dom";
 
 
