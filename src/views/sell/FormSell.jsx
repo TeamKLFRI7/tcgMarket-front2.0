@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader";
 import { useGetSelling } from "../../axios";
 
@@ -109,8 +109,52 @@ const FormSell = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+  useEffect(() => {
+    const fileReaders = [];
+    let isCancel = false;
+    if (formData.imageFiles.length) {
+      const promise = formData.imageFiles.map((file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReaders.push(fileReader);
+          fileReader.onload = (e) => {
+            const { result } = e.target;
+            if (result) {
+              resolve(result);
+            }
+          };
+          fileReader.onabort = () => {
+            reject(new Error("Lecture du fichier annulé"));
+          };
+          fileReader.onerror = () => {
+            reject(new Error("Echec de la lecture du fichier"));
+          };
+          fileReader.readAsDataURL(file);
+        });
+      });
+      Promise.all(promise)
+        .then((images) => {
+          if (!isCancel) {
+            setFormData({
+              ...formData,
+              images: images,
+            });
+          }
+        })
+        .catch((reason) => {
+          console.log(reason);
+        });
+    }
+    return () => {
+      isCancel = true;
+      fileReaders.forEach((fileReader) => {
+        if (fileReader.readyState === 1) {
+          fileReader.abort();
+        }
+      });
+    };
+  }, [formData.imageFiles]);
 
-  console.log(formData);
   switch (step) {
     case 1:
       return (
@@ -261,9 +305,18 @@ const FormSell = () => {
                   style={styles.formElement}
                 />
               </div>
-              {formData.imageFiles?.map((image, index) => (
-                <img src={image} key={index} alt={"..."} />
-              ))}
+              <div style={styles.fileContainer}>
+                {formData.imageFiles
+                  ? formData.images?.map((image, index) => (
+                      <img
+                        src={image}
+                        key={index}
+                        alt={"..."}
+                        style={styles.file}
+                      />
+                    ))
+                  : null}
+              </div>
               <div>
                 <input
                   type="file"
@@ -272,6 +325,7 @@ const FormSell = () => {
                   accept="image/png, image/jpeg, image/jpg"
                   multiple
                   onChange={handleChange}
+                  disabled={formData.imageFiles.length === 3}
                   style={styles.inputFile}
                 />
                 <label htmlFor="image" style={styles.inputLabel}>
@@ -341,6 +395,14 @@ const styles = {
     textAlign: "center",
     color: "white",
     backgroundColor: "#636AF2",
+  },
+  fileContainer: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  file: {
+    width: "calc(100% / 3 - .5rem)",
   },
 };
 
