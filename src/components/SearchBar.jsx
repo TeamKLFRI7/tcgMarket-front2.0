@@ -5,6 +5,9 @@ const SearchBar = ({setSearchHeight, setSearchResults}) => {
 
   const [query, setQuery] = useState("");
   setSearchResults(useSearchCard(query));
+  if(query.length < 3) {
+    setSearchResults(null)
+  }
   
   const ref = useRef(null);
   useEffect(() => {
