@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader";
 import { useGetSelling } from "../../axios";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const FormSell = () => {
+  let apiUrl = process.env.REACT_APP_URL_API;
+  const navigate = useNavigate();
   const cover = require("../../assets/img/sellCover.png");
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -15,7 +19,8 @@ const FormSell = () => {
     cardIndex: "",
     card: "",
     cardImage: "",
-    description: "",
+    name: "",
+    quality: "",
     price: "",
     imageFiles: [],
     images: [],
@@ -108,6 +113,25 @@ const FormSell = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    const sell = {
+      fkIdUser: 1,
+      name: formData.name,
+      quality: formData.quality,
+      price: formData.price,
+      card: formData.card,
+      cardSet: formData.set,
+      images: formData.imageFiles,
+      fkIdGame: formData.game,
+    };
+    console.log(sell);
+    axios
+      .post(apiUrl + "/card_users", { sell })
+      .then((res) => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
   useEffect(() => {
     const fileReaders = [];
@@ -154,7 +178,7 @@ const FormSell = () => {
       });
     };
   }, [formData.imageFiles]);
-
+  console.log(formData);
   switch (step) {
     case 1:
       return (
@@ -254,7 +278,7 @@ const FormSell = () => {
               <button
                 type="submit"
                 style={styles.step}
-                // disabled={!formData.cardImage}
+                disabled={!formData.cardImage}
               >
                 Étape suivante
               </button>
@@ -272,14 +296,14 @@ const FormSell = () => {
           />
           <div style={styles.formContainer}>
             <p>2. Informations de ventes :</p>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div>
                 <input
-                  name="description"
-                  id="description"
+                  name="name"
+                  id="name"
                   onChange={handleChange}
-                  value={formData.description}
-                  placeholder={"description : ex: carte gradé, sous sleeve..."}
+                  value={formData.name}
+                  placeholder={"nom de votre carte"}
                   style={styles.formElement}
                 />
               </div>

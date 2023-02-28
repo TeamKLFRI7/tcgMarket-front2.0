@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./Connexion.css";
+import "./Auth.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import WhiteButton from "../../components/buttons/WhiteButton";

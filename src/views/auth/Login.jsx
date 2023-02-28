@@ -4,8 +4,8 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import YellowButton from "../../components/buttons/YellowButton";
-import "./Connexion.css";
-import { api } from './AuthService';
+import "./Auth.css";
+import { api } from "./AuthService";
 
 export const Login = (props) => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export const Login = (props) => {
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     api
-      .post('/authentication_token', values)
+      .post("/authentication_token", values)
       .then((res) => {
         setApiError(null);
         localStorage.setItem("token", res.data.token);
@@ -41,7 +41,7 @@ export const Login = (props) => {
             localStorage.setItem("user", res.data.id);
           })
           .catch((err) => {
-            // console.log(err)
+            console.log(err);
           });
         // -------------------- END --------------------
 
