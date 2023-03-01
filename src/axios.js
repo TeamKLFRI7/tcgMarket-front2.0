@@ -141,3 +141,24 @@ export let useGetUserMe = () => {
     }
 }
 
+export let useSearchCard = (name) => {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+      const fetchData = async() => {
+        if(name.length > 2) {
+          try {
+            const response = await api.get(baseUrl + `/cards?name=${name}`)
+            setData(response.data);
+          } catch (error) {
+              console.log(error);
+          }
+        }
+      };
+      
+      fetchData()
+  }, [name])
+
+  return data;
+}
+
