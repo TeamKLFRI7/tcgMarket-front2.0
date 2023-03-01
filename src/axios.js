@@ -150,7 +150,6 @@ export let useSearchCard = (name) => {
           try {
             const response = await api.get(baseUrl + `/cards?name=${name}`)
             setData(response.data);
-            console.log(response.data)
           } catch (error) {
               console.log(error);
           }

@@ -11,13 +11,16 @@ const Game = ({ searchResults }) => {
     } = useGetGame();
 
     const [cards, setCards] = useState(searchResults);
-    
+
     useEffect(() => {
         setCards(searchResults);
         if (document.querySelector('input').value.length < 3) {
             setCards(null)
         }
     }, [searchResults]);
+    
+
+    let countResults = cards?.length;
 
   return (
     <div>
@@ -40,14 +43,32 @@ const Game = ({ searchResults }) => {
         )}
         {cards && (
             <>  
-                <h1 className={'title'}>Résultat de recherche : </h1>
-                {cards.map((card, index) => (
-                    <Card img={card.img} name={card.name} key={index} />
-                ))}
+                <h1 className={'title'}>Cartes trouvées : { countResults }</h1>
+                <div style={styles.mainContainer}>
+                    {cards.map((card, index) => (
+                        <div style={styles.cardsContainer}>
+                            <Card img={card.img} name={card.name} key={index} />
+                        </div>
+                    ))}
+                </div>
             </>)
         }
     </div>
   )
+}
+
+const styles = {
+    mainContainer: {
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "space-around",
+    },
+    cardsContainer: {
+      width: "calc(100% / 2 - 1rem)",
+      marginBottom: "1.5rem",
+      position: "relative",
+    },
 }
 
 export default Game
