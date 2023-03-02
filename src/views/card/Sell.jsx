@@ -1,6 +1,4 @@
 import { useGetSell } from "../../axios";
-import PageHeader from "../../components/PageHeader";
-import { Link } from "react-router-dom";
 import Card from "../../components/Card";
 
 const Sell = () => {
