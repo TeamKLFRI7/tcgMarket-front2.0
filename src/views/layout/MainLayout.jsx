@@ -3,6 +3,7 @@ import home from "../../assets/img/home.png";
 import NavBar from "./NavBar";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import SearchBarBis from "../../components/SearchBarBis";
+import ModalForm from "../../components/ModalForm";
 
 const MainLayout = (props) => {
   console.log(props);
@@ -24,9 +25,9 @@ const MainLayout = (props) => {
 
   return (
     <div style={styles.container}>
+      {props.modalOpen && <ModalForm setModalOpen={props.setModalOpen} />}
       <SearchBarBis
         ref={searchBarRef}
-        searchResults={props.searchResults}
         setSearchResults={props.setSearchResults}
       />
       <div style={styles.contentContainer}>
