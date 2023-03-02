@@ -1,5 +1,5 @@
 import searchBar from "./SearchBar";
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useState } from "react";
 import { useSearchCard } from "../axios";
 
 const SearchBarBis = forwardRef((props, ref) => {
@@ -13,6 +13,7 @@ const SearchBarBis = forwardRef((props, ref) => {
       <input
         style={styles.searchBar}
         placeholder="Entrez le nom d'une carte"
+        onChange={(e) => setQuery(e.target.value)}
         id={"searchBar"}
         ref={ref}
       />

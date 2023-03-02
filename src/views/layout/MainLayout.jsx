@@ -1,35 +1,51 @@
-import { Outlet } from "react-router-dom";
 import home from "../../assets/img/home.png";
-import NavBar from "./NavBar";
+import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import SearchBarBis from "../../components/SearchBarBis";
 import ModalForm from "../../components/ModalForm";
+import SearchBarBis from "../../components/SearchBarBis";
+import NavBar from "./NavBar";
 
 const MainLayout = (props) => {
-  console.log(props);
+  const location = useLocation();
+  const viewportHeight = window.innerHeight;
   const [searchBarHeight, setSearchBarHeight] = useState(0);
   const [navBarHeight, setNavBarHeight] = useState(0);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const searchBarRef = useRef(null);
   const navBarRef = useRef(null);
   const mainRef = useRef(null);
 
-  useLayoutEffect(() => {
-    setSearchBarHeight(searchBarRef.current.clientHeight);
-    setNavBarHeight(navBarRef.current.clientHeight);
-  }, []);
+  const hiddenSearchLocation = ["/profil", "/vendre-mes-cartes"];
+  const isSearchHidden = hiddenSearchLocation.includes(location.pathname);
 
   useEffect(() => {
-    const viewportHeight = window.innerHeight;
-    mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 2rem)`;
+    setCurrentLocation(location);
+  }, [location]);
+
+  useLayoutEffect(() => {
+    if (!isSearchHidden) {
+      setSearchBarHeight(searchBarRef.current.clientHeight);
+    }
+    setNavBarHeight(navBarRef.current.clientHeight);
+  }, [currentLocation]);
+
+  useEffect(() => {
+    if (!isSearchHidden) {
+      mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 2rem)`;
+    } else {
+      mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 1rem)`;
+    }
   }, [searchBarHeight, navBarHeight]);
 
   return (
     <div style={styles.container}>
       {props.modalOpen && <ModalForm setModalOpen={props.setModalOpen} />}
-      <SearchBarBis
-        ref={searchBarRef}
-        setSearchResults={props.setSearchResults}
-      />
+      {isSearchHidden ? null : (
+        <SearchBarBis
+          ref={searchBarRef}
+          setSearchResults={props.setSearchResults}
+        />
+      )}
       <div style={styles.contentContainer}>
         <div ref={mainRef} style={styles.main}>
           <Outlet />
