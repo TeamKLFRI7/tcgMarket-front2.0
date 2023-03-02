@@ -5,13 +5,12 @@ import home from "../../assets/img/home.png";
 
 const Home = () => {
   const { data, loading } = useGetAllGames();
-
   return (
     <div style={styles.mainHome}>
       {loading && <div>Chargement</div>}
       {!loading && (
         <div style={styles.container}>
-          {data["hydra:member"].map((game, index) => (
+          {data["hydra:member"].map((game) => (
             <>
               {game.isActive === false ? (
                 <DisabledButton
