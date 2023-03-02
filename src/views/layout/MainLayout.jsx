@@ -1,64 +1,41 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import home from "../../assets/img/home.png";
 import NavBar from "./NavBar";
-import SearchBar from "../../components/SearchBar";
-import ModalForm from "../../components/ModalForm";
-import Menu from "../../components/Menu";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import SearchBarBis from "../../components/SearchBarBis";
 
-import { useEffect, useRef, useState } from "react";
-
-const MainLayout = ({
-  modalOpen,
-  setModalOpen,
-  searchResults,
-  setSearchResults,
-}) => {
-  const location = useLocation();
-  const mainRef = useRef(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [navBarHeight, setNavBarHeight] = useState(0);
+const MainLayout = (props) => {
+  console.log(props);
   const [searchBarHeight, setSearchBarHeight] = useState(0);
+  const [navBarHeight, setNavBarHeight] = useState(0);
+  const searchBarRef = useRef(null);
+  const navBarRef = useRef(null);
+  const mainRef = useRef(null);
+
+  useLayoutEffect(() => {
+    setSearchBarHeight(searchBarRef.current.clientHeight);
+    setNavBarHeight(navBarRef.current.clientHeight);
+  }, []);
 
   useEffect(() => {
     const viewportHeight = window.innerHeight;
-    if (location.pathname === "/jeux/1") {
-      mainRef.current.style.height = `calc(${
-        viewportHeight - searchBarHeight - navBarHeight
-      }px - 2rem)`;
-    } else {
-      mainRef.current.style.height = `calc(${
-        viewportHeight - navBarHeight
-      }px - 1rem)`;
-    }
-    return () => {
-      mainRef.current.style.height = "";
-    };
-  }, [location, navBarHeight, searchBarHeight]);
+    mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 2rem)`;
+  }, [searchBarHeight, navBarHeight]);
 
   return (
-    <>
-      {menuOpen && <Menu setMenuOpen={setMenuOpen} />}
-      <div style={styles.container}>
-        {modalOpen && <ModalForm setModalOpen={setModalOpen} />}
-        {location.pathname === "/jeux/1" && (
-          <SearchBar
-            setSearchHeight={setSearchBarHeight}
-            searchResults={searchResults}
-            setSearchResults={setSearchResults}
-          />
-        )}
-        <div style={styles.contentContainer}>
-          <div ref={mainRef} style={styles.main}>
-            <Outlet />
-          </div>
-          <NavBar
-            setHeight={setNavBarHeight}
-            setMenuOpen={setMenuOpen}
-            style={styles.navBar}
-          />
+    <div style={styles.container}>
+      <SearchBarBis
+        ref={searchBarRef}
+        searchResults={props.searchResults}
+        setSearchResults={props.setSearchResults}
+      />
+      <div style={styles.contentContainer}>
+        <div ref={mainRef} style={styles.main}>
+          <Outlet />
         </div>
+        <NavBar ref={navBarRef} style={styles.navBar} />
       </div>
-    </>
+    </div>
   );
 };
 
@@ -70,15 +47,6 @@ const styles = {
     flexDirection: "column",
     justifyContent: "strech",
     maxHeight: "100vh",
-  },
-  searchBar: {
-    backgroundColor: "#fff",
-    padding: "20px",
-    fontSize: "18px",
-    borderRadius: "62px",
-    border: "none",
-    boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-    margin: ".5rem 0 .5rem",
   },
   contentContainer: {
     backgroundColor: "rgb(100, 106, 234)",
