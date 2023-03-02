@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ModalForm from "../../components/ModalForm";
 import SearchBarBis from "../../components/SearchBarBis";
 import NavBar from "./NavBar";
+import NavBarTest from "./NavBarTest";
 
 const MainLayout = (props) => {
   const location = useLocation();
@@ -27,7 +28,7 @@ const MainLayout = (props) => {
       setSearchBarHeight(searchBarRef.current.clientHeight);
     }
     setNavBarHeight(navBarRef.current.clientHeight);
-  }, [currentLocation]);
+  }, [currentLocation, isSearchHidden]);
 
   useEffect(() => {
     if (!isSearchHidden) {
@@ -35,7 +36,7 @@ const MainLayout = (props) => {
     } else {
       mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 1rem)`;
     }
-  }, [searchBarHeight, navBarHeight]);
+  }, [searchBarHeight, navBarHeight, isSearchHidden, viewportHeight]);
 
   return (
     <div style={styles.container}>
@@ -50,7 +51,7 @@ const MainLayout = (props) => {
         <div ref={mainRef} style={styles.main}>
           <Outlet />
         </div>
-        <NavBar ref={navBarRef} style={styles.navBar} />
+        <NavBarTest ref={navBarRef} style={styles.navBar} />
       </div>
     </div>
   );

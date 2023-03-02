@@ -1,4 +1,3 @@
-import searchBar from "./SearchBar";
 import { forwardRef, useState } from "react";
 import { useSearchCard } from "../axios";
 
@@ -19,7 +18,7 @@ const SearchBarBis = forwardRef((props, ref) => {
       />
       <div className="dropdownMenu">
         <div className="dropdownContent">
-          <a href="" className="dropdownItem"></a>
+          <a href="#" className="dropdownItem"></a>
         </div>
       </div>
     </>

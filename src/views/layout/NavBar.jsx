@@ -4,7 +4,7 @@ import { IcMenu } from "../../assets/icons/IcMenu";
 import { IcPlus } from "../../assets/icons/IcPlus";
 import { IcArrowLeft } from "../../assets/icons/IcArrowLeft";
 import { useNavigate, useLocation } from "react-router-dom";
-import { forwardRef, useRef } from "react";
+import { forwardRef } from "react";
 
 const NavBar = forwardRef((props, ref) => {
   const navigate = useNavigate();
