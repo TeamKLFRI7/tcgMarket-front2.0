@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { forwardRef, useEffect, useState } from "react";
 import "./Menu.css";
 import { IcLogin } from "../../assets/icons/IcLogin";
+import { IcXMark } from "../../assets/icons/IcXMark";
 
 const NavBarTest = forwardRef((props, ref) => {
   const navigate = useNavigate();
@@ -52,6 +53,9 @@ const NavBarTest = forwardRef((props, ref) => {
           <Hamburger />
         </div>
         <div className={`nav-elements  ${showNavbar && "active"}`}>
+          <button onClick={handleShowNavbar}>
+            <IcXMark color={"rgb(100, 106, 234)"} />
+          </button>
           <ul>
             <li>
               <NavLink to="/">Home</NavLink>
@@ -67,7 +71,7 @@ const NavBarTest = forwardRef((props, ref) => {
             </li>
             <li>
               <NavLink to={"/login"}>
-                INSCRIPTION / CONNEXION <IcLogin />
+                INSCRIPTION / CONNEXION <IcLogin color={"rgb(100, 106, 234)"} />
               </NavLink>
             </li>
           </ul>

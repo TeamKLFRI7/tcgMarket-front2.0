@@ -3,7 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ModalForm from "../../components/ModalForm";
 import SearchBarBis from "../../components/SearchBarBis";
-import NavBar from "./NavBar";
+//import NavBar from "./NavBar";
 import NavBarTest from "./NavBarTest";
 
 const MainLayout = (props) => {
@@ -64,7 +64,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "strech",
-    maxHeight: "100vh",
+    height: "100vh",
   },
   contentContainer: {
     backgroundColor: "rgb(100, 106, 234)",
