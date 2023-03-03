@@ -1,17 +1,17 @@
 import home from "../../assets/img/home.png";
+import "./NavBar.css";
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ModalForm from "../../components/ModalForm";
 import SearchBarBis from "../../components/SearchBarBis";
-//import NavBar from "./NavBar";
-import NavBarTest from "./NavBarTest";
+//import NavBarOldVersion from "./NavBarOldVersion";
+import NavBar from "./NavBar";
 
 const MainLayout = (props) => {
   const location = useLocation();
   const viewportHeight = window.innerHeight;
   const [searchBarHeight, setSearchBarHeight] = useState(0);
   const [navBarHeight, setNavBarHeight] = useState(0);
-  const [currentLocation, setCurrentLocation] = useState(null);
   const searchBarRef = useRef(null);
   const navBarRef = useRef(null);
   const mainRef = useRef(null);
@@ -19,16 +19,12 @@ const MainLayout = (props) => {
   const hiddenSearchLocation = ["/profil", "/vendre-mes-cartes"];
   const isSearchHidden = hiddenSearchLocation.includes(location.pathname);
 
-  useEffect(() => {
-    setCurrentLocation(location);
-  }, [location]);
-
   useLayoutEffect(() => {
     if (!isSearchHidden) {
       setSearchBarHeight(searchBarRef.current.clientHeight);
     }
     setNavBarHeight(navBarRef.current.clientHeight);
-  }, [currentLocation, isSearchHidden]);
+  }, [isSearchHidden]);
 
   useEffect(() => {
     if (!isSearchHidden) {
@@ -51,7 +47,7 @@ const MainLayout = (props) => {
         <div ref={mainRef} style={styles.main}>
           <Outlet />
         </div>
-        <NavBarTest ref={navBarRef} style={styles.navBar} />
+        <NavBar ref={navBarRef} />
       </div>
     </div>
   );
@@ -69,8 +65,8 @@ const styles = {
   contentContainer: {
     backgroundColor: "rgb(100, 106, 234)",
     borderRadius: "30px",
-    flexGrow: "1",
     display: "flex",
+    flexGrow: "1",
     flexDirection: "column",
     boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
   },
@@ -82,7 +78,7 @@ const styles = {
     border: "none",
     flexGrow: "1",
     boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-    marginBottom: "5px",
+    marginBottom: "0.25rem",
     height: "",
     overflow: "scroll",
   },
@@ -101,14 +97,6 @@ const styles = {
     fontSize: "18px",
     flexGrow: "1",
     boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-  },
-  navBar: {
-    color: "white",
-    padding: "10px",
-    fontSize: "18px",
-    border: "none",
-    borderRadius: "30px",
-    marginBottom: "5px",
   },
 };
 
