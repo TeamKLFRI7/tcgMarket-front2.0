@@ -12,6 +12,7 @@ import { IcSold } from "../../assets/icons/IcSold";
 import { IcCatalogue } from "../../assets/icons/IcCatalogue";
 import TcgLogo from "../../assets/img/logo-tcgMarket.png";
 import "./NavBar.css";
+import { IcLogout } from "../../assets/icons/IcLogout";
 
 const NavBar = forwardRef((props, ref) => {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ const NavBar = forwardRef((props, ref) => {
               className={"navElements-headerButton"}
               onClick={handleShowNavbar}
             >
-              <IcXMark color={styles.color} />
+              <IcXMark />
             </button>
             <img
               className={"navElements-headerLogo"}
@@ -110,7 +111,7 @@ const NavBar = forwardRef((props, ref) => {
               <li className={"navElements-li"} onClick={handleShowNavbar}>
                 <NavLink to={"#"}>
                   <span className={"navElements-linkText"}>
-                    Se déconnecter <IcLogin />
+                    Se déconnecter <IcLogout />
                   </span>
                 </NavLink>
               </li>
@@ -129,11 +130,5 @@ const NavBar = forwardRef((props, ref) => {
     </nav>
   );
 });
-
-const styles = {
-  color: {
-    color: "rgb(100, 106, 234)",
-  },
-};
 
 export default NavBar;
