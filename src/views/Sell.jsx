@@ -1,5 +1,5 @@
-import { useGetSell } from "../../axios";
-import Card from "../../components/Card";
+import { useGetSell } from "../axios";
+import Card from "../components/Card";
 
 const Sell = () => {
   const { data, loading } = useGetSell();

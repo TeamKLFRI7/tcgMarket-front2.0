@@ -1,5 +1,5 @@
 import home from "../../assets/img/home.png";
-import "./NavBar.css";
+import "./layout.css";
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ModalForm from "../../components/ModalForm";

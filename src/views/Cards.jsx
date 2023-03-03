@@ -1,6 +1,6 @@
-import Card from "../../components/Card";
-import { useGetCards } from "../../axios";
-import PageHeader from "../../components/PageHeader";
+import Card from "../components/Card";
+import { useGetCards } from "../axios";
+import PageHeader from "../components/PageHeader";
 import { Link } from "react-router-dom";
 
 const Cards = () => {
@@ -22,7 +22,7 @@ const Cards = () => {
                       <div style={styles.cardCountContainer}>
                         <div style={styles.cardCount}>
                           <img
-                            src={require("../../assets/img/pokeball.png")}
+                            src={require("../assets/img/pokeball.png")}
                             alt={"pokeball"}
                             style={styles.cardCountImg}
                           />

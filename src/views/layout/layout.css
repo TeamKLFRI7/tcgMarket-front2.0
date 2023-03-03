@@ -2,90 +2,76 @@
 /*blockName_modifierName*/
 /*blockName-elementName*/
 /*blockName-elementName_modifierName*/
-
 .navbar {
     height: 3rem;
 }
-
 .navbar-button {
-    background: none;
     border: none;
+    background: none;
 }
-
 .navbar-container {
-    height: 100%;
-    font-size: 1.5rem;
-    margin-bottom: 0.25rem;
+    font-size: var(--medium-fontSize);
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    margin-bottom: var(--space1);
 }
-
 .menu-icon {
     display: block;
     cursor: pointer;
 }
-
 .navElements {
     position: absolute;
-    right: 0;
     top: 0;
+    right: 0;
+    overflow: hidden;
     width: 0;
     height: 100vh;
-    background-color: white;
     transition: all 0.3s ease-in;
-    overflow: hidden;
+    background-color: var(--secondary-color);
 }
-
 .navElements.active {
     width: 100%;
-    background-color: rgb(100, 106, 234);
+    background-color: var(--main-color);
 }
-
 .navElements-header {
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
 }
-
 .navElements-headerButton {
-    margin-top: 2rem;
-    margin-left: auto;
-    margin-right: 2rem;
     display: block;
-    background: none;
+    margin-top: var(--space8);
+    margin-right: var(--space8);
+    margin-left: auto;
     border: none;
+    background: none;
 }
-
 .navElements-headerLogo {
     width: 80%;
     height: 80%;
     margin: 0 auto;
 }
-
 .navElements-ul {
-    margin-top: 0;
-    padding-inline-start: 0;
-    padding: 0 2rem;
-    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    height: 40%;
+    margin-top: 0;
+    padding-inline-start: 0;
+    padding: 0 var(--space8);
     list-style-type: none;
 }
-
 .navElements-li {
-    margin-right: unset;
     margin-top: 1.25rem;
+    margin-right: unset;
 }
-
 .navElements-li_MarginTop {
     margin-top: 0;
 }
-
-
 .navElements-linkText {
-    color: white;
     display: flex;
     justify-content: space-between;
+    color: var(--secondary-color);
 }

@@ -1,97 +1,85 @@
 .modalBackground {
-    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
     width: 100vw;
     height: 100vh;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.modalContainer {
+    position: fixed;
     z-index: 10;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-}
-
-.modalContainer {
+    overflow-y: scroll;
     width: 95vw;
     height: 90vh;
-    top: 50%;
-    left: 50%;
-    background: white;
-    color: white;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    overflow-y: scroll;
-    z-index: 10;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
     padding: 30px 20px;
+    transform: translate(-50%, -50%);
+    color: var(--secondary-color);
+    border-radius: 10px;
+    background: var(--secondary-color);
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
 }
-
 .modal {
     font-size: 1.2rem;
 }
-
 .modalHeader {
-    height: 50px;
-    background: white;
+    display: flex;
     overflow: hidden;
+    justify-content: space-between;
+    height: 50px;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    display: flex;
-    justify-content: space-between;
+    background: var(--secondary-color);
 }
-
 .heading {
+    font-size: 24px;
+    font-weight: 600;
     margin: 0;
     padding: 10px;
-    color: #333;
-    font-weight: 600;
-    font-size: 24px;
     text-align: center;
-}
-
-.modalContent {
-    padding: 10px;
-    font-size: 14px;
     color: #333;
 }
-
+.modalContent {
+    font-size: 14px;
+    padding: 10px;
+    color: #333;
+}
 .myField {
     padding: 20px 10px;
-    border-radius: 10px;
     border: 1px solid #6C6C6C;
+    border-radius: 10px;
     box-shadow: 0 5px 5px rgb(188 188 188);
 }
-
 .mobileFields {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
-
 .modalActions {
     bottom: 2px;
-    margin-bottom: 10px;
     width: 100%;
+    margin-bottom: 10px;
 }
-
 .actionsContainer {
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: space-around;
 }
-
 .closeBtn {
-    cursor: pointer;
-    background: transparent;
-    border: none;
     z-index: 10;
+    cursor: pointer;
+    border: none;
+    background: transparent;
 }
-
 .closeBtn > svg {
     max-width: 40px;
     max-height: 40px;
 }
-
 /* .closeBtn:hover {
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
     transform: translate(-4px, 4px);

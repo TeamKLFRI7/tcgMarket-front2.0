@@ -1,22 +1,48 @@
+/*blockName*/
+/*blockName_modifierName*/
+/*blockName-elementName*/
+/*blockName-elementName_modifierName*/
+:root {
+    /*COLOR*/
+    --light-shadow: rgb(188, 188, 188);
+    --dark-shadow: rgb(73, 73, 73);
+    --main-color: rgb(100, 106, 234);
+    --secondary-color: #fff;
+    --light-color: #eee;
+    --danger-color: rgb(220, 57, 57);
+    /*MARGES / PADDING*/
+    --space1: 0.25rem;
+    --space2: 0.5rem;
+    --space3: 0.75rem;
+    --space4: 1rem;
+    --space5: 1.25rem;
+    --space6: 1.5rem;
+    --space7: 1.75rem;
+    --space8: 2rem;
+    --space9: 2.25rem;
+    --space10: 2.5rem;
+    --space11: 2.75rem;
+    --space12: 3rem;
+    /*FONT-SIZE*/
+    --medium-fontSize: 1.5rem;
+    --large-fontSize: 2rem;
+}
 * {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
     text-decoration: none;
     color: black;
 }
-
 body {
-    margin: 0;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #eee;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--light-color);
 }
-
 .active {
-    color: #eee;
+    color: var(--light-color);
 }
-
 .title {
     font-size: 1rem;
     margin-bottom: 1rem;

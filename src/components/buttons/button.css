@@ -1,36 +1,38 @@
 .btn {
+    font-size: var(--medium-fontSize);
     position: relative;
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    margin: 1.25rem 0;
-    padding: 1.25rem 1.25rem;
-    border-radius: 10px;
-    border: none;
+    margin: var(--space5) 0;
+    padding: var(--space5);
     cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
 }
-
 .yellowBtn {
+    color: white;
     background-color: #E5CD24;
-    color: white;
-    box-shadow: 0 5px 5px rgb(188, 188, 188);
+    box-shadow: 0 5px 5px var(--light-shadow);
 }
-
 .whiteBtn {
-    background-color: white;
     color: #B49F11;
-    box-shadow: 0 5px 5px rgb(73, 73, 73);
+    background-color: white;
+    box-shadow: 0 5px 5px var(--dark-shadow);
 }
-
 .purpleBtn {
-    background-color: rgb(99, 106, 242);
-    color: white;
-    box-shadow: 0 5px 5px rgb(188, 188, 188);
-    font-size: 16px!important;
+    font-size: 1rem !important;
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+    box-shadow: 0 5px 5px var(--light-shadow);
 }
-
 .deleteBtn {
-    background-color: rgb(220, 57, 57);
-    color: white;
-    box-shadow: 0 5px 5px rgb(188, 188, 188);
-    font-size: 1rem!important;
+    font-size: 1rem !important;
+    color: var(--secondary-color);
+    background-color: var(--danger-color);
+    box-shadow: 0 5px 5px var(--light-shadow);
+}
+@media only screen and (min-width: 600px) {
+    .btn {
+        position: relative;
+        margin: var(--space5) var(--space12);
+    }
 }

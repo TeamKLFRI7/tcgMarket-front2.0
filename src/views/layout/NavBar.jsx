@@ -11,7 +11,7 @@ import { IcMesAnnonces } from "../../assets/icons/IcMesAnnonces";
 import { IcSold } from "../../assets/icons/IcSold";
 import { IcCatalogue } from "../../assets/icons/IcCatalogue";
 import TcgLogo from "../../assets/img/logo-tcgMarket.png";
-import "./NavBar.css";
+import "./layout.css";
 import { IcLogout } from "../../assets/icons/IcLogout";
 
 const NavBar = forwardRef((props, ref) => {

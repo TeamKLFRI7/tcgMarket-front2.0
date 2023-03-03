@@ -1,12 +1,12 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import Game from "./views/card/Game";
-import Cards from "./views/card/Cards";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Game from "./views/game/Game";
+import Cards from "./views/Cards";
 import Auth from "./views/auth/Auth";
 import MainLayout from "./views/layout/MainLayout";
 import Home from "./views/home/Home";
 import Profil from "./views/profil/Profil";
 import { useState } from "react";
-import Sell from "./views/card/Sell";
+import Sell from "./views/Sell";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
