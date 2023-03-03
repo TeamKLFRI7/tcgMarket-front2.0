@@ -1,6 +1,6 @@
 import React from "react";
 
-export const IcXMark = ({ color }) => {
+export const IcXMark = () => {
   return (
     <svg
       width="30"
@@ -11,14 +11,14 @@ export const IcXMark = ({ color }) => {
     >
       <path
         d="M18 5.91L6 18.09"
-        stroke={color}
+        stroke="white"
         strokeWidth="1"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M6 5.91L18 18.09"
-        stroke={color}
+        stroke="white"
         strokeWidth="1"
         strokeLinecap="round"
         strokeLinejoin="round"

@@ -1,3 +1,8 @@
+/*blockName*/
+/*blockName.modifierName*/
+/*blockName-elementName*/
+/*blockName-elementName.modifierName*/
+
 .navBar {
     display: flex;
     justify-content: space-around;
@@ -12,7 +17,7 @@
 .container {
     display: flex;
     justify-content: space-around;
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .menu-icon {
@@ -33,20 +38,32 @@
 
 .nav-elements.active {
     width: 100%;
+    background-color: rgb(100, 106, 234);
+}
+
+.navElements-header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.navElements-header-button {
+    display: block;
+    margin-left: auto;
+    background: none;
+    border: none;
 }
 
 .nav-elements ul {
     height: calc(80% - 4rem);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     list-style-type: none;
 }
 
 .nav-elements ul li {
     margin-right: unset;
-    margin-top: 22px;
+    margin-top: 1.25rem;
 }
-.nav-elements ul li a{
-    color: rgb(100, 106, 234)
+
+.nav-elements ul li a {
+    color: white;
 }

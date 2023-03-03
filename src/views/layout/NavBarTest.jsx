@@ -1,13 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { forwardRef, useEffect, useState } from "react";
 import { IcHome } from "../../assets/icons/IcHome";
 import { IcMenu as Hamburger } from "../../assets/icons/IcMenu";
 import { IcPlus } from "../../assets/icons/IcPlus";
 import { IcArrowLeft } from "../../assets/icons/IcArrowLeft";
-import { useNavigate, useLocation } from "react-router-dom";
-import { forwardRef, useEffect, useState } from "react";
-import "./Menu.css";
 import { IcLogin } from "../../assets/icons/IcLogin";
 import { IcXMark } from "../../assets/icons/IcXMark";
+import TcgLogo from "../../assets/img/logo-tcgMarket.png";
+import "./Menu.css";
 
 const NavBarTest = forwardRef((props, ref) => {
   const navigate = useNavigate();
@@ -53,9 +53,15 @@ const NavBarTest = forwardRef((props, ref) => {
           <Hamburger />
         </div>
         <div className={`nav-elements  ${showNavbar && "active"}`}>
-          <button onClick={handleShowNavbar}>
-            <IcXMark color={"rgb(100, 106, 234)"} />
-          </button>
+          <div className={"navElements-header"}>
+            <button
+              className={"navElements-header-button"}
+              onClick={handleShowNavbar}
+            >
+              <IcXMark color={styles.color} />
+            </button>
+            <img src={TcgLogo} alt={TcgLogo} />
+          </div>
           <ul>
             <li>
               <NavLink to="/">Home</NavLink>
@@ -71,7 +77,7 @@ const NavBarTest = forwardRef((props, ref) => {
             </li>
             <li>
               <NavLink to={"/login"}>
-                INSCRIPTION / CONNEXION <IcLogin color={"rgb(100, 106, 234)"} />
+                Inscription / Connexion <IcLogin color={styles.color} />
               </NavLink>
             </li>
           </ul>
@@ -80,5 +86,11 @@ const NavBarTest = forwardRef((props, ref) => {
     </nav>
   );
 });
+
+const styles = {
+  color: {
+    color: "rgb(100, 106, 234)",
+  },
+};
 
 export default NavBarTest;
