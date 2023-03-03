@@ -40,12 +40,9 @@ const NavBar = forwardRef((props, ref) => {
             <IcPlus />
           </NavLink>
         ) : (
-          <NavLink
-            onClick={() => navigate(-1)}
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-          >
+          <button className={"navbar-button"} onClick={() => navigate(-1)}>
             <IcArrowLeft />
-          </NavLink>
+          </button>
         )}
         <NavLink
           to={"/"}

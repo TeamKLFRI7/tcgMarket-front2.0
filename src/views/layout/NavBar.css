@@ -7,6 +7,11 @@
     height: 3rem;
 }
 
+.navbar-button {
+    background: none;
+    border: none;
+}
+
 .navbar-container {
     height: 100%;
     font-size: 1.5rem;
