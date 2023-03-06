@@ -12,23 +12,43 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [modalOpen, setModalOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-    
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Auth setToken={setToken}/>} />
-      <Route element={<MainLayout modalOpen={modalOpen} setModalOpen={setModalOpen} setSearchResults={setSearchResults}/>}>
-        <Route path="/jeux/:id" element={<Game searchResults={searchResults} />} />
-        <Route path="/set/:id/cartes" element={<Cards />} />
+      <Route path="/login" element={<Auth setToken={setToken} />} />
+      <Route
+        element={
+          <MainLayout
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            setSearchResults={setSearchResults}
+          />
+        }
+      >
+        <Route
+          path="/jeux/:id"
+          element={<Game searchResults={searchResults} />}
+        />
+        <Route
+          path="/set/:id/cartes"
+          element={<Cards searchResults={searchResults} />}
+        />
         <Route path="boutique/:id" element={<Sell />} />
         {/* Routes protégées début */}
         <Route
-          path="/ajouter-une-annonce"
+          path="/vendre-mes-cartes"
           element={token ? <p>Vendre une carte</p> : <Navigate to="/login" />}
         />
         <Route
           path="/profil"
-          element={token ? <Profil setModalOpen={setModalOpen}/> : <Navigate to="/login" />}
+          element={
+            token ? (
+              <Profil setModalOpen={setModalOpen} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
         <Route
           path="/mes-annonces"

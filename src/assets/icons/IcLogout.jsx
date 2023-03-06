@@ -1,6 +1,6 @@
 import React from "react";
 
-export const IcLogin = () => {
+export const IcLogout = () => {
   return (
     <svg
       width="24"
@@ -17,21 +17,21 @@ export const IcLogin = () => {
         strokeLinejoin="round"
       />
       <path
-        d="M2.75 12H15"
+        d="M15 12H2.78"
         stroke="white"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M15 12L11 8"
+        d="M2.75 12L6.75 16"
         stroke="white"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M15 12L11 16"
+        d="M2.75 12L6.75 8"
         stroke="white"
         strokeWidth="1.5"
         strokeLinecap="round"

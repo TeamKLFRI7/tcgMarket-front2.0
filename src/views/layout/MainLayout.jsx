@@ -1,64 +1,55 @@
-import { Outlet, useLocation } from "react-router-dom";
 import home from "../../assets/img/home.png";
-import NavBar from "./NavBar";
-import SearchBar from "../../components/SearchBar";
+import "./NavBar.css";
+import { Outlet, useLocation } from "react-router-dom";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ModalForm from "../../components/ModalForm";
-import Menu from "../../components/Menu";
+import SearchBarBis from "../../components/SearchBarBis";
+//import NavBarOldVersion from "./NavBarOldVersion";
+import NavBar from "./NavBar";
 
-import { useEffect, useRef, useState } from "react";
-
-const MainLayout = ({
-  modalOpen,
-  setModalOpen,
-  searchResults,
-  setSearchResults,
-}) => {
+const MainLayout = (props) => {
   const location = useLocation();
-  const mainRef = useRef(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [navBarHeight, setNavBarHeight] = useState(0);
+  const viewportHeight = window.innerHeight;
   const [searchBarHeight, setSearchBarHeight] = useState(0);
+  const [navBarHeight, setNavBarHeight] = useState(0);
+  const searchBarRef = useRef(null);
+  const navBarRef = useRef(null);
+  const mainRef = useRef(null);
+
+  const hiddenSearchLocation = ["/profil", "/vendre-mes-cartes"];
+  const isSearchHidden = hiddenSearchLocation.includes(location.pathname);
+
+  useLayoutEffect(() => {
+    if (!isSearchHidden) {
+      setSearchBarHeight(searchBarRef.current.clientHeight);
+    }
+    setNavBarHeight(navBarRef.current.clientHeight);
+  }, [isSearchHidden]);
 
   useEffect(() => {
-    const viewportHeight = window.innerHeight;
-    if (location.pathname === "/jeux/1") {
-      mainRef.current.style.height = `calc(${
-        viewportHeight - searchBarHeight - navBarHeight
-      }px - 2rem)`;
+    if (!isSearchHidden) {
+      mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 2rem)`;
     } else {
-      mainRef.current.style.height = `calc(${
-        viewportHeight - navBarHeight
-      }px - 1rem)`;
+      mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 1rem)`;
     }
-    return () => {
-      mainRef.current.style.height = "";
-    };
-  }, [location, navBarHeight, searchBarHeight]);
+  }, [searchBarHeight, navBarHeight, isSearchHidden, viewportHeight]);
 
   return (
-    <>
-      {menuOpen && <Menu setMenuOpen={setMenuOpen} />}
-      <div style={styles.container}>
-        {modalOpen && <ModalForm setModalOpen={setModalOpen} />}
-        {location.pathname === "/jeux/1" && (
-          <SearchBar
-            setSearchHeight={setSearchBarHeight}
-            searchResults={searchResults}
-            setSearchResults={setSearchResults}
-          />
-        )}
-        <div style={styles.contentContainer}>
-          <div ref={mainRef} style={styles.main}>
-            <Outlet />
-          </div>
-          <NavBar
-            setHeight={setNavBarHeight}
-            setMenuOpen={setMenuOpen}
-            style={styles.navBar}
-          />
+    <div style={styles.container}>
+      {props.modalOpen && <ModalForm setModalOpen={props.setModalOpen} />}
+      {isSearchHidden ? null : (
+        <SearchBarBis
+          ref={searchBarRef}
+          setSearchResults={props.setSearchResults}
+        />
+      )}
+      <div style={styles.contentContainer}>
+        <div ref={mainRef} style={styles.main}>
+          <Outlet />
         </div>
+        <NavBar ref={navBarRef} />
       </div>
-    </>
+    </div>
   );
 };
 
@@ -69,22 +60,13 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "strech",
-    maxHeight: "100vh",
-  },
-  searchBar: {
-    backgroundColor: "#fff",
-    padding: "20px",
-    fontSize: "18px",
-    borderRadius: "62px",
-    border: "none",
-    boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-    margin: ".5rem 0 .5rem",
+    height: "100vh",
   },
   contentContainer: {
     backgroundColor: "rgb(100, 106, 234)",
     borderRadius: "30px",
-    flexGrow: "1",
     display: "flex",
+    flexGrow: "1",
     flexDirection: "column",
     boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
   },
@@ -96,7 +78,7 @@ const styles = {
     border: "none",
     flexGrow: "1",
     boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-    marginBottom: "5px",
+    marginBottom: "0.25rem",
     height: "",
     overflow: "scroll",
   },
@@ -115,14 +97,6 @@ const styles = {
     fontSize: "18px",
     flexGrow: "1",
     boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-  },
-  navBar: {
-    color: "white",
-    padding: "10px",
-    fontSize: "18px",
-    border: "none",
-    borderRadius: "30px",
-    marginBottom: "5px",
   },
 };
 
