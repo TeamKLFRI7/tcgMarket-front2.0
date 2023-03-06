@@ -1,7 +1,8 @@
 .connexion {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px 0;
     position: relative;
     background: radial-gradient(rgba(121, 138, 231, 0.44), #636AF2);
 }
@@ -118,4 +119,16 @@
  color: rgb(202, 48, 48);
  font-size: 14px;
  font-weight: 600;
+}
+
+.error-msg {
+    font-size: 14px;
+    font-style: italic;
+    color: rgb(197 3 3);
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    white-space: pre-line;
+    text-align: left;
 }
