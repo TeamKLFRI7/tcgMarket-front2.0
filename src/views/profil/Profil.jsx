@@ -117,6 +117,7 @@ const styles = {
   buttonContent: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-around",
     zIndex: "2",
   },
   boxContainer: {
