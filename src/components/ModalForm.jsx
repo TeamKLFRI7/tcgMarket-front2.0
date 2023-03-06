@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGetUserMe } from "../axios";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form, ErrorMessage, useFormik } from "formik";
 import * as Yup from "yup";
 import PurpleButton from "./buttons/PurpleButton";
 import axios from "axios";
@@ -28,15 +28,30 @@ const ModalForm = ({ setModalOpen }) => {
   if (data.userInfo) {
     infoSup = data.userInfo;
   }
+
+  const phoneRegex = /^(?:\+\d[0-9]|0)\d{9}$/;
   const validationSchema = Yup.object({
-    pseudo: Yup.string()
-      .max(15, "Le pseudo doit être d'au moins 15 charactères")
-      .required("Required"),
-    // phone: Yup.string()
-    //   .max(13, "Le numéro doit commencer par 06 ou 07 ou +33")
-    //   .required("Required"),
-    // email: Yup.string().email("Adresse mail invalide").required("Required"),
-  });
+    userName: Yup.string()
+      .max(15, "Le pseudo ne doit pas dépasser 15 charactères.")
+      .required("Pseudo requis"),
+    phoneNumber: Yup.string()
+      .matches(phoneRegex, 'Le numéro doit commencer par 06 ou 07 et être composé de 10 chiffre exactement.')
+      .required("Numéro de téléphone requis"),
+    email: Yup.string().email("Adresse mail invalide.").required("Email requis"),
+    description: Yup.string()
+      .max(154, 'Vous ne pouvez pas dépasser 154 charactères.'),
+    address: Yup.string()
+      .max(255, 'Vous ne pouvez pas dépasser 255 charactères.'),
+    city: Yup.string()
+      .matches(/^[a-zA-Z]+$/, 'Le nom de la ville ne doit être composé que de lettres.'),
+    postalCode: Yup.string()
+      .max(10, 'Le code postal ne doit pas excéder 10 chiffres.')
+      .matches(/^[0-9]+$/, 'Le nom code postal ne doit être composé que de chiffres.'),
+    country: Yup.string()
+      .matches(/^[a-zA-Z]+$/, 'Le pays ne doit être composé que de lettres.'),
+    deliveryAddress: Yup.string()
+      .max(255, 'Vous ne pouvez pas dépasser 255 charactères.')
+  }); 
 
   const handleSubmitModifications = (values, { setSubmitting }) => {
     values.userInfo["id"] = infoSup.id;
@@ -49,8 +64,7 @@ const ModalForm = ({ setModalOpen }) => {
             "Content-Type": `application/json`,
           },
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setSubmitting(false);
           setModalOpen(false);
           window.location.reload(true);
@@ -70,18 +84,17 @@ const ModalForm = ({ setModalOpen }) => {
       {!loading && (
         <Formik
           initialValues={{
-            userName: "",
-            email: "",
-            phoneNumber: "",
-            userInfo: {
-              description: "",
-              address: "",
-              city: "",
-              postalCode: "",
-              country: "",
-              deliveryAddress: "",
-            },
+            userName: data.userName,
+            email: data.email,
+            phoneNumber: data.phoneNumber,
+            description: infoSup.description,
+            address: infoSup.address,
+            city: infoSup.city,
+            postalCode: infoSup.postalCode,
+            country: infoSup.country,
+            deliveryAddress: infoSup.deliveryAddress,
           }}
+          validationSchema={validationSchema}
           onSubmit={handleSubmitModifications}
         >
           <div className="modalBackground">
@@ -102,109 +115,112 @@ const ModalForm = ({ setModalOpen }) => {
                 <Form>
                   <div className="modalContent">
                     <div className="col mobileFields">
-                      <label htmlFor="userName">Pseudo : </label>
+                      <label htmlFor="userName" className="modalProfilLabel">Pseudo : </label>
                       <Field
                         name="userName"
                         type="text"
                         className="myField"
                         placeholder={data.userName}
                       />
-                      <ErrorMessage name="userName" />
+                      <ErrorMessage name="userName" render={msg => <div className="error-msg-modal">{msg}</div>}/>
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="email">Email : </label>
+                      <label htmlFor="email" className="modalProfilLabel">Email : </label>
                       <Field
                         name="email"
                         type="email"
                         className="myField"
                         placeholder={data.email}
                       />
-                      <ErrorMessage name="email" />
+                      <ErrorMessage name="email" render={msg => <div className="error-msg-modal">{msg}</div>}/>
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="phoneNumber">Téléphone : </label>
+                      <label htmlFor="phoneNumber" className="modalProfilLabel">Téléphone : </label>
                       <Field
                         name="phoneNumber"
                         type="numbers"
                         className="myField"
                         placeholder={data.phoneNumber}
                       />
-                      <ErrorMessage name="phoneNumber" />
+                      <ErrorMessage name="phoneNumber" render={msg => <div className="error-msg-modal">{msg}</div>}/>
                     </div>
 
-                    <div className="col mobileFields">
-                      <label htmlFor="userInfo.description">
-                        Description :{" "}
-                      </label>
-                      <Field
-                        name="userInfo.description"
-                        type="text"
-                        className="myField"
-                        placeholder={infoSup.description}
-                      />
-                      <ErrorMessage name="description" />
-                    </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="userInfo.address">Adresse : </label>
+                      <label htmlFor="address" className="modalProfilLabel">Adresse : </label>
                       <Field
-                        name="userInfo.address"
+                        name="address"
                         type="text"
                         className="myField"
                         placeholder={infoSup.address}
                       />
-                      <ErrorMessage name="address" />
+                      <ErrorMessage name="address" render={msg => <div className="error-msg-modal">{msg}</div>}/>
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="userInfo.city">Ville : </label>
+                      <label htmlFor="city" className="modalProfilLabel">Ville : </label>
                       <Field
-                        name="userInfo.city"
+                        name="city"
                         type="text"
                         className="myField"
                         placeholder={infoSup.city}
                       />
-                      <ErrorMessage name="city" />
+                      <ErrorMessage name="city" render={msg => <div className="error-msg-modal">{msg}</div>}/>
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="userInfo.postalCode">
+                      <label htmlFor="postalCode" className="modalProfilLabel">
                         Code postal :{" "}
                       </label>
                       <Field
-                        name="userInfo.postalCode"
+                        name="postalCode"
                         type="text"
                         className="myField"
                         placeholder={infoSup.postalCode}
                       />
-                      <ErrorMessage name="postalCode" />
+                      <ErrorMessage name="postalCode" render={msg => <div className="error-msg-modal">{msg}</div>}/>
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="userInfo.country">Pays : </label>
+                      <label htmlFor="country" className="modalProfilLabel">Pays : </label>
                       <Field
-                        name="userInfo.country"
+                        name="country"
                         type="text"
                         className="myField"
                         placeholder={infoSup.country}
                       />
-                      <ErrorMessage name="country" />
+                      <ErrorMessage name="country" render={msg => <div className="error-msg-modal">{msg}</div>}/>
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="userInfo.deliveryAddress">
+                      <label htmlFor="deliveryAddress" className="modalProfilLabel">
                         Adresse de livraison :{" "}
                       </label>
                       <Field
-                        name="userInfo.deliveryAddress"
+                        name="deliveryAddress"
                         type="text"
                         className="myField"
                         placeholder={infoSup.deliveryAddress}
                       />
-                      <ErrorMessage name="deliveryAddress" />
+                      <ErrorMessage name="deliveryAddress" render={msg => <div className="error-msg-modal">{msg}</div>}/>
                     </div>
+
+                    <div className="col mobileFields">
+                      <label htmlFor="description" className="modalProfilLabel">
+                        Description :{" "}
+                      </label>
+                      <Field
+                        name="description"
+                        component="textarea"
+                        className="myField descField"
+                        rows="7"
+                        placeholder={infoSup.description}
+                      />
+                      <ErrorMessage name="description" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                    </div>
+
                   </div>
                   <div className="modalActions">
                     <div className="actionsContainer">

@@ -24,11 +24,15 @@ const Game = (props) => {
         <>
           {cards ? null : (
             <>
-              <h1 className={"title"}>Dernières cartes mises en ligne :</h1>
-              <h1 className={"title"}>Séries pokémons :</h1>
-              {data.cardSeries.map((serie, index) => (
-                <FrameSeries key={index} serieData={serie} />
-              ))}
+                {cards ? null : (
+                    <>
+                        <h1 className={'title'}>Dernières cartes mises en ligne :</h1>
+                        <h1 className={'title'}>Séries pokémons : </h1>
+                        {data.cardSeries.map((serie, index) => (
+                            <FrameSeries key={index} serieData={serie} />
+                        ))}
+                    </>
+                )}
             </>
           )}
         </>

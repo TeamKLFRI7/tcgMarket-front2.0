@@ -41,16 +41,39 @@ const Profil = ({ setModalOpen }) => {
             <h2 style={styles.userName}>{data.userName}</h2>
           </div>
           <div style={styles.infoContent}>
-            <hr />
-            <p>Email : {data.email}</p>
-            <p>Téléphone : {data.phoneNumber}</p>
-            <hr />
-            <p>Description : {infoSup.description}</p>
-            <p>Addresse : {infoSup.address}</p>
-            <p>Ville : {infoSup.city}</p>
-            <p>Code Postal : {infoSup.postalCode}</p>
-            <p>Pays : {infoSup.country}</p>
-            <p>Addresse de livraison : {infoSup.deliveryAddress}</p>
+            {/* BOX ONE */}
+            <div style={styles.boxContainer}>
+              {/* BLOCK ONE */}
+              <p style={styles.profilLabel} >Email : </p>
+              <p style={styles.profilContent}> {data.email}</p>
+              <hr style={styles.hrWithStyle} />
+              {/* BLOCK TWO */}
+              <p style={styles.profilLabel}>Téléphone : </p>
+              <p style={styles.profilContent}>{data.phoneNumber}</p>
+            </div>
+            {/* BOX TWO */}
+            <div style={styles.boxContainer}>
+               {/* BLOCK THREE */}
+              <p style={styles.profilLabel} >Addresse : </p>
+              <p style={styles.profilContent}>{infoSup.address}</p>
+               {/* BLOCK FOUR */}
+              <p style={styles.profilLabel} >Ville : </p>
+              <p style={styles.profilContent}>{infoSup.city}</p>
+               {/* BLOCK FIVE */}
+              <p style={styles.profilLabel} >Code Postal : </p>
+              <p style={styles.profilContent}>{infoSup.postalCode}</p>
+               {/* BLOCK SIX */}
+              <p style={styles.profilLabel} >Pays : </p>
+              <p style={styles.profilContent}>{infoSup.country}</p>
+               {/* BLOCK SEVEN */}
+              <hr style={styles.hrWithStyle} />
+              <p style={styles.profilLabel} >Addresse de livraison : </p>
+              <p style={styles.profilContent}>{infoSup.deliveryAddress}</p>
+               {/* BLOCK EIGHT */}
+              <hr style={styles.hrWithStyle} />
+              <p style={styles.profilLabel} >Description : </p>
+              <p style={styles.profilContent}>{infoSup.description}</p>
+            </div>
           </div>
           <div style={styles.buttonContent}>
             <PurpleButton
@@ -58,7 +81,7 @@ const Profil = ({ setModalOpen }) => {
               type={"submit"}
               children={"modifier"}
             />
-            <RedButton path={id} type={"submit"} children={"suprprimer"} />
+            <RedButton path={id} type={"submit"} children={"supprimer"} />
           </div>
         </div>
       )}
@@ -96,6 +119,31 @@ const styles = {
     flexDirection: "row",
     zIndex: "2",
   },
+  boxContainer: {
+    borderRadius: "10px",
+    margin: "15px 0",
+    padding: "15px 20px",
+    boxShadow: "rgb(185 184 184) 0px 3px 10px"
+
+  },
+  hrWithStyle: {
+    borderTop: "1px dashed #777",
+    width: "100%",
+    margin: "25px 0"
+  },
+  profilLabel: {
+    color: "#555",
+    fontWeight: "600",
+    fontSize: "14px",
+    marginBottom: "0"
+  },
+  profilContent: {
+    color: "rgb(55 64 240)",
+    fontWeight: "400",
+    fontSize: "18px",
+    marginTop: "7px",
+    marginBottom: "20px"
+  }
 };
 
 export default Profil;

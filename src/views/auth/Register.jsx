@@ -11,18 +11,19 @@ import { api } from './AuthService';
 export const Register = (props) => {
   const apiUrl = process.env.REACT_APP_URL_API;
   const navigate = useNavigate();
+  const phoneRegex = /^(?:\+\d[0-9]|0)\d{9}$/;
 
   const validationSchema = Yup.object({
     userName: Yup.string()
-      .max(15, "Le pseudo ne doit pas dépasser 15 charactères")
-      .required("Required"),
+      .max(15, "Le pseudo ne doit pas dépasser 15 charactères.")
+      .required("Pseudo requis"),
     phoneNumber: Yup.string()
-      .max(13, "Le numéro doit commencer par 06 ou 07 ou +33")
-      .required("Required"),
-    email: Yup.string().email("Adresse mail invalide").required("Required"),
+      .matches(phoneRegex, 'Le numéro doit commencer par 06 ou 07 et être composé de 10 chiffre exactement.')
+      .required("Numéro de téléphone requis"),
+    email: Yup.string().email("Adresse mail invalide.").required("Email requis"),
     password: Yup.string()
-      .min(8, "Votre mot de passe doit faire au mnimum 8 charactères")
-      .required("Required"),
+      .min(8, "Votre mot de passe doit faire au mnimum 8 charactères.")
+      .required("Mot de passe requis"),
   });
 
   const [apiError, setApiError] = useState(null);
@@ -68,8 +69,8 @@ export const Register = (props) => {
         // handle success
       })
       .catch((err) => {
-        if (err.response.data.code === 401) {
-          setApiError("L'identifiant et/ou le mot de passe sont invalides.");
+        if (err.response.data.code === 400) {
+          setApiError("Les champs renseignés sont inexactes et/ou ne correspondent pas aux normes exigées. Veulliez vérifier vos informations.");
         } else if (err.response.data.code === 403) {
           setApiError("Vous n'avez pas accès à ces informations.");
         } else if (err.response.data.code === 404) {
@@ -102,7 +103,7 @@ export const Register = (props) => {
             className="field"
             placeholder="Pseudo"
           />
-          <ErrorMessage name="userName" />
+          <ErrorMessage name="userName" render={msg => <div className="error-msg">{msg}</div>}/>
 
           <Field
             name="phoneNumber"
@@ -110,7 +111,7 @@ export const Register = (props) => {
             className="field"
             placeholder="Téléphone"
           />
-          <ErrorMessage name="phoneNumber" />
+          <ErrorMessage name="phoneNumber" render={msg => <div className="error-msg">{msg}</div>}/>
 
           <Field
             name="email"
@@ -118,7 +119,7 @@ export const Register = (props) => {
             className="field"
             placeholder="Email"
           />
-          <ErrorMessage name="email" />
+          <ErrorMessage name="email" render={msg => <div className="error-msg">{msg}</div>}/>
 
           <Field
             name="password"
@@ -126,11 +127,11 @@ export const Register = (props) => {
             className="field"
             placeholder="Mot de passe"
           />
-          <ErrorMessage name="password" />
+          <ErrorMessage name="password" render={msg => <div className="error-msg">{msg}</div>}/>
 
-          <p className="link-btn" onClick={() => props.onFormSwitch("login")}>
+          <p className="link-btn">
             Vous avez un compte?{" "}
-            <span className="span-btn">Connectez vous.</span>
+            <span className="span-btn" onClick={() => props.onFormSwitch("login")}>Connectez vous.</span>
           </p>
           <p className="error-connection">{apiError}</p>
           <WhiteButton path={"#"} type={"submit"} children={"s'inscrire"} />
