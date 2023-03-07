@@ -4,7 +4,7 @@
     justify-content: center;
     width: calc(100% - 2rem);
     height: 8rem;
-    margin: auto;
+    margin: 0 auto 2rem;
 }
 .pageHead-ImgContainer {
     display: flex;
