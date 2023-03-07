@@ -60,7 +60,7 @@ const NavBar = forwardRef((props, ref) => {
               className={"navElements-headerButton"}
               onClick={handleShowNavbar}
             >
-              <IcXMark />
+              <IcXMark color={"white"} />
             </button>
             <img
               className={"navElements-headerLogo"}

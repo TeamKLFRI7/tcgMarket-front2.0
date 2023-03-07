@@ -5,7 +5,7 @@ import Auth from "./views/auth/Auth";
 import MainLayout from "./views/layout/MainLayout";
 import Home from "./views/home/Home";
 import Profil from "./views/profil/Profil";
-import Sell from "./views/Sell";
+import Sell from "./views/sell/Sell";
 import { useEffect, useState } from "react";
 
 function App() {

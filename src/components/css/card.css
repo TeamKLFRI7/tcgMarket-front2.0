@@ -30,3 +30,23 @@
     padding: .5rem 1rem;
     text-transform: none;
 }
+.sell {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 16rem;
+}
+.sell-card {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 1rem);
+}
+.sell-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 2rem);
+}
+.sell-infoElement {
+    margin-bottom: 1rem;
+}

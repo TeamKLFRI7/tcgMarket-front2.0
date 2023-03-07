@@ -8,7 +8,6 @@
     font-weight: 100;
     font-style: normal;
 }
-
 @font-face {
     font-family: 'Roboto';
     src: url('./fonts/Roboto-Light.ttf') format('truetype');
@@ -27,7 +26,6 @@
     font-weight: 700;
     font-style: normal;
 }
-
 @font-face {
     font-family: 'Roboto';
     src: url('./fonts/Roboto-Black.ttf') format('truetype');
@@ -38,7 +36,8 @@
     /*COLOR*/
     --light-shadow: rgb(188, 188, 188);
     --dark-shadow: rgb(73, 73, 73);
-    --black-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    --midBlack-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    --black-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
     --main-color: rgb(100, 106, 234);
     --secondary-color: #fff;
     --light-color: #eee;
