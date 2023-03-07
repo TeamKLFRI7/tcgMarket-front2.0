@@ -30,6 +30,10 @@ const NavBar = forwardRef((props, ref) => {
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
   };
+
+  function removeToken() {
+    localStorage.clear();
+  }
   return (
     <nav className={"navbar"} ref={ref}>
       <div className="navbar-container">
@@ -60,7 +64,7 @@ const NavBar = forwardRef((props, ref) => {
               className={"navElements-headerButton"}
               onClick={handleShowNavbar}
             >
-              <IcXMark />
+              <IcXMark color="white" />
             </button>
             <img
               className={"navElements-headerLogo"}
@@ -109,7 +113,7 @@ const NavBar = forwardRef((props, ref) => {
             </li>
             {token ? (
               <li className={"navElements-li"} onClick={handleShowNavbar}>
-                <NavLink to={"#"}>
+                <NavLink to={"/"} onClick={() => removeToken()}>
                   <span className={"navElements-linkText"}>
                     Se déconnecter <IcLogout />
                   </span>

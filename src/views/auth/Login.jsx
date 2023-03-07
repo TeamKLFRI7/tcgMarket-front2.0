@@ -47,7 +47,6 @@ const Login = (props) => {
         // -------------------- END --------------------
 
         setSubmitting(false);
-        // handle success
       })
       .catch((err) => {
         if (err.response.data.code === 401) {
@@ -60,7 +59,6 @@ const Login = (props) => {
           setApiError("Erreur serveur. Veuillez réassyer ultérieurement.");
         }
         setSubmitting(false);
-        // handle error
       });
   };
 
@@ -71,8 +69,6 @@ const Login = (props) => {
       onSubmit={handleSubmit}
     >
       <div className="formContainer">
-        {/* <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p> */}
-
         <h1 className="connexionTitle">CONNECTION</h1>
         <Form className="formContainerLog">
           <Field
@@ -89,14 +85,13 @@ const Login = (props) => {
             placeholder="Mot de passe"
             className="field"
           />
-          <ErrorMessage name="password" />
+          <ErrorMessage name="password" render={msg => <div className="error-msg">{msg}</div>} />
 
           <p
             className="link-btn"
-            onClick={() => props.onFormSwitch("register")}
           >
             Vous n'avez pas de compte?{" "}
-            <span className="span-btn">En créer un.</span>
+            <span className="span-btn" onClick={() => props.onFormSwitch("register")}>En créer un.</span>
           </p>
           <p className="error-connection">{apiError}</p>
           <YellowButton path={"#"} type={"submit"} children={"se connecter"} />

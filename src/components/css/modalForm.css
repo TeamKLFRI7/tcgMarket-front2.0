@@ -19,12 +19,16 @@
     padding: 30px 20px;
     transform: translate(-50%, -50%);
     color: var(--secondary-color);
+    z-index: 10;
     border-radius: 10px;
     background: var(--secondary-color);
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+    padding: 30px 20px;
+    overflow-y: auto;
 }
 .modal {
     font-size: 1.2rem;
+    transition: opacity .15s linear;
 }
 .modalHeader {
     display: flex;
@@ -53,13 +57,31 @@
     border: 1px solid #6C6C6C;
     border-radius: 10px;
     box-shadow: 0 5px 5px rgb(188 188 188);
+    border: 1px solid #6C6C6C;
+    font-size: 16px;
+    margin-top: 7px;
+    font-weight: 400;
+}
+
+.myField:focus-visible {
+    outline-color: rgb(55 64 240);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
 }
 .mobileFields {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: column;
     margin-bottom: 20px;
 }
+
+.modalProfilLabel {
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
 .modalActions {
     bottom: 2px;
     width: 100%;
@@ -80,7 +102,14 @@
     max-width: 40px;
     max-height: 40px;
 }
-/* .closeBtn:hover {
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-    transform: translate(-4px, 4px);
-} */
+.error-msg-modal {
+    font-size: 14px;
+    font-style: italic;
+    color: rgb(197 3 3);
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    white-space: pre-line;
+    text-align: left;
+}

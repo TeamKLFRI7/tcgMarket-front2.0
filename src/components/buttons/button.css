@@ -24,11 +24,13 @@
     color: var(--secondary-color);
     background-color: var(--main-color);
     box-shadow: 0 5px 5px var(--light-shadow);
+    padding: 15px 20px;
 }
 .deleteBtn {
     color: var(--secondary-color);
     background-color: var(--danger-color);
     box-shadow: 0 5px 5px var(--light-shadow);
+    padding: 15px 20px;
 }
 @media only screen and (min-width: 600px) {
     .btn {
