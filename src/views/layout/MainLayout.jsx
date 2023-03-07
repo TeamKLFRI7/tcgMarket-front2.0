@@ -4,7 +4,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import ModalForm from "../../components/ModalForm";
 import SearchBar from "../../components/SearchBar";
-//import NavBarOldVersion from "./NavBarOldVersion";
 import NavBar from "./NavBar";
 
 const MainLayout = (props) => {
