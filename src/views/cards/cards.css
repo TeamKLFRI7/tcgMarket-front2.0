@@ -36,3 +36,16 @@
 .noSell {
     opacity: 0.6;
 }
+
+@media screen and (min-width: 768px) {
+    .cards-cardContainer {
+        width: calc(100% / 3 - 1rem);
+    }
+
+}
+
+@media screen and (min-width: 1024px) {
+    .cards-cardContainer {
+        width: calc(100% / 4 - 1rem);
+    }
+}

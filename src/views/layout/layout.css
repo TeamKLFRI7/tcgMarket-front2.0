@@ -76,9 +76,10 @@
     background: none;
 }
 .navElements-headerLogo {
-    width: 80%;
-    height: 80%;
+    width: 60%;
+    height: 60%;
     margin: 0 auto;
+    margin-bottom: 30%;
 }
 .navElements-ul {
     display: flex;
@@ -91,7 +92,7 @@
     list-style-type: none;
 }
 .navElements-li {
-    margin-top: 1.25rem;
+    margin-top: 1.75rem;
     margin-right: unset;
 }
 .navElements-li_MarginTop {

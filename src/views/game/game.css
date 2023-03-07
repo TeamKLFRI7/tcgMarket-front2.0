@@ -12,7 +12,17 @@
     width: calc(100% / 2 - 1rem);
     margin-bottom: 1.5rem;
 }
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
+    .search-card {
+        position: relative;
+        width: calc(100% / 3 - 1rem);
+        margin-bottom: 1.5rem;
+    }
 }
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1024px) {
+    .search-card {
+        position: relative;
+        width: calc(100% / 4 - 1rem);
+        margin-bottom: 1.5rem;
+    }
 }
