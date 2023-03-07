@@ -5,7 +5,7 @@
     justify-content: center;
     min-height: 100vh;
     margin-bottom: 5px;
-    padding: var(--space5);
+    padding: 1.25rem;
     border: none;
     background-image: url("../../assets/img/home.png"), radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(99, 106, 242, 1) 53%);
     background-repeat: no-repeat;
@@ -15,4 +15,8 @@
 .container {
     display: flex;
     flex-direction: column;
+}
+@media only screen and (min-width: 992px) {
+}
+@media only screen and (min-width: 1200px) {
 }

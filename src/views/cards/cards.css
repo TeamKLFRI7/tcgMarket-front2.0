@@ -1,0 +1,38 @@
+.cards {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.cards-cardContainer {
+    position: relative;
+    width: calc(100% / 2 - 1rem);
+    margin-bottom: 1.5rem;
+}
+.cards-cardCountContainer {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    text-align: center;
+    border-radius: 51%;
+}
+.cards-cardCardCount {
+    position: relative;
+    height: 2.5rem;
+}
+.cards-cardCardCountImg {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.cards-cardCardCountText {
+    font-size: 2rem;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-text-stroke: 2px white;
+}
+.noSell {
+    opacity: 0.6;
+}

@@ -1,12 +1,14 @@
 .btn {
-    font-size: var(--medium-fontSize);
     position: relative;
-    margin: var(--space5) 0;
-    padding: var(--space5);
+    margin: 1.25rem 0;
+    padding: 1.25rem;
     cursor: pointer;
     text-transform: uppercase;
     border: none;
     border-radius: 10px;
+}
+.btn_mediumFontSize {
+    font-size: var(--medium-fontSize);
 }
 .yellowBtn {
     color: white;
@@ -19,13 +21,11 @@
     box-shadow: 0 5px 5px var(--dark-shadow);
 }
 .purpleBtn {
-    font-size: 1rem !important;
     color: var(--secondary-color);
     background-color: var(--main-color);
     box-shadow: 0 5px 5px var(--light-shadow);
 }
 .deleteBtn {
-    font-size: 1rem !important;
     color: var(--secondary-color);
     background-color: var(--danger-color);
     box-shadow: 0 5px 5px var(--light-shadow);
@@ -33,6 +33,24 @@
 @media only screen and (min-width: 600px) {
     .btn {
         position: relative;
-        margin: var(--space5) var(--space12);
+        margin: 1.25rem 3rem;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .btn {
+        position: relative;
+        margin: 1.25rem 5rem;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .btn {
+        position: relative;
+        margin: 1.25rem 3rem;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .btn {
+        position: relative;
+        margin: 1.25rem 3rem;
     }
 }

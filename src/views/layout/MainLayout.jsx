@@ -1,15 +1,15 @@
 import home from "../../assets/img/home.png";
 import "./layout.css";
 import { Outlet, useLocation } from "react-router-dom";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ModalForm from "../../components/ModalForm";
-import SearchBarBis from "../../components/SearchBarBis";
+import SearchBar from "../../components/SearchBar";
 //import NavBarOldVersion from "./NavBarOldVersion";
 import NavBar from "./NavBar";
 
 const MainLayout = (props) => {
   const location = useLocation();
-  const viewportHeight = window.innerHeight;
+  const viewportHeight = props.height;
   const [searchBarHeight, setSearchBarHeight] = useState(0);
   const [navBarHeight, setNavBarHeight] = useState(0);
   const searchBarRef = useRef(null);
@@ -19,16 +19,13 @@ const MainLayout = (props) => {
   const hiddenSearchLocation = ["/profil", "/vendre-mes-cartes"];
   const isSearchHidden = hiddenSearchLocation.includes(location.pathname);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    setNavBarHeight(navBarRef.current.clientHeight);
+
     if (!isSearchHidden) {
       setSearchBarHeight(searchBarRef.current.clientHeight);
-    }
-    setNavBarHeight(navBarRef.current.clientHeight);
-  }, [isSearchHidden]);
-
-  useEffect(() => {
-    if (!isSearchHidden) {
       mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 2rem)`;
+      console.log(searchBarHeight);
     } else {
       mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 1rem)`;
     }
@@ -38,7 +35,7 @@ const MainLayout = (props) => {
     <div style={styles.container}>
       {props.modalOpen && <ModalForm setModalOpen={props.setModalOpen} />}
       {isSearchHidden ? null : (
-        <SearchBarBis
+        <SearchBar
           ref={searchBarRef}
           setSearchResults={props.setSearchResults}
         />

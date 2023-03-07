@@ -1,0 +1,18 @@
+.search-title {
+    padding-left: 1rem;
+}
+.search-cardContainer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.search-card {
+    position: relative;
+    width: calc(100% / 2 - 1rem);
+    margin-bottom: 1.5rem;
+}
+@media only screen and (min-width: 992px) {
+}
+@media only screen and (min-width: 1200px) {
+}

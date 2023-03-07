@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import YellowButton from "../../components/buttons/YellowButton";
 import "./Connexion.css";
-import { api } from './AuthService';
+import { api } from "./AuthService";
 
-export const Login = (props) => {
+const Login = (props) => {
   const navigate = useNavigate();
   const basicUrl = process.env.REACT_APP_URL_API;
 
@@ -23,7 +23,7 @@ export const Login = (props) => {
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     api
-      .post('/authentication_token', values)
+      .post("/authentication_token", values)
       .then((res) => {
         setApiError(null);
         localStorage.setItem("token", res.data.token);
@@ -42,9 +42,10 @@ export const Login = (props) => {
             navigate("/profil");
           })
           .catch((err) => {
+            console.log(err);
           });
         // -------------------- END --------------------
-        
+
         setSubmitting(false);
         // handle success
       })
@@ -104,3 +105,5 @@ export const Login = (props) => {
     </Formik>
   );
 };
+
+export default Login;

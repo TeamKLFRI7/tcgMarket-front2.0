@@ -1,15 +1,20 @@
-import './button.css';
-import {useNavigate} from "react-router-dom";
+import "./button.css";
+import { useNavigate } from "react-router-dom";
 
-const YellowButton = props => {
+const YellowButton = (props) => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  return (
+    <>
+      <button
+        onClick={() => navigate(props.path)}
+        type={props.type}
+        className={"btn yellowBtn"}
+      >
+        {props.children}
+      </button>
+    </>
+  );
+};
 
-    return (
-        <>
-            <button onClick={() => navigate(props.path)} type={props.type} className='btn yellowBtn'>{props.children}</button>
-        </>
-    )
-}
-
-export default YellowButton
+export default YellowButton;

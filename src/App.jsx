@@ -1,17 +1,32 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Game from "./views/game/Game";
-import Cards from "./views/Cards";
+import Cards from "./views/cards/Cards";
 import Auth from "./views/auth/Auth";
 import MainLayout from "./views/layout/MainLayout";
 import Home from "./views/home/Home";
 import Profil from "./views/profil/Profil";
-import { useState } from "react";
 import Sell from "./views/Sell";
+import { useEffect, useState } from "react";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [modalOpen, setModalOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   return (
     <Routes>
@@ -20,6 +35,7 @@ function App() {
       <Route
         element={
           <MainLayout
+            height={windowSize[1]}
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
             setSearchResults={setSearchResults}

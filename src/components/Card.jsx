@@ -1,11 +1,17 @@
+import PurpleButton from "./buttons/PurpleButton";
+
 const Card = (props) => {
   return (
     <div style={{ ...styles.card, ...props.style?.sellContainer }}>
       <div style={props.style?.sellCard}>
-        <img style={styles.img} src={props.img} alt={"Carte " + props.name} />
-        <h2 style={styles.name}>{props.name}</h2>
+        <img
+          className={"card-img"}
+          src={props.img}
+          alt={"Carte " + props.name}
+        />
+        <span className={"card-name"}>{props.name}</span>
       </div>
-      <div style={{ ...styles.sellInfo, ...props.style?.sellInfo }}>
+      <div className={"card-sellInfo_dNone"} style={props.style?.sellInfo}>
         <div>
           <div style={props.style?.sellInfoElement}>
             Vendeur : {props.infoUser?.userName}
@@ -15,7 +21,12 @@ const Card = (props) => {
           </div>
           <div>Prix : {props.infoCard?.price}€</div>
         </div>
-        <button style={styles.button}>Ajouter au panier</button>
+        <PurpleButton
+          style={"card-addButton"}
+          type={"button"}
+          path={"#"}
+          children={"Ajouter au panier"}
+        />
       </div>
     </div>
   );
@@ -24,7 +35,7 @@ const Card = (props) => {
 const styles = {
   card: {
     padding: ".5rem",
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 0px 8px",
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     borderRadius: "3%",
     gap: ".5rem",
     display: "flex",
@@ -37,7 +48,6 @@ const styles = {
     borderRadius: "3%",
   },
   name: {
-    fontSize: "14px",
     margin: 0,
     padding: 0,
     textAlign: "center",
