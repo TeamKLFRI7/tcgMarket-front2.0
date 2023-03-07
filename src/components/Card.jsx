@@ -24,7 +24,6 @@ const Card = (props) => {
         <PurpleButton
           style={"card-addButton"}
           type={"button"}
-          path={"#"}
           children={"Ajouter au panier"}
         />
       </div>
