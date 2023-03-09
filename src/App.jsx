@@ -27,7 +27,6 @@ function App() {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -35,6 +34,7 @@ function App() {
       <Route
         element={
           <MainLayout
+            width={windowSize[0]}
             height={windowSize[1]}
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}

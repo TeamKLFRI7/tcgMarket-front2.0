@@ -37,7 +37,8 @@
     --light-shadow: rgb(188, 188, 188);
     --dark-shadow: rgb(73, 73, 73);
     --midBlack-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-    --black-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    --black-shadow: rgba(0, 0, 0, 0.24) 0 0 8px;
+    --black-shadow_bottom: rgba(0, 0, 0, 0.24) 0 3px 8px;
     --main-color: rgb(100, 106, 234);
     --secondary-color: #fff;
     --light-color: #eee;

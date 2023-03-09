@@ -6,20 +6,19 @@ import "./game.css";
 
 const Game = (props) => {
   const { data, loading } = useGetGame();
-
   const [cards, setCards] = useState(props.searchResults);
-
+  let countResults = cards?.length;
+  console.log(cards);
   useEffect(() => {
-    setCards(props.searchResults);
-    if (document.querySelector("input").value.length < 3) {
+    if (props.searchResults !== null) {
+      setCards(props.searchResults);
+    } else {
       setCards(null);
     }
   }, [props.searchResults]);
 
-  let countResults = cards?.length;
-
   return (
-    <div>
+    <div className={"games"}>
       {loading && <div>Chargement</div>}
       {!loading && (
         <>

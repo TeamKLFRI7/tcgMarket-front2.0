@@ -34,28 +34,28 @@ const NavBar = forwardRef((props, ref) => {
     <nav className={"navbar"} ref={ref}>
       <div className="navbar-container">
         {location.pathname === "/jeux/1" ? (
-          <NavLink
-            to={"/vendre-mes-cartes"}
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-          >
+          <NavLink to={"/vendre-mes-cartes"} className={"navbar-element_dnone"}>
             <IcPlus />
           </NavLink>
         ) : (
-          <button className={"navbar-button"} onClick={() => navigate(-1)}>
+          <button
+            className={"navbar-button navbar-element_dnone"}
+            onClick={() => navigate(-1)}
+          >
             <IcArrowLeft />
           </button>
         )}
-        <NavLink
-          to={"/"}
-          className={({ isActive }) => (isActive ? "active" : "inactive")}
-        >
+        <NavLink to={"/"} className={"navbar-element_dnone"}>
           <IcHome />
         </NavLink>
-        <div className="menu-icon" onClick={handleShowNavbar}>
+        <div
+          className="menu-icon navbar-element_dnone"
+          onClick={handleShowNavbar}
+        >
           <Hamburger />
         </div>
         <div className={`navElements  ${showNavbar && "active"}`}>
-          <div className={"navElements-header"}>
+          <div className={"navElements-header navbar-element_dnone"}>
             <button
               className={"navElements-headerButton"}
               onClick={handleShowNavbar}
@@ -72,13 +72,15 @@ const NavBar = forwardRef((props, ref) => {
             {token && (
               <>
                 <li
-                  className={"navElements-li navElements-li_MarginTop"}
+                  className={"navElements-li navElements-li_MarginTop0"}
                   onClick={handleShowNavbar}
                 >
                   <NavLink to="#">
                     <span className={"navElements-linkText"}>
                       Mes vente en cours
-                      <IcMesAnnonces />
+                      <span className={"navbar-element_dnone"}>
+                        <IcMesAnnonces />
+                      </span>
                     </span>
                   </NavLink>
                 </li>
@@ -86,7 +88,9 @@ const NavBar = forwardRef((props, ref) => {
                   <NavLink to="/vendre-mes-cartes">
                     <span className={"navElements-linkText"}>
                       Vendre mes cartes
-                      <IcSold />
+                      <span className={"navbar-element_dnone"}>
+                        <IcSold />
+                      </span>
                     </span>
                   </NavLink>
                 </li>
@@ -94,7 +98,9 @@ const NavBar = forwardRef((props, ref) => {
                   <NavLink to="/profil">
                     <span className={"navElements-linkText"}>
                       Mon profile
-                      <IcUser />
+                      <span className={"navbar-element_dnone"}>
+                        <IcUser />
+                      </span>
                     </span>
                   </NavLink>
                 </li>
@@ -103,7 +109,10 @@ const NavBar = forwardRef((props, ref) => {
             <li className={"navElements-li"} onClick={handleShowNavbar}>
               <NavLink to={"#"}>
                 <span className={"navElements-linkText"}>
-                  Cartes en ventes <IcCatalogue />
+                  Cartes en ventes
+                  <span className={"navbar-element_dnone"}>
+                    <IcCatalogue />
+                  </span>
                 </span>
               </NavLink>
             </li>
@@ -111,7 +120,10 @@ const NavBar = forwardRef((props, ref) => {
               <li className={"navElements-li"} onClick={handleShowNavbar}>
                 <NavLink to={"#"}>
                   <span className={"navElements-linkText"}>
-                    Se déconnecter <IcLogout />
+                    Se déconnecter
+                    <span className={"navbar-element_dnone"}>
+                      <IcLogout />
+                    </span>
                   </span>
                 </NavLink>
               </li>

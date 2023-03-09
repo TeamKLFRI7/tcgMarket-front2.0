@@ -5,18 +5,18 @@ import { api } from "./views/auth/AuthService";
 
 let baseUrl = process.env.REACT_APP_URL_API;
 
-const getSeries = () => {
-  axios
-    .get(baseUrl + "/card_series?page=1")
-    .then((response) => {
-      // console.log(response.data['hydra:member']);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-getSeries();
+// const getSeries = () => {
+//   axios
+//     .get(baseUrl + "/card_series?page=1")
+//     .then((response) => {
+//       // console.log(response.data['hydra:member']);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+//
+// getSeries();
 
 export let useGetCards = () => {
   const [data, setData] = useState({});
@@ -153,6 +153,8 @@ export let useSearchCard = (name) => {
         } catch (error) {
           console.log(error);
         }
+      } else {
+        setData(null);
       }
     };
 

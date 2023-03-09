@@ -8,16 +8,13 @@ const SearchBar = forwardRef((props, ref) => {
 
   useEffect(() => {
     props.setSearchResults(data);
-    if (data?.length < 3) {
-      props.setSearchResults(null);
-    }
-  });
+  }, [data]);
   return (
     <>
       <input
         ref={ref}
         className={"searchBar"}
-        placeholder="Entrez le nom d'une carte"
+        placeholder="Recherche..."
         onChange={(e) => setQuery(e.target.value)}
         id={"searchBar"}
       />

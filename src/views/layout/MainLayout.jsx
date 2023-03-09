@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import ModalForm from "../../components/ModalForm";
 import SearchBar from "../../components/SearchBar";
 import NavBar from "./NavBar";
+import Header from "./Header";
 
 const MainLayout = (props) => {
   const location = useLocation();
+  const viewportWidth = props.width;
   const viewportHeight = props.height;
   const [searchBarHeight, setSearchBarHeight] = useState(0);
   const [navBarHeight, setNavBarHeight] = useState(0);
@@ -15,22 +17,32 @@ const MainLayout = (props) => {
   const mainRef = useRef(null);
 
   const hiddenSearchLocation = ["/profil", "/vendre-mes-cartes"];
-  const isSearchHidden = hiddenSearchLocation.includes(location.pathname);
+  let isSearchHidden =
+    hiddenSearchLocation.includes(location.pathname) || viewportWidth >= 1024;
 
   useEffect(() => {
     setNavBarHeight(navBarRef.current.clientHeight);
 
     if (!isSearchHidden) {
-      setSearchBarHeight(searchBarRef.current.clientHeight);
+      setSearchBarHeight(searchBarRef.current?.clientHeight);
       mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 2rem)`;
     } else {
-      mainRef.current.style.height = `calc(${viewportHeight}px - ${searchBarHeight}px - ${navBarHeight}px - 1rem)`;
+      mainRef.current.style.height = `calc(${viewportHeight}px - ${navBarHeight}px - 1rem)`;
     }
-  }, [searchBarHeight, navBarHeight, isSearchHidden, viewportHeight]);
+  }, [
+    searchBarHeight,
+    navBarHeight,
+    isSearchHidden,
+    viewportHeight,
+    viewportWidth,
+  ]);
 
   return (
     <div className={"mainLayout"}>
       {props.modalOpen && <ModalForm setModalOpen={props.setModalOpen} />}
+      {viewportWidth >= 1024 && (
+        <Header setSearchResults={props.setSearchResults} ref={navBarRef} />
+      )}
       {isSearchHidden ? null : (
         <SearchBar
           ref={searchBarRef}
@@ -45,7 +57,7 @@ const MainLayout = (props) => {
         >
           <Outlet />
         </div>
-        <NavBar ref={navBarRef} />
+        {viewportWidth < 1024 && <NavBar ref={navBarRef} />}
       </div>
     </div>
   );
