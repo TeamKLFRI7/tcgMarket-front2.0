@@ -35,8 +35,12 @@ const Cards = () => {
                     </div>
                   </Link>
                 ) : (
-                  <div className={"cards-cardContainer noSell"}>
-                    <Card img={card.img} name={card.name} />
+                  <div className={"cards-cardContainer"}>
+                    <Card
+                      img={card.img}
+                      name={card.name}
+                      style={styles.style}
+                    />
                   </div>
                 )}
               </div>
@@ -46,6 +50,12 @@ const Cards = () => {
       )}
     </div>
   );
+};
+
+const styles = {
+  style: {
+    noSell: "noSell",
+  },
 };
 
 export default Cards;

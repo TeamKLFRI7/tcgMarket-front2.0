@@ -1,3 +1,6 @@
+.games {
+    margin-bottom: 3rem;
+}
 .search-title {
     padding-left: 1rem;
 }
@@ -10,19 +13,11 @@
 .search-card {
     position: relative;
     width: calc(100% / 2 - 1rem);
+    max-width: 11rem;
     margin-bottom: 1.5rem;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 300px) {
     .search-card {
-        position: relative;
-        width: calc(100% / 3 - 1rem);
-        margin-bottom: 1.5rem;
-    }
-}
-@media only screen and (min-width: 1024px) {
-    .search-card {
-        position: relative;
-        width: calc(100% / 4 - 1rem);
-        margin-bottom: 1.5rem;
+        width: 100%;
     }
 }
