@@ -1,10 +1,11 @@
 import { useGetAllGames } from "../../axios";
-import WhiteButton from "../../components/buttons/WhiteButton";
-import DisabledButton from "../../components/buttons/DisabledButton";
 import "./home.css";
 import { forwardRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { Loader } from "../../components/Loader";
 
 const Home = forwardRef((props, ref) => {
+  const navigate = useNavigate();
   const { data, loading } = useGetAllGames();
   return (
     <div className={"mainHome"} ref={ref}>
@@ -14,20 +15,31 @@ const Home = forwardRef((props, ref) => {
           {data["hydra:member"].map((game) => (
             <>
               {game.isActive === false ? (
-                <DisabledButton
-                  type={"button"}
-                  style={"btn_mediumFontSize"}
-                  children={game.name}
-                  key={game.id}
-                />
+                  <div style={{ 
+                    backgroundImage: `linear-gradient(0deg, rgba(50, 50, 50, 0.4), rgba(50, 50, 50, 0.4)), url(/${game.name}.png)`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%",
+                    backgroundSize:"cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat" 
+                  }}> 
+                    <img src={`${game.name}-logo.png`} className={'logoCard'}/>
+                </div>
               ) : (
-                <WhiteButton
-                  path={`/jeux/${game.id}`}
-                  style={"btn_mediumFontSize"}
-                  type={"button"}
-                  children={game.name}
-                  key={game.id}
-                />
+                <div style={{ 
+                  backgroundImage: `url(/${game.name}2.png)`, 
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  backgroundSize:"cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat" 
+                }}>
+                  <img src={`${game.name}-logo.png`} className={'logoCardClickable'} onClick={() => navigate(`/jeux/${game.id}`)}/>
+                </div>
               )}
             </>
           ))}
