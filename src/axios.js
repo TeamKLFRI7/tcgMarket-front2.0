@@ -32,6 +32,7 @@ export let useGetCards = () => {
         setData(response);
       } catch (error) {
         console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -54,7 +55,7 @@ export let useGetAllGames = () => {
         const { data: response } = await axios.get(baseUrl + "/games?page=1");
         setData(response);
       } catch (error) {
-        console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -79,6 +80,7 @@ export let useGetGame = () => {
         setData(response);
       } catch (error) {
         console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -103,6 +105,7 @@ export let useGetSell = () => {
         setData(response);
       } catch (error) {
         console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -128,6 +131,7 @@ export let useGetUserMe = () => {
         setData(response);
       } catch (error) {
         console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -152,6 +156,7 @@ export let useSearchCard = (name) => {
           setData(response.data);
         } catch (error) {
           console.log(error);
+          return error;
         }
       } else {
         setData(null);

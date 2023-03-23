@@ -13,9 +13,45 @@
     box-shadow: rgba(0, 0, 0, 0.05) 0 4px 12px;
 }
 .container {
+    display: inline-flex;
+    height: 100vh;
+}
+
+.tcg-logo {
+    width: 50%;
+    max-width: 250px;
+    margin-bottom: -80px;
+    display: flex;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.sub-container-1 {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+    background:  
+        linear-gradient(90deg, rgba(220, 57, 57, .8), rgba(255,0,0,0) 70.71%),
+        linear-gradient(180deg, rgba(100, 106, 234, 0.8), rgba(0,255,0,0) 70.71%),
+        linear-gradient(360deg, rgba(100, 106, 234, 0.8), rgba(0,255,0,0) 70.71%);
+    width: 60vw;
+    padding: 5% 10% 10% 10%;
+    height: 100vh;
+}
+
+.title-intro {
+    font-size: var(--large-fontSize);
+}
+
+.text-intro {
+    font-size: var(--medium-fontSize);
+}
+.sub-container-2 {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
     height: 100vh;
 }
 .logoCard {

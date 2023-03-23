@@ -12,10 +12,12 @@ const Login = (props) => {
   const basicUrl = process.env.REACT_APP_URL_API;
 
   const validationSchema = Yup.object({
-    userName: Yup.string().required("Required"),
+    userName: Yup.string()
+      .min(3, "Votre nom d'utilisateur doit faire au mnimum 3 charactères.")
+      .required("Le nom d'utilisateur est obligatoire."),
     password: Yup.string()
-      .min(8, "Votre mot de passe doit faire au mnimum 8 charactères")
-      .required("Required"),
+      .min(8, "Votre mot de passe doit faire au mnimum 8 charactères.")
+      .required("Le mot de passe est obligatoire."),
   });
 
   const [apiError, setApiError] = useState(null);
@@ -23,43 +25,43 @@ const Login = (props) => {
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     api
-      .post("/authentication_token", values)
+      .post(basicUrl + "/authentication_token", values)
       .then((res) => {
-        setApiError(null);
-        localStorage.setItem("token", res.data.token);
-        props.setToken(res.data.token);
-
-        // -------------------- Récupère le profil utilisateur --------------------
-        axios
-          .get(basicUrl + "/me", {
-            headers: {
-              Authorization: `Bearer ${res.data.token}`,
-              "Content-Type": `application/json`,
-            },
-          })
-          .then((res) => {
-            localStorage.setItem("user", res.data.id);
-            navigate("/profil");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        // -------------------- END --------------------
-
-        setSubmitting(false);
-      })
-      .catch((err) => {
-        if (err.response.data.code === 401) {
-          setApiError("L'identifiant et/ou le mot de passe sont invalides.");
-        } else if (err.response.data.code === 403) {
+        if (res.status === 200 || res.status === 201) {
+          setApiError(null);
+          localStorage.setItem("token", res.data.token);
+          props.setToken(res.data.token);
+  
+          // -------------------- Récupère le profil utilisateur --------------------
+          if (res.data.token) {
+            axios
+            .get(basicUrl + "/me", {
+              headers: {
+                Authorization: `Bearer ${res.data.token}`,
+                "Content-Type": `application/json`,
+              },
+            })
+            .then((res) => {
+              localStorage.setItem("user", res.data.id);
+              navigate("/profil");
+            })
+          }
+          // -------------------- END --------------------
+        } else if (res.response.status === 400 || res.response.status === 401) {
+          setApiError("Les champs renseignés sont inexactes et/ou ne correspondent pas aux normes exigées. Veulliez vérifier vos informations.");
+        }
+        else if (res.response.status=== 403) {
           setApiError("Vous n'avez pas accès à ces informations.");
-        } else if (err.response.data.code === 404) {
+        } 
+        else if (res.response.status === 404) {
           setApiError("Page innaccessible.");
-        } else if (err.response.data.code >= 500) {
+        } 
+        else if (res.response.status >= 500) {
           setApiError("Erreur serveur. Veuillez réassyer ultérieurement.");
         }
+        setApiError(null)
         setSubmitting(false);
-      });
+      })
   };
 
   return (
@@ -74,10 +76,10 @@ const Login = (props) => {
           <Field
             name="userName"
             type="text"
-            placeholder="Username"
+            placeholder="Nom d'utilisateur"
             className="field"
           />
-          <ErrorMessage name="username" />
+          <ErrorMessage name="userName" render={msg => <div className="error-msg">{msg}</div>}/>
 
           <Field
             name="password"

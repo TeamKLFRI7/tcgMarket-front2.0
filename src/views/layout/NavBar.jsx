@@ -30,6 +30,11 @@ const NavBar = forwardRef((props, ref) => {
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
   };
+  const handleDisconnect = () => {
+    if (localStorage.getItem("token")) {
+      localStorage.clear();
+    }
+  }
   return (
     <nav className={"navbar"} ref={ref}>
       <div className="navbar-container">
@@ -118,7 +123,7 @@ const NavBar = forwardRef((props, ref) => {
             </li>
             {token ? (
               <li className={"navElements-li"} onClick={handleShowNavbar}>
-                <NavLink to={"#"}>
+                <NavLink to={"/"} onClick={handleDisconnect}>
                   <span className={"navElements-linkText"}>
                     Se déconnecter
                     <span className={"navbar-element_dnone"}>
