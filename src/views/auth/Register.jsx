@@ -31,7 +31,7 @@ export const Register = (props) => {
   const handleSubmitRegister = (values, { setSubmitting }) => {
     setSubmitting(true);
     axios.post(apiUrl + "/register", values)
-      .then((res) => {
+      .then(() => {
         let newUser = {
           "userName": values.userName,
           "password": values.password
@@ -65,13 +65,16 @@ export const Register = (props) => {
       })
       .catch((err) => {
         console.log(err)
-        if (err.response.status === 400) {
+        if (err.response.status === 400 || err.response.status === 401) {
           setApiError("Les champs renseignés sont inexactes et/ou ne correspondent pas aux normes exigées. Veulliez vérifier vos informations.");
-        } else if (err.response.status=== 403) {
+        }
+        else if (err.response.status=== 403) {
           setApiError("Vous n'avez pas accès à ces informations.");
-        } else if (err.response.status === 404) {
+        } 
+        else if (err.response.status === 404) {
           setApiError("Page innaccessible.");
-        } else if (err.response.status >= 500) {
+        } 
+        else if (err.response.status >= 500) {
           setApiError("Erreur serveur. Veuillez réassyer ultérieurement.");
         }
         setSubmitting(false);

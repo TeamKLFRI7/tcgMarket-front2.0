@@ -8,7 +8,6 @@ const Game = (props) => {
   const { data, loading } = useGetGame();
   const [cards, setCards] = useState(props.searchResults);
   let countResults = cards?.length;
-  console.log(cards);
   useEffect(() => {
     if (props.searchResults !== null) {
       setCards(props.searchResults);

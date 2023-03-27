@@ -10,6 +10,7 @@ import { api } from "./AuthService";
 const Login = (props) => {
   const navigate = useNavigate();
   const basicUrl = process.env.REACT_APP_URL_API;
+  const url = process.env.REACT_APP_URL;
 
   const validationSchema = Yup.object({
     userName: Yup.string()
@@ -25,7 +26,7 @@ const Login = (props) => {
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     api
-      .post(basicUrl + "/authentication_token", values)
+      .post(`${url}/authentication_token`, values)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           setApiError(null);
