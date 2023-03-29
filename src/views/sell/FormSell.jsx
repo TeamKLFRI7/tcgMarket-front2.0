@@ -3,6 +3,7 @@ import PageHeader from "../../components/PageHeader";
 import { useGetSelling } from "../../axios";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import game from "../card/Game";
 
 const FormSell = () => {
   let apiUrl = process.env.REACT_APP_URL_API;
@@ -26,6 +27,9 @@ const FormSell = () => {
     images: [],
   });
   const { data, loading } = useGetSelling();
+  {
+    console.log(data);
+  }
   const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -120,14 +124,21 @@ const FormSell = () => {
       price: formData.price,
       card: formData.card,
       cardSet: formData.set,
-      images: formData.imageFiles,
+      file: formData.imageFiles,
       fkIdGame: formData.game,
     };
-    console.log(sell);
     axios
-      .post(apiUrl + "/card_users", { sell })
+      .post(
+        apiUrl + "/sellCard",
+        { sell },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then(() => {
-        navigate("/");
+        navigate("/profil");
       })
       .catch((err) => {
         console.error(err);
@@ -178,7 +189,7 @@ const FormSell = () => {
       });
     };
   }, [formData.imageFiles]);
-  console.log(formData);
+
   switch (step) {
     case 1:
       return (
@@ -369,7 +380,7 @@ const FormSell = () => {
 const styles = {
   style: {
     headImg: {
-      objectFit: "cover",
+      objectFit: "fill",
     },
   },
   formContainer: {

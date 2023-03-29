@@ -8,7 +8,7 @@ let baseUrl = process.env.REACT_APP_URL_API;
 const getSeries = () => {
   axios
     .get(baseUrl + "/card_series?page=1")
-    .then((response) => {
+    .then(() => {
       // console.log(response.data['hydra:member']);
     })
     .catch((error) => {
@@ -160,4 +160,28 @@ export let useSearchCard = (name) => {
   }, [name]);
 
   return data;
+};
+
+export let useGetSelling = () => {
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: response } = await axios.get(baseUrl + `/sell`);
+        setData(response);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [id]);
+
+  return {
+    data,
+    loading,
+  };
 };
