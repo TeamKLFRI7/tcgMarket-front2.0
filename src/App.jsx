@@ -7,6 +7,7 @@ import Home from "./views/home/Home";
 import Profil from "./views/profil/Profil";
 import Sell from "./views/sell/Sell";
 import { useEffect, useState } from "react";
+import FormSell from "./views/sell/FormSell";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));

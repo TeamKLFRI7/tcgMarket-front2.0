@@ -7,7 +7,7 @@ const Card = (props) => {
       <div className={props.style?.sellCard}>
         <img
           className={`card-img ${props.style?.noSell}`}
-          src={props.img}
+          src={props.imgUrl ? props.imgUrl : props.img}
           alt={"Carte " + props.name}
         />
         <span className={"card-name"}>{props.name}</span>

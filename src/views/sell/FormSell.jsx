@@ -3,7 +3,7 @@ import PageHeader from "../../components/PageHeader";
 import { useGetSelling } from "../../axios";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import game from "../card/Game";
+import game from "../game/Game";
 
 const FormSell = () => {
   let apiUrl = process.env.REACT_APP_URL_API;
@@ -117,17 +117,6 @@ const FormSell = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const sellData = new FormData();
-    // sellData.append("fkIdUser", 1);
-    // sellData.append("name", formData.name);
-    // sellData.append("quality", formData.quality);
-    // sellData.append("price", formData.price);
-    // sellData.append("card", formData.card);
-    // sellData.append("cardSet", formData.set);
-    // for (let i = 0; i < formData.imageFiles.length; i++) {
-    //   sellData.append("file", formData.imageFiles[i]);
-    // }
-    // sellData.append("fkIdGame", formData.game);
 
     axios
       .postForm(apiUrl + "/sellCard", {
