@@ -54,7 +54,7 @@ function App() {
         {/* Routes protégées début */}
         <Route
           path="/vendre-mes-cartes"
-          element={token ? <p>Vendre une carte</p> : <Navigate to="/login" />}
+          element={token ? <FormSell /> : <Navigate to="/login" />}
         />
         <Route
           path="/profil"
