@@ -170,7 +170,7 @@ export let useGetSelling = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: response } = await axios.get(baseUrl + `/sell`);
+        const { data: response } = await axios.get(baseUrl + `/get_all_cards`);
         setData(response);
       } catch (error) {
         console.log(error);
