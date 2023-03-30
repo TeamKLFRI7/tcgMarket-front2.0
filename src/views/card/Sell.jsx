@@ -3,19 +3,20 @@ import Card from "../../components/Card";
 
 const Sell = () => {
   const { data, loading } = useGetSell();
-  //console.log(data);
+  const apiUrl = process.env.REACT_APP_URL;
+
   return (
     <div>
       {loading && <div>Chargement</div>}
       {!loading && (
         <>
-          <h1>{data.name}</h1>
+          {/*<h1>{data.name}</h1>*/}
           {data.fkIdCardUser.map((card, index) => (
             <div style={styles.cardsContainer} key={index}>
               <Card
                 key={index}
                 style={styles.style}
-                img={card.images[1]}
+                imgUrl={apiUrl + card.fileUrl}
                 name={data.name}
                 infoUser={card.fkIdUser}
                 infoCard={card}

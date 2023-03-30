@@ -1,8 +1,14 @@
 const Card = (props) => {
+  console.log(props);
+
   return (
     <div style={{ ...styles.card, ...props.style?.sellContainer }}>
       <div style={props.style?.sellCard}>
-        <img style={styles.img} src={props.img} alt={"Carte " + props.name} />
+        <img
+          style={styles.img}
+          src={props.imgUrl ? props.imgUrl : props.img}
+          alt={"Carte " + props.name}
+        />
         <h2 style={styles.name}>{props.name}</h2>
       </div>
       <div style={{ ...styles.sellInfo, ...props.style?.sellInfo }}>

@@ -8,6 +8,7 @@ import game from "../card/Game";
 const FormSell = () => {
   let apiUrl = process.env.REACT_APP_URL_API;
   const navigate = useNavigate();
+  const id = localStorage.getItem("user");
   const cover = require("../../assets/img/sellCover.png");
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -26,10 +27,9 @@ const FormSell = () => {
     imageFiles: [],
     images: [],
   });
+
   const { data, loading } = useGetSelling();
-  {
-    console.log(data);
-  }
+
   const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -117,26 +117,29 @@ const FormSell = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const sell = {
-      fkIdUser: 1,
-      name: formData.name,
-      quality: formData.quality,
-      price: formData.price,
-      card: formData.card,
-      cardSet: formData.set,
-      file: formData.imageFiles,
-      fkIdGame: formData.game,
-    };
+    // const sellData = new FormData();
+    // sellData.append("fkIdUser", 1);
+    // sellData.append("name", formData.name);
+    // sellData.append("quality", formData.quality);
+    // sellData.append("price", formData.price);
+    // sellData.append("card", formData.card);
+    // sellData.append("cardSet", formData.set);
+    // for (let i = 0; i < formData.imageFiles.length; i++) {
+    //   sellData.append("file", formData.imageFiles[i]);
+    // }
+    // sellData.append("fkIdGame", formData.game);
+
     axios
-      .post(
-        apiUrl + "/sellCard",
-        { sell },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .postForm(apiUrl + "/sellCard", {
+        fkIdUser: id,
+        name: formData.name,
+        quality: formData.quality,
+        price: formData.price,
+        card: formData.card,
+        cardSet: formData.set,
+        file: formData.imageFiles[0],
+        fkIdGame: formData.game,
+      })
       .then(() => {
         navigate("/profil");
       })
