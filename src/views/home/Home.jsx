@@ -2,6 +2,7 @@ import { useGetAllGames } from "../../axios";
 import WhiteButton from "../../components/buttons/WhiteButton";
 import DisabledButton from "../../components/buttons/DisabledButton";
 import home from "../../assets/img/home.png";
+import { Fragment } from "react";
 
 const Home = () => {
   const { data, loading } = useGetAllGames();
@@ -11,22 +12,17 @@ const Home = () => {
       {!loading && (
         <div style={styles.container}>
           {data["hydra:member"].map((game) => (
-            <>
+            <Fragment key={game.id}>
               {game.isActive === false ? (
-                <DisabledButton
-                  type={"button"}
-                  children={game.name}
-                  key={game.id}
-                />
+                <DisabledButton type={"button"} children={game.name} />
               ) : (
                 <WhiteButton
                   path={`/jeux/${game.id}`}
                   type={"button"}
                   children={game.name}
-                  key={game.id}
                 />
               )}
-            </>
+            </Fragment>
           ))}
         </div>
       )}

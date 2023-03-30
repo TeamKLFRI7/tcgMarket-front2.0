@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Game from "./views/card/Game";
 import Cards from "./views/card/Cards";
 import Auth from "./views/auth/Auth";
@@ -7,6 +7,7 @@ import Home from "./views/home/Home";
 import Profil from "./views/profil/Profil";
 import { useState } from "react";
 import Sell from "./views/card/Sell";
+import FormSell from "./views/sell/FormSell";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -38,7 +39,7 @@ function App() {
         {/* Routes protégées début */}
         <Route
           path="/vendre-mes-cartes"
-          element={token ? <p>Vendre une carte</p> : <Navigate to="/login" />}
+          element={token ? <FormSell /> : <Navigate to="/login" />}
         />
         <Route
           path="/profil"
