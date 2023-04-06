@@ -60,6 +60,9 @@ body {
     margin: 0;
     background-color: var(--light-color);
 }
+img {
+    vertical-align: middle
+}
 .active {
     color: var(--light-color);
 }

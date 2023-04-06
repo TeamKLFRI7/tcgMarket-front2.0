@@ -4,13 +4,27 @@ import "./css/set.css";
 const Set = (props) => {
   return (
     <>
-      {props.setData.map((set, index) => (
-        <Link to={"/set/" + set.id + "/cartes"} key={index}>
-          <div className={"set"}>
-            <img src={set.img} alt={"set icone"} className={"set-img"} />
-            <img src={set.logo} alt={"set logo"} className={"set-img"} />
-          </div>
-        </Link>
+      {props.setData.map((set) => (
+        <div className={"setContainer"} key={set.id}>
+          <Link to={"/set/" + set.id + "/cartes"}>
+            <div className={"set"}>
+              <div className={"set-iconContainer"}>
+                <img
+                  src={set.img}
+                  alt={"set icon"}
+                  className={"set-img icon"}
+                />
+              </div>
+              <div className={"set-logoContainer"}>
+                <img
+                  src={set.logo}
+                  alt={"set logo"}
+                  className={"set-img logo"}
+                />
+              </div>
+            </div>
+          </Link>
+        </div>
       ))}
     </>
   );

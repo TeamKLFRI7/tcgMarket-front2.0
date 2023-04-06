@@ -3,7 +3,6 @@ import PageHeader from "../../components/PageHeader";
 import { useGetSelling } from "../../axios";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import game from "../game/Game";
 
 const FormSell = () => {
   let apiUrl = process.env.REACT_APP_URL_API;

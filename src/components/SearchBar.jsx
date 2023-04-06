@@ -8,7 +8,7 @@ const SearchBar = forwardRef((props, ref) => {
 
   useEffect(() => {
     props.setSearchResults(data);
-  }, [data]);
+  }, [data, props]);
   return (
     <>
       <input

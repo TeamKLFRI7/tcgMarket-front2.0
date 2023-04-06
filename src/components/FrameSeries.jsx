@@ -1,16 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Set from "./Set";
 import "./css/frameSeries.css";
 
 const FrameSeries = (props) => {
   const [show, setShow] = useState();
+  const [isViewportWide, setIsViewportWide] = useState(false);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      const viewportWidth = window.innerWidth;
+      setIsViewportWide(viewportWidth >= 600);
+    };
+    handleWindowResize();
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   function toggleShow() {
     setShow(!show);
   }
 
   return (
-    <div className={"serial"} onClick={toggleShow}>
+    <div
+      className={"serial serial_shadowNone"}
+      onClick={!isViewportWide ? toggleShow : undefined}
+    >
       <div className={"serial-info"}>
         <img
           className={"serial-infoImg"}
@@ -19,7 +35,11 @@ const FrameSeries = (props) => {
         />
         <span>{props.serieData.serieName}</span>
       </div>
-      <div>{show && <Set setData={props.serieData.fkIdCardSet} />}</div>
+      <div className={"serial-setList"}>
+        {(isViewportWide || show) && (
+          <Set setData={props.serieData.fkIdCardSet} />
+        )}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGetUserMe } from "../axios";
-import { Formik, Field, Form, ErrorMessage, useFormik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import PurpleButton from "./buttons/PurpleButton";
 import axios from "axios";
@@ -35,23 +35,41 @@ const ModalForm = ({ setModalOpen }) => {
       .max(15, "Le pseudo ne doit pas dépasser 15 charactères.")
       .required("Pseudo requis"),
     phoneNumber: Yup.string()
-      .matches(phoneRegex, 'Le numéro doit commencer par 06 ou 07 et être composé de 10 chiffre exactement.')
+      .matches(
+        phoneRegex,
+        "Le numéro doit commencer par 06 ou 07 et être composé de 10 chiffre exactement."
+      )
       .required("Numéro de téléphone requis"),
-    email: Yup.string().email("Adresse mail invalide.").required("Email requis"),
-    description: Yup.string()
-      .max(154, 'Vous ne pouvez pas dépasser 154 charactères.'),
-    address: Yup.string()
-      .max(255, 'Vous ne pouvez pas dépasser 255 charactères.'),
-    city: Yup.string()
-      .matches(/^[a-zA-Z]+$/, 'Le nom de la ville ne doit être composé que de lettres.'),
+    email: Yup.string()
+      .email("Adresse mail invalide.")
+      .required("Email requis"),
+    description: Yup.string().max(
+      154,
+      "Vous ne pouvez pas dépasser 154 charactères."
+    ),
+    address: Yup.string().max(
+      255,
+      "Vous ne pouvez pas dépasser 255 charactères."
+    ),
+    city: Yup.string().matches(
+      /^[a-zA-Z]+$/,
+      "Le nom de la ville ne doit être composé que de lettres."
+    ),
     postalCode: Yup.string()
-      .max(10, 'Le code postal ne doit pas excéder 10 chiffres.')
-      .matches(/^[0-9]+$/, 'Le nom code postal ne doit être composé que de chiffres.'),
-    country: Yup.string()
-      .matches(/^[a-zA-Z]+$/, 'Le pays ne doit être composé que de lettres.'),
-    deliveryAddress: Yup.string()
-      .max(255, 'Vous ne pouvez pas dépasser 255 charactères.')
-  }); 
+      .max(10, "Le code postal ne doit pas excéder 10 chiffres.")
+      .matches(
+        /^[0-9]+$/,
+        "Le nom code postal ne doit être composé que de chiffres."
+      ),
+    country: Yup.string().matches(
+      /^[a-zA-Z]+$/,
+      "Le pays ne doit être composé que de lettres."
+    ),
+    deliveryAddress: Yup.string().max(
+      255,
+      "Vous ne pouvez pas dépasser 255 charactères."
+    ),
+  });
 
   const handleSubmitModifications = (values, { setSubmitting }) => {
     values.userInfo["id"] = infoSup.id;
@@ -115,59 +133,93 @@ const ModalForm = ({ setModalOpen }) => {
                 <Form>
                   <div className="modalContent">
                     <div className="col mobileFields">
-                      <label htmlFor="userName" className="modalProfilLabel">Pseudo : </label>
+                      <label htmlFor="userName" className="modalProfilLabel">
+                        Pseudo :{" "}
+                      </label>
                       <Field
                         name="userName"
                         type="text"
                         className="myField"
                         placeholder={data.userName}
                       />
-                      <ErrorMessage name="userName" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                      <ErrorMessage
+                        name="userName"
+                        render={(msg) => (
+                          <div className="error-msg-modal">{msg}</div>
+                        )}
+                      />
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="email" className="modalProfilLabel">Email : </label>
+                      <label htmlFor="email" className="modalProfilLabel">
+                        Email :{" "}
+                      </label>
                       <Field
                         name="email"
                         type="email"
                         className="myField"
                         placeholder={data.email}
                       />
-                      <ErrorMessage name="email" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                      <ErrorMessage
+                        name="email"
+                        render={(msg) => (
+                          <div className="error-msg-modal">{msg}</div>
+                        )}
+                      />
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="phoneNumber" className="modalProfilLabel">Téléphone : </label>
+                      <label htmlFor="phoneNumber" className="modalProfilLabel">
+                        Téléphone :{" "}
+                      </label>
                       <Field
                         name="phoneNumber"
                         type="numbers"
                         className="myField"
                         placeholder={data.phoneNumber}
                       />
-                      <ErrorMessage name="phoneNumber" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                      <ErrorMessage
+                        name="phoneNumber"
+                        render={(msg) => (
+                          <div className="error-msg-modal">{msg}</div>
+                        )}
+                      />
                     </div>
 
-
                     <div className="col mobileFields">
-                      <label htmlFor="address" className="modalProfilLabel">Adresse : </label>
+                      <label htmlFor="address" className="modalProfilLabel">
+                        Adresse :{" "}
+                      </label>
                       <Field
                         name="address"
                         type="text"
                         className="myField"
                         placeholder={infoSup.address}
                       />
-                      <ErrorMessage name="address" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                      <ErrorMessage
+                        name="address"
+                        render={(msg) => (
+                          <div className="error-msg-modal">{msg}</div>
+                        )}
+                      />
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="city" className="modalProfilLabel">Ville : </label>
+                      <label htmlFor="city" className="modalProfilLabel">
+                        Ville :{" "}
+                      </label>
                       <Field
                         name="city"
                         type="text"
                         className="myField"
                         placeholder={infoSup.city}
                       />
-                      <ErrorMessage name="city" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                      <ErrorMessage
+                        name="city"
+                        render={(msg) => (
+                          <div className="error-msg-modal">{msg}</div>
+                        )}
+                      />
                     </div>
 
                     <div className="col mobileFields">
@@ -180,22 +232,37 @@ const ModalForm = ({ setModalOpen }) => {
                         className="myField"
                         placeholder={infoSup.postalCode}
                       />
-                      <ErrorMessage name="postalCode" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                      <ErrorMessage
+                        name="postalCode"
+                        render={(msg) => (
+                          <div className="error-msg-modal">{msg}</div>
+                        )}
+                      />
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="country" className="modalProfilLabel">Pays : </label>
+                      <label htmlFor="country" className="modalProfilLabel">
+                        Pays :{" "}
+                      </label>
                       <Field
                         name="country"
                         type="text"
                         className="myField"
                         placeholder={infoSup.country}
                       />
-                      <ErrorMessage name="country" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                      <ErrorMessage
+                        name="country"
+                        render={(msg) => (
+                          <div className="error-msg-modal">{msg}</div>
+                        )}
+                      />
                     </div>
 
                     <div className="col mobileFields">
-                      <label htmlFor="deliveryAddress" className="modalProfilLabel">
+                      <label
+                        htmlFor="deliveryAddress"
+                        className="modalProfilLabel"
+                      >
                         Adresse de livraison :{" "}
                       </label>
                       <Field
@@ -204,7 +271,12 @@ const ModalForm = ({ setModalOpen }) => {
                         className="myField"
                         placeholder={infoSup.deliveryAddress}
                       />
-                      <ErrorMessage name="deliveryAddress" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                      <ErrorMessage
+                        name="deliveryAddress"
+                        render={(msg) => (
+                          <div className="error-msg-modal">{msg}</div>
+                        )}
+                      />
                     </div>
 
                     <div className="col mobileFields">
@@ -218,9 +290,13 @@ const ModalForm = ({ setModalOpen }) => {
                         rows="7"
                         placeholder={infoSup.description}
                       />
-                      <ErrorMessage name="description" render={msg => <div className="error-msg-modal">{msg}</div>}/>
+                      <ErrorMessage
+                        name="description"
+                        render={(msg) => (
+                          <div className="error-msg-modal">{msg}</div>
+                        )}
+                      />
                     </div>
-
                   </div>
                   <div className="modalActions">
                     <div className="actionsContainer">

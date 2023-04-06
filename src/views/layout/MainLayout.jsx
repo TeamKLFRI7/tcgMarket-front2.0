@@ -18,7 +18,7 @@ const MainLayout = (props) => {
 
   const hiddenSearchLocation = ["/profil", "/vendre-mes-cartes"];
   let isSearchHidden =
-    hiddenSearchLocation.includes(location.pathname) || viewportWidth >= 1024;
+    hiddenSearchLocation.includes(location.pathname) || viewportWidth >= 729;
 
   useEffect(() => {
     setNavBarHeight(navBarRef.current.clientHeight);
@@ -40,7 +40,7 @@ const MainLayout = (props) => {
   return (
     <div className={"mainLayout"}>
       {props.modalOpen && <ModalForm setModalOpen={props.setModalOpen} />}
-      {viewportWidth >= 1024 && (
+      {viewportWidth >= 729 && (
         <Header setSearchResults={props.setSearchResults} ref={navBarRef} />
       )}
       {isSearchHidden ? null : (
@@ -57,7 +57,7 @@ const MainLayout = (props) => {
         >
           <Outlet />
         </div>
-        {viewportWidth < 1024 && <NavBar ref={navBarRef} />}
+        {viewportWidth < 729 && <NavBar ref={navBarRef} />}
       </div>
     </div>
   );

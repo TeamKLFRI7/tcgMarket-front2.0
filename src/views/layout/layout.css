@@ -29,21 +29,31 @@
 /*------HEADER------*/
 .header {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     background-color: var(--main-color);
 }
 .header-imgContainer {
-    max-height: 11rem;
-    margin: auto;
+    margin-left: 2rem;
 }
 .header-img {
-    height: 100%;
+    max-width: 50%;
+    height: auto;
 }
 .header-nav {
     display: flex;
     align-items: center;
     justify-content: space-between
+}
+.header-account {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0.5rem;
+    color: var(--main-color);
+    background-color: var(--secondary-color);
+}
+.header-accountTitle {
+    color: var(--secondary-color);
+    background-color: var(--main-color);
 }
 /*------NAVBAR------*/
 .navbar {
@@ -120,7 +130,16 @@
     justify-content: space-between;
     color: var(--secondary-color);
 }
-@media only screen and (min-width: 1024px) {
+.navElements-dropdown {
+    display: none;
+}
+.navElements-dropdownMenu {
+    display: none;
+}
+.navElements-li_md {
+    display: none;
+}
+@media only screen and (min-width: 729px) {
     .mainLayout {
         display: flex;
         overflow: hidden;
@@ -151,9 +170,6 @@
     .navbar-element_dnone {
         display: none;
     }
-    .navbar {
-        flex-grow: 1;
-    }
     .navElements {
         position: static;
         overflow: unset;
@@ -161,6 +177,9 @@
         height: 3rem;
         padding-top: 1rem;
         background-color: var(--main-color);
+    }
+    .navElements-linkText_md {
+        width: 8rem;
     }
     .navElements-ul {
         display: flex;
@@ -171,7 +190,39 @@
     }
     .navElements-li {
         font-size: 1rem;
-        margin-top: 0;
-        margin-right: unset;
+        margin: 0 0 0 1.5rem;
+    }
+    .navElements-dropdown {
+        position: relative;
+        display: block;
+    }
+    .navElements-dropdownMenu {
+        position: absolute;
+        bottom: -10rem;
+        left: 0;
+        display: block;
+        width: 12rem;
+        padding: 1rem;
+        border: 1px solid var(--main-color);
+        border-radius: 0.625rem;
+        background-color: var(--secondary-color);
+    }
+    .dropDownMenu-links {
+        display: flex;
+        flex-direction: column;
+    }
+    .navElements-linkText_center {
+        justify-content: center;
+    }
+    .dropdownMenu-text {
+        display: block;
+        margin-bottom: .5rem;
+        color: var(--main-color);
+    }
+    .dropdownMenu-text_MB {
+        margin-bottom: 0;
+    }
+    .navElements-li_md {
+        display: block;
     }
 }
