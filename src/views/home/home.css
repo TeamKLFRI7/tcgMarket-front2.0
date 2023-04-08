@@ -1,73 +1,147 @@
-.mainHome {
+.active {
     display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    /* justify-content: center; */
-    min-height: 100vh;
-    margin-bottom: 5px;
-    /* padding: 1.25rem; */
-    border: none;
-    /* background-image: url("../../assets/img/home-2.png"), radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(99, 106, 242, 1) 53%); */
-    background-repeat: no-repeat;
-    /* background-position: 50% 100%; */
-    box-shadow: rgba(0, 0, 0, 0.05) 0 4px 12px;
-}
-.container {
-    display: inline-flex;
-    height: 100vh;
 }
 
-.tcg-logo {
-    width: 50%;
-    max-width: 250px;
-    margin-bottom: -80px;
+.inactive_home {
+    display: none;
+}
+
+.mainHome {
+    display: flex;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    min-width: 100vw;
+}
+
+.sub-container-1 {
+    background: 
+    linear-gradient(336deg, rgba(99, 106, 242, .9), rgba(0,0,255,0) 80.71%),
+    linear-gradient(127deg, rgba(52, 21, 133, .7), rgba(115, 0, 255, 0) 70.71%),
+    linear-gradient(217deg, rgba(220, 57, 57, .9), rgba(255,0,0,0) 80.71%);     
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+}
+
+.sub-container-2 {
+    display: flex;
+    flex-direction: column;
+    min-width: 100vw;
+}
+.sub-container-2 :nth-child(1) { order: 2; }
+.sub-container-2 :nth-child(2) { order: 3; }
+.sub-container-2 :nth-child(3) { order: 1; }
+
+.logoCard {
+    max-width: 300px;
+}
+
+.logoCardClickable {
+    max-width: 300px;
+}
+
+.title-intro {
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.text-intro {
+    font-size: 1.2rem;
+}
+
+.returnToHome {
+    position: absolute;
+    background-color: #222;
+    border: none;
+    padding: 5px;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+.returnText {
+    color: white;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.tcg-logo-home {
+    width: 70%;
+    margin-bottom: -40px;
     display: flex;
     justify-content: center;
     margin-right: auto;
     margin-left: auto;
 }
 
-.sub-container-1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background:  
-        linear-gradient(90deg, rgba(220, 57, 57, .8), rgba(255,0,0,0) 70.71%),
-        linear-gradient(180deg, rgba(100, 106, 234, 0.8), rgba(0,255,0,0) 70.71%),
-        linear-gradient(360deg, rgba(100, 106, 234, 0.8), rgba(0,255,0,0) 70.71%);
-    width: 60vw;
-    padding: 5% 10% 10% 10%;
-    height: 100vh;
+.btn-see-games {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin: 1.25rem 0;
+    padding: 1.25rem 1.25rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(99, 106, 242);
+    color: #fff;
+    font-size: 16px!important;
+    padding: 15px 30px;
 }
 
-.title-intro {
-    font-size: var(--large-fontSize);
-}
 
-.text-intro {
-    font-size: var(--medium-fontSize);
-}
-.sub-container-2 {
-    display: flex;
-    flex-direction: column;
-    width: 50vw;
-    height: 100vh;
-}
-.logoCard {
-    width: 15rem;
-}
-.logoCardClickable {
-    width: 18rem;
-}
+@media only screen and (min-width: 1024px) {
+    .inactive_home {
+        display: flex;
+    }
 
-@media only screen and (min-width: 768px) {
+    .returnToHome {
+        display: none;
+    }
+
+    .sub-container-2 {
+        display: flex;
+        flex-direction: column;
+        min-width: 60vw;
+    }
+    .sub-container-2 :nth-child(1) { order: 2; }
+    .sub-container-2 :nth-child(2) { order: 3; }
+    .sub-container-2 :nth-child(3) { order: 1; }
+
+    .btn-see-games {
+        display: none;
+    }
+
     .logoCard {
-        width: 25rem;
+        max-width: 400px;
     }
+    
     .logoCardClickable {
-        width: 30rem;
+        max-width: 400px;
     }
-}
-@media only screen and (min-width: 1200px) {
+    
+    .title-intro {
+        text-align: center;
+        font-size: 2.2rem;
+    }
+    
+    .text-intro {
+        font-size: 1.4rem;
+    }
+
+    .sub-container-1 {
+        min-width: 40vw;
+    }
+
+    .sub-container-2 {
+        min-width: 60vw;
+    }
+    
 }
