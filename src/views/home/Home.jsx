@@ -21,7 +21,7 @@ const Home = (() => {
       {loading && <div>Chargement</div>}
       {!loading && (
         <div className={"container"}>
-          <div className={isActive ? "active" : "inactive_home"}>
+          <div className={isActive ? "active_home" : "inactive_home"}>
             <div className="sub-container-1">
               <img src={tcgLogo} alt="" className="tcg-logo-home"/>
                 <h1 className="title-intro">Bienvenue sur <br/>Trading Card Games Market !</h1>
@@ -32,7 +32,7 @@ const Home = (() => {
                 <button className="btn-see-games" onClick={toggleGames} >Voir les jeux</button>
             </div>
           </div>
-          <div className={isActive ? "inactive_home" : "active"}>
+          <div className={isActive ? "inactive_home" : "active_home"}>
             <button className={"returnToHome"} onClick={toggleGames}>
               <IcArrowLeft /> <span className="returnText">Revenir à l'accueil</span> 
             </button>
