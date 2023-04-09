@@ -1,0 +1,151 @@
+.profilePicContainer {
+    border-radius: 50%;
+    background-color: #636AF2;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profilTitle {
+    margin-left: 20px;
+}
+
+.profilePicture {
+    width: 50px;
+}
+
+.formHeader_mobile {
+    display: flex;
+    margin-left: 20px;
+}
+
+.formHeader_desktop {
+    display: none;
+}
+
+.userName {
+    margin-left: 20px;
+}
+
+button {
+    justify-content: center;
+}
+
+.infoContent {
+    margin-bottom: 20px;
+}
+
+.buttonContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 2;
+}
+
+.boxContainer {
+    border-radius: 10px;
+    margin: 15px 0;
+    padding: 15px 20px;
+    box-shadow: rgb(185 184 184) 0px 3px 10px;
+
+}
+
+.hrWithStyle {
+    border-top: 1px dashed #777;
+    width: 100%;
+    margin: 25px 0;
+}
+
+.profilLabel {
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.profilContent {
+    color: rgb(55 64 240);
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: 7px;
+    margin-bottom: 20px;
+}
+
+
+@media only screen and (min-width: 720px) and (max-width: 900px) {
+
+    .infoContent {
+        margin: 0 20px 20px 20px;
+    }
+
+    .buttonContent {
+        margin-bottom: 50px;
+    }
+
+}
+
+@media only screen and (min-width: 901px) and (max-width: 1100px) {
+
+    .formHeader_mobile {
+        display: none;
+    }
+
+    .formHeader_desktop {
+        display: flex;
+        margin-bottom: 40px;
+    }
+
+    .infoContent {
+        display: flex;
+        justify-content: center;
+    }
+
+    .boxContainer {
+        min-width: 350px;
+        max-height: 100%;
+        margin: 0 20px;
+    }
+
+    .buttonContent {
+        margin-bottom: 50px;
+    }
+
+    .buttonContent {
+        justify-content: center;
+    }
+
+}
+
+@media only screen and (min-width: 1101px) {
+
+    .formHeader_mobile {
+        display: none;
+    }
+
+    .formHeader_desktop {
+        display: flex;
+        margin-bottom: 40px;
+    }
+
+    .infoContent {
+        display: flex;
+        justify-content: center;
+    }
+
+    .boxContainer {
+        min-width: 550px;
+        max-height: 100%;
+        margin: 0 20px;
+    }
+
+    .buttonContent {
+        margin-bottom: 50px;
+    }
+
+    .buttonContent {
+        justify-content: center;
+    }
+
+}

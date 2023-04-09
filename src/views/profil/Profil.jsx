@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useGetUserMe } from "../../axios";
 import PurpleButton from "../../components/buttons/PurpleButton";
 import RedButton from "../../components/buttons/RedButton";
+import "./profil.css";
 
 const Profil = ({ setModalOpen }) => {
   const id = localStorage.getItem("user");
@@ -29,53 +30,63 @@ const Profil = ({ setModalOpen }) => {
       {token && loading && <div>Chargement...</div>}
       {token && !loading && (
         <div>
-          <h1>Mon profil</h1>
-          <div style={styles.formHeader}>
-            <div style={styles.profilePicContainer}>
+          <h1 className="profilTitle">Mon profil</h1>
+          <div className="formHeader_mobile">
+            <div className="profilePicContainer">
               <img
                 src={require("../../assets/img/pikachu2.png")}
                 alt=""
-                style={styles.profilePicture}
+                className="profilePicture"
               />
             </div>
-            <h2 style={styles.userName}>{data.userName}</h2>
+            <h2 className="userName">{data.userName}</h2>
           </div>
-          <div style={styles.infoContent}>
+          <div className="infoContent">
             {/* BOX ONE */}
-            <div style={styles.boxContainer}>
+            <div className="boxContainer">
+              <div className="formHeader_desktop">
+                <div className="profilePicContainer">
+                  <img
+                    src={require("../../assets/img/pikachu2.png")}
+                    alt=""
+                    className="profilePicture"
+                  />
+                </div>
+                <h2 className="userName">{data.userName}</h2>
+              </div>
               {/* BLOCK ONE */}
-              <p style={styles.profilLabel} >Email : </p>
-              <p style={styles.profilContent}> {data.email}</p>
-              <hr style={styles.hrWithStyle} />
+              <p className="profilLabel" >Email : </p>
+              <p className="profilContent"> {data.email}</p>
+              <hr className="hrWithStyle" />
               {/* BLOCK TWO */}
-              <p style={styles.profilLabel}>Téléphone : </p>
-              <p style={styles.profilContent}>{data.phoneNumber}</p>
+              <p className="profilLabel">Téléphone : </p>
+              <p className="profilContent">{data.phoneNumber}</p>
             </div>
             {/* BOX TWO */}
-            <div style={styles.boxContainer}>
+            <div className="boxContainer">
                {/* BLOCK THREE */}
-              <p style={styles.profilLabel} >Addresse : </p>
-              <p style={styles.profilContent}>{infoSup.address}</p>
+              <p className="profilLabel" >Addresse : </p>
+              <p className="profilContent">{infoSup.address}</p>
                {/* BLOCK FOUR */}
-              <p style={styles.profilLabel} >Ville : </p>
-              <p style={styles.profilContent}>{infoSup.city}</p>
+              <p className="profilLabel" >Ville : </p>
+              <p className="profilContent">{infoSup.city}</p>
                {/* BLOCK FIVE */}
-              <p style={styles.profilLabel} >Code Postal : </p>
-              <p style={styles.profilContent}>{infoSup.postalCode}</p>
+              <p className="profilLabel" >Code Postal : </p>
+              <p className="profilContent">{infoSup.postalCode}</p>
                {/* BLOCK SIX */}
-              <p style={styles.profilLabel} >Pays : </p>
-              <p style={styles.profilContent}>{infoSup.country}</p>
+              <p className="profilLabel" >Pays : </p>
+              <p className="profilContent">{infoSup.country}</p>
                {/* BLOCK SEVEN */}
-              <hr style={styles.hrWithStyle} />
-              <p style={styles.profilLabel} >Addresse de livraison : </p>
-              <p style={styles.profilContent}>{infoSup.deliveryAddress}</p>
+              <hr className="hrWithStyle" />
+              <p className="profilLabel" >Addresse de livraison : </p>
+              <p className="profilContent">{infoSup.deliveryAddress}</p>
                {/* BLOCK EIGHT */}
-              <hr style={styles.hrWithStyle} />
-              <p style={styles.profilLabel} >Description : </p>
-              <p style={styles.profilContent}>{infoSup.description}</p>
+              <hr className="hrWithStyle" />
+              <p className="profilLabel" >Description : </p>
+              <p className="profilContent">{infoSup.description}</p>
             </div>
           </div>
-          <div style={styles.buttonContent}>
+          <div className="buttonContent">
             <PurpleButton
               path={() => setModalOpen(true)}
               type={"submit"}
@@ -87,64 +98,6 @@ const Profil = ({ setModalOpen }) => {
       )}
     </>
   );
-};
-
-const styles = {
-  profilePicContainer: {
-    borderRadius: "50%",
-    backgroundColor: "#636AF2",
-    width: "80px",
-    height: "80px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  profilePicture: {
-    width: "50px",
-  },
-  formHeader: {
-    display: "flex",
-  },
-  userName: {
-    marginLeft: "20px",
-  },
-  button: {
-    justifyContent: "center",
-  },
-  infoContent: {
-    marginBottom: "20px",
-  },
-  buttonContent: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    zIndex: "2",
-  },
-  boxContainer: {
-    borderRadius: "10px",
-    margin: "15px 0",
-    padding: "15px 20px",
-    boxShadow: "rgb(185 184 184) 0px 3px 10px"
-
-  },
-  hrWithStyle: {
-    borderTop: "1px dashed #777",
-    width: "100%",
-    margin: "25px 0"
-  },
-  profilLabel: {
-    color: "#555",
-    fontWeight: "600",
-    fontSize: "14px",
-    marginBottom: "0"
-  },
-  profilContent: {
-    color: "rgb(55 64 240)",
-    fontWeight: "400",
-    fontSize: "18px",
-    marginTop: "7px",
-    marginBottom: "20px"
-  }
 };
 
 export default Profil;

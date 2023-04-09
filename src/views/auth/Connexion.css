@@ -133,8 +133,36 @@
     text-align: left;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 420px) and (max-width: 720px) {
+
     .formContainer {
         margin: 50px auto;
     }
+
+    .img-dresseurs {
+        margin-left: 15%;
+        width: 70%;
+    }
+
+    .formContainerInsc {
+        margin: 50px auto;
+    }
+    
+}
+
+@media only screen and (min-width: 720px) {
+
+    .img-dresseurs {
+        margin-left: 30%;
+        width: 40%;
+    }
+
+    .formContainer {
+        margin: 50px auto;
+    }
+
+    .formContainerInsc {
+        margin: 50px auto;
+    }
+    
 }

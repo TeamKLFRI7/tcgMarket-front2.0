@@ -1,8 +1,7 @@
 import { useGetAllGames } from "../../axios";
 import { IcArrowLeft } from "../../assets/icons/IcArrowLeft";
-import { forwardRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import WhiteButton from "../../components/buttons/WhiteButton";
 
 import "./home.css";
 import tcgLogo from "../../assets/img/logo-tcgMarket.png";
