@@ -30,6 +30,9 @@
         padding-bottom: 0;
         border-bottom: none;
     }
+    .set-link {
+        width: 100%;
+    }
     .set-img {
         max-width: 100%;
         height: auto;

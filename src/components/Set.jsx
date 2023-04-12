@@ -6,7 +6,7 @@ const Set = (props) => {
     <>
       {props.setData.map((set) => (
         <div className={"setContainer"} key={set.id}>
-          <Link to={"/set/" + set.id + "/cartes"}>
+          <Link to={"/set/" + set.id + "/cartes"} className={"set-link"}>
             <div className={"set"}>
               <div className={"set-iconContainer"}>
                 <img

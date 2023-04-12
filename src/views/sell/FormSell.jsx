@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader";
 import { useGetSelling } from "../../axios";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./sell.css";
 
 const FormSell = () => {
   let apiUrl = process.env.REACT_APP_URL_API;
@@ -188,17 +189,17 @@ const FormSell = () => {
           <PageHeader
             title="Vendez vos cartes"
             img={cover}
-            style={styles.style}
+            css={styles.style}
           />
-          <div style={styles.formContainer}>
+          <div className={"formContainer"}>
             <p>1. Sélectionnez une carte :</p>
-            <form onSubmit={nextStep} style={styles.form}>
+            <form onSubmit={nextStep} className={"form"}>
               <div>
                 <select
                   name="game"
                   id="game"
                   onChange={handleChange}
-                  style={styles.formElement}
+                  className={"formElement"}
                 >
                   <option value="">Sélectionnez un jeu</option>
                   {data["hydra:member"]?.map((game, index) => (
@@ -214,7 +215,7 @@ const FormSell = () => {
                   id="series"
                   onChange={handleChange}
                   disabled={!formData.game}
-                  style={styles.formElement}
+                  className={"formElement"}
                 >
                   <option value="">Sélectionnez une série</option>
                   {formData.game && !loading
@@ -234,7 +235,7 @@ const FormSell = () => {
                   id="set"
                   onChange={handleChange}
                   disabled={!formData.series}
-                  style={styles.formElement}
+                  className={"formElement"}
                 >
                   <option value="">Sélectionnez un set</option>
                   {formData.series && !loading
@@ -254,7 +255,7 @@ const FormSell = () => {
                   id="card"
                   onChange={handleChange}
                   disabled={!formData.set}
-                  style={styles.formElement}
+                  className={"formElement"}
                 >
                   <option value="">Sélectionnez une carte</option>
                   {formData.set && !loading
@@ -273,13 +274,13 @@ const FormSell = () => {
               {formData.cardImage ? (
                 <img
                   src={formData.cardImage}
-                  style={styles.cardImage}
+                  className={"cardImage"}
                   alt={"carte sélectionnée"}
                 />
               ) : null}
               <button
                 type="submit"
-                style={styles.step}
+                className={"step"}
                 disabled={!formData.cardImage}
               >
                 Étape suivante
@@ -294,9 +295,9 @@ const FormSell = () => {
           <PageHeader
             title="Vendez vos cartes"
             img={cover}
-            style={styles.style}
+            css={styles.style}
           />
-          <div style={styles.formContainer}>
+          <div className={"formContainer"}>
             <p>2. Informations de ventes :</p>
             <form onSubmit={handleSubmit}>
               <div>
@@ -306,7 +307,7 @@ const FormSell = () => {
                   onChange={handleChange}
                   value={formData.name}
                   placeholder={"nom de votre carte"}
-                  style={styles.formElement}
+                  className={"formElement"}
                 />
               </div>
               <div>
@@ -317,7 +318,7 @@ const FormSell = () => {
                   onChange={handleChange}
                   value={formData.quality}
                   placeholder={"Qualitée"}
-                  style={styles.formElement}
+                  className={"formElement"}
                 />
               </div>
               <div>
@@ -328,17 +329,17 @@ const FormSell = () => {
                   onChange={handleChange}
                   value={formData.price}
                   placeholder={"Prix"}
-                  style={styles.formElement}
+                  className={"formElement"}
                 />
               </div>
-              <div style={styles.fileContainer}>
+              <div className={"formContainer"}>
                 {formData.imageFiles
                   ? formData.images?.map((image, index) => (
                       <img
                         src={image}
                         key={index}
                         alt={"..."}
-                        style={styles.file}
+                        className={"file"}
                       />
                     ))
                   : null}
@@ -352,13 +353,15 @@ const FormSell = () => {
                   multiple
                   onChange={handleChange}
                   disabled={formData.imageFiles.length === 3}
-                  style={styles.inputFile}
+                  className={"inputFile"}
                 />
-                <label htmlFor="image" style={styles.inputLabel}>
+                <label htmlFor="image" className={"inputLabel"}>
                   Ajouter une image
                 </label>
               </div>
-              <button type="submit">Envoyer</button>
+              <button type="submit" className={"sendButton"}>
+                Envoyer
+              </button>
             </form>
           </div>
         </>
@@ -369,67 +372,7 @@ const FormSell = () => {
 };
 
 const styles = {
-  style: {
-    headImg: {
-      objectFit: "fill",
-    },
-  },
-  formContainer: {
-    margin: "0 1rem",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-  formElement: {
-    width: "100%",
-    minHeight: "2rem",
-    marginBottom: "1rem",
-    padding: ".5rem",
-    color: "grey",
-    border: "none",
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    borderRadius: ".625rem",
-  },
-  step: {
-    border: "none",
-    background: "none",
-    color: "#636AF2",
-    fontWeight: "bold",
-  },
-  cardImage: {
-    width: "70%",
-    margin: "0 auto 1rem",
-  },
-  icon: {
-    color: "#636AF2",
-  },
-  inputFile: {
-    width: "0.1px",
-    height: "0.1px",
-    opacity: "0",
-    overflow: "hidden",
-    position: "absolute",
-    zIndex: "-1",
-  },
-  inputLabel: {
-    display: "block",
-    padding: ".5rem",
-    width: "100%",
-    borderRadius: ".625rem",
-    textAlign: "center",
-    color: "white",
-    backgroundColor: "#636AF2",
-  },
-  fileContainer: {
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-  },
-  file: {
-    width: "calc(100% / 3 - .5rem)",
-  },
+  style: "headImg",
 };
 
 export default FormSell;

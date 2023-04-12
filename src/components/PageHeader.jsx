@@ -1,12 +1,13 @@
 import "./css/pageHeader.css";
 
 const PageHeader = (props) => {
+  console.log(props);
   return (
     <div className={"pageHead"}>
       <h3>{props.title}</h3>
       <div className={"pageHead-ImgContainer"}>
         <img
-          className={"pageHead-Img"}
+          className={`pageHead-Img ${props?.css}`}
           src={props.img}
           alt={"Couverture de page"}
         />
