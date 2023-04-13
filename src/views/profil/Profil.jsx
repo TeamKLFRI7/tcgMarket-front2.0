@@ -1,22 +1,22 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useEffect, useState } from "react";
 import { useGetUserMe } from "../../axios";
 import PurpleButton from "../../components/buttons/PurpleButton";
 import RedButton from "../../components/buttons/RedButton";
 import "./profil.css";
+import { getToken } from "../../getToken";
 
 const Profil = ({ setModalOpen }) => {
   const id = localStorage.getItem("user");
+  const [token, setToken] = useState("");
 
-  const [token, setToken] = useState();
-
-  const getToken = async () => {
-    const localToken = await localStorage.getItem("token");
-
-    if (localToken) setToken(localToken);
-  };
   useEffect(() => {
-    getToken();
+    getToken()
+      .then((token) => {
+        setToken(token);
+      })
+      .catch((error) => {
+        console.error("Erreur:", error);
+      });
   }, []);
 
   const { data, loading } = useGetUserMe();
@@ -55,7 +55,7 @@ const Profil = ({ setModalOpen }) => {
                 <h2 className="userName">{data.userName}</h2>
               </div>
               {/* BLOCK ONE */}
-              <p className="profilLabel" >Email : </p>
+              <p className="profilLabel">Email : </p>
               <p className="profilContent"> {data.email}</p>
               <hr className="hrWithStyle" />
               {/* BLOCK TWO */}
@@ -64,25 +64,25 @@ const Profil = ({ setModalOpen }) => {
             </div>
             {/* BOX TWO */}
             <div className="boxContainer">
-               {/* BLOCK THREE */}
-              <p className="profilLabel" >Addresse : </p>
+              {/* BLOCK THREE */}
+              <p className="profilLabel">Addresse : </p>
               <p className="profilContent">{infoSup.address}</p>
-               {/* BLOCK FOUR */}
-              <p className="profilLabel" >Ville : </p>
+              {/* BLOCK FOUR */}
+              <p className="profilLabel">Ville : </p>
               <p className="profilContent">{infoSup.city}</p>
-               {/* BLOCK FIVE */}
-              <p className="profilLabel" >Code Postal : </p>
+              {/* BLOCK FIVE */}
+              <p className="profilLabel">Code Postal : </p>
               <p className="profilContent">{infoSup.postalCode}</p>
-               {/* BLOCK SIX */}
-              <p className="profilLabel" >Pays : </p>
+              {/* BLOCK SIX */}
+              <p className="profilLabel">Pays : </p>
               <p className="profilContent">{infoSup.country}</p>
-               {/* BLOCK SEVEN */}
+              {/* BLOCK SEVEN */}
               <hr className="hrWithStyle" />
-              <p className="profilLabel" >Addresse de livraison : </p>
+              <p className="profilLabel">Addresse de livraison : </p>
               <p className="profilContent">{infoSup.deliveryAddress}</p>
-               {/* BLOCK EIGHT */}
+              {/* BLOCK EIGHT */}
               <hr className="hrWithStyle" />
-              <p className="profilLabel" >Description : </p>
+              <p className="profilLabel">Description : </p>
               <p className="profilContent">{infoSup.description}</p>
             </div>
           </div>

@@ -13,20 +13,23 @@ import { IcCatalogue } from "../../assets/icons/IcCatalogue";
 import TcgLogo from "../../assets/img/logo-tcgMarket.png";
 import "./layout.css";
 import { IcLogout } from "../../assets/icons/IcLogout";
+import { getToken } from "../../getToken";
 
 const NavBar = forwardRef((props, ref) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [token, setToken] = useState(null);
-  const [show, setShow] = useState();
+  const [show, setShow] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
 
-  const getToken = async () => {
-    const localToken = await localStorage.getItem("token");
-    if (localToken) setToken(localToken);
-  };
   useEffect(() => {
-    getToken();
+    getToken()
+      .then((token) => {
+        setToken(token);
+      })
+      .catch((error) => {
+        console.error("Erreur:", error);
+      });
   }, []);
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);

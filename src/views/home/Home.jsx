@@ -8,7 +8,7 @@ import tcgLogo from "../../assets/img/logo-tcgMarket.png";
 
 const Home = () => {
   const { data, loading } = useGetAllGames();
-  const [isActive, setActive] = useState("false");
+  const [isActive, setActive] = useState(false);
   const toggleGames = () => {
     setActive(!isActive);
   };

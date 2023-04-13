@@ -19,7 +19,11 @@ let baseUrl = process.env.REACT_APP_URL_API;
 // getSeries();
 
 export let useGetCards = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    setName: undefined,
+    logo: undefined,
+    fkIdCar: undefined,
+  });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
@@ -69,7 +73,9 @@ export let useGetAllGames = () => {
 };
 
 export let useGetGame = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    cardSeries: undefined,
+  });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
@@ -94,7 +100,9 @@ export let useGetGame = () => {
 };
 
 export let useGetSell = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    fkIdCardUser: undefined,
+  });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 

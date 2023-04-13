@@ -3,7 +3,7 @@ import Set from "./Set";
 import "./css/frameSeries.css";
 
 const FrameSeries = (props) => {
-  const [show, setShow] = useState();
+  const [show, setShow] = useState(false);
   const [isViewportWide, setIsViewportWide] = useState(false);
 
   useEffect(() => {

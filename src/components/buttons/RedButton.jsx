@@ -2,19 +2,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./button.css";
+import { getToken } from "../../getToken";
 
 const RedButton = (props) => {
   let apiUrl = process.env.REACT_APP_URL_API;
   const navigate = useNavigate();
-  const [token, setToken] = useState();
+  const [token, setToken] = useState("");
 
-  const getToken = async () => {
-    const localToken = await localStorage.getItem("token");
-
-    if (localToken) setToken(localToken);
-  };
   useEffect(() => {
-    getToken();
+    getToken()
+      .then((token) => {
+        setToken(token);
+      })
+      .catch((error) => {
+        console.error("Erreur:", error);
+      });
   }, []);
 
   const [apiError, setApiError] = useState(null);

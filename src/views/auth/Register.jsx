@@ -24,11 +24,11 @@ export const Register = (props) => {
     password: Yup.string()
       .min(8, "Votre mot de passe doit faire au mnimum 8 charactères.")
       .required("Mot de passe requis"),
+    plainPassword: Yup.string(),
   });
 
   const [apiError, setApiError] = useState(null);
   const [apiFieldsErr, setApiFieldsErr] = useState(null);
-  console.log(apiFieldsErr);
 
   const handleSubmitRegister = (values, { setSubmitting }) => {
     setSubmitting(true);

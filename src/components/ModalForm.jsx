@@ -6,20 +6,22 @@ import PurpleButton from "./buttons/PurpleButton";
 import axios from "axios";
 import "./css/modalForm.css";
 import { IcXMark } from "../assets/icons/IcXMark";
+import { getToken } from "../getToken";
 
 const ModalForm = ({ setModalOpen }) => {
   let apiUrl = process.env.REACT_APP_URL_API;
-  const [token, setToken] = useState();
+  const [token, setToken] = useState("");
   const [apiError, setApiError] = useState(null);
   const id = localStorage.getItem("user");
 
-  const getToken = async () => {
-    const localToken = await localStorage.getItem("token");
-
-    if (localToken) setToken(localToken);
-  };
   useEffect(() => {
-    getToken();
+    getToken()
+      .then((token) => {
+        setToken(token);
+      })
+      .catch((error) => {
+        console.error("Erreur:", error);
+      });
   }, []);
 
   const { data, loading } = useGetUserMe();
