@@ -75,11 +75,24 @@ const ModalForm = ({ setModalOpen }) => {
   });
 
   const handleSubmitModifications = (values, { setSubmitting }) => {
-    values.userInfo["id"] = infoSup.id;
+    let newUser = {
+      email: values.email,
+      userName: values.userName,
+      phoneNumber: values.phoneNumber,
+      userInfo: {
+        id: parseInt(id),
+        city: values.city,
+        country: values.country,
+        address: values.address,
+        postalCode: values.postalCode,
+        description: values.description,
+        deliveryAddress: values.deliveryAddress
+      }
+    }
     setSubmitting(true);
     if (id) {
       axios
-        .put(apiUrl + "/users/" + id, values, {
+        .put(apiUrl + "/users/" + id, newUser, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": `application/json`,
@@ -105,15 +118,15 @@ const ModalForm = ({ setModalOpen }) => {
       {!loading && (
         <Formik
           initialValues={{
-            userName: data.userName,
-            email: data.email,
-            phoneNumber: data.phoneNumber,
-            description: infoSup.description,
-            address: infoSup.address,
-            city: infoSup.city,
-            postalCode: infoSup.postalCode,
-            country: infoSup.country,
-            deliveryAddress: infoSup.deliveryAddress,
+            userName: data.userName || "",
+            email: data.email || "",
+            phoneNumber: data.phoneNumber || "",
+            description: infoSup.description || "",
+            address: infoSup.address || "",
+            city: infoSup.city || "",
+            postalCode: infoSup.postalCode || "",
+            country: infoSup.country || "",
+            deliveryAddress: infoSup.deliveryAddress || "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmitModifications}
