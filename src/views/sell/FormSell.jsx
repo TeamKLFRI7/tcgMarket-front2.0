@@ -332,7 +332,7 @@ const FormSell = () => {
                   className={"formElement"}
                 />
               </div>
-              <div className={"formContainer"}>
+              <div className={"formContainer formContainerFile"}>
                 {formData.imageFiles
                   ? formData.images?.map((image, index) => (
                       <img

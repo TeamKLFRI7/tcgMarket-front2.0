@@ -4,6 +4,10 @@
 .formContainer {
     margin: 0 auto;
 }
+.formContainerFile {
+    height: 12rem;
+    margin-bottom: 1.5rem;
+}
 .form {
     display: flex;
     flex-direction: column;
@@ -64,6 +68,9 @@
 }
 .file {
     width: calc(100% / 3);
+    max-height: 100%;
     padding: 0 .5rem;
+}
+@media only screen and (min-width: 768px) {
 }
 
