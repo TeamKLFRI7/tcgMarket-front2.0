@@ -17,7 +17,7 @@ const Sell = () => {
               <Card
                 key={index}
                 style={styles.style}
-                imgUrl={apiUrl + card.fileUrl}
+                imgUrl={apiUrl + card["fileUrl"]}
                 name={data.name}
                 infoUser={card.fkIdUser}
                 infoCard={card}

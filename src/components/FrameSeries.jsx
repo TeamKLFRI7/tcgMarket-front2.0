@@ -33,11 +33,11 @@ const FrameSeries = (props) => {
           src={require("../assets/img/pokeball.png")}
           alt={"pokéball"}
         />
-        <span>{props.serieData.serieName}</span>
+        <span>{props.serieData["serieName"]}</span>
       </div>
       <div className={"serial-setList"}>
         {(isViewportWide || show) && (
-          <Set setData={props.serieData.fkIdCardSet} />
+          <Set setData={props.serieData["fkIdCardSet"]} />
         )}
       </div>
     </div>
