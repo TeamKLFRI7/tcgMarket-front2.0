@@ -17,7 +17,7 @@ const Cards = () => {
             {data.fkIdCar.map((card, index) => (
               <div key={index} className={"contents"}>
                 {card.fkIdCardUser.length !== 0 ? (
-                  <Link to={"/boutique/" + card.id} className={"contents"}>
+                  <Link to={"" + card.id + "/ventes"} className={"contents"}>
                     <div className={"cards-cardContainer"}>
                       <Card img={card.img} name={card.name} />
                       <div className={"cards-cardCountContainer"}>

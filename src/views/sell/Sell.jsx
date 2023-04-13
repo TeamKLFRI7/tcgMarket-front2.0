@@ -10,7 +10,7 @@ const Sell = () => {
     <div>
       {loading && <div>Chargement</div>}
       {!loading && (
-        <>
+        <div className={"sellPage"}>
           {/*<h1>{data.name}</h1>*/}
           {data.fkIdCardUser.map((card, index) => (
             <div className={"cardsContainer"} key={index}>
@@ -24,7 +24,7 @@ const Sell = () => {
               />
             </div>
           ))}
-        </>
+        </div>
       )}
     </div>
   );
@@ -35,6 +35,7 @@ const styles = {
     sellContainer: "sell",
     sellCard: "sell-card",
     sellInfo: "sell-info",
+    sellImg: "sell-img",
     sellInfoElement: "sell-infoElement",
   },
 };

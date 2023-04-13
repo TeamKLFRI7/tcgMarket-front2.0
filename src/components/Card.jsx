@@ -6,7 +6,7 @@ const Card = (props) => {
     <div className={`card ${props.style?.sellContainer}`}>
       <div className={props.style?.sellCard}>
         <img
-          className={`card-img ${props.style?.noSell}`}
+          className={`card-img ${props.style?.noSell} ${props.style?.sellImg}`}
           src={props.imgUrl ? props.imgUrl : props.img}
           alt={"Carte " + props.name}
         />

@@ -71,6 +71,35 @@
     max-height: 100%;
     padding: 0 .5rem;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 600px) {
+    .sellPage {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .cardsContainer {
+        width: calc(100% / 2);
+        padding: .5rem;
+    }
 }
-
+@media only screen and (min-width: 768px) {
+    .cardsContainer {
+        width: calc(100% / 3)
+    }
+    .sell-card {
+        align-items: center;
+        width: 100%;
+    }
+    .sell-img {
+        max-height: 9rem;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .cardsContainer {
+        width: calc(100% / 4);
+    }
+    .sell {
+        max-width: 100%;
+        margin: 0;
+    }
+}

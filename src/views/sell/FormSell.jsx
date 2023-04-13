@@ -137,13 +137,18 @@ const FormSell = () => {
       });
   };
   useEffect(() => {
-    const fileReaders = [];
-    let isCancel = false;
+    const fileReaders = []; //On initialise une variable fileReaders qui est un tableau vide
+    let isCancel = false; //On initialise une variable isCancel à False
+    //Si l'utilisateur sélectionne une image
     if (formData.imageFiles.length) {
       const promise = formData.imageFiles.map((file) => {
+        //On créer une nouvelle promesse pour chaque image
         return new Promise((resolve, reject) => {
+          //On utilise la méthode FileReader pour lire le contenu d'un fichier en utilisant l'API File
           const fileReader = new FileReader();
+          //Pour chaque fichier image, un objet FileReader est créé et ajouté au tableau fileReaders
           fileReaders.push(fileReader);
+          //On utilise onload, onabort et onerror de l'objet FileReader pour gérer les différents événements de lecture du fichier
           fileReader.onload = (e) => {
             const { result } = e.target;
             if (result) {
@@ -156,11 +161,14 @@ const FormSell = () => {
           fileReader.onerror = () => {
             reject(new Error("Echec de la lecture du fichier"));
           };
+          //readAsDataURL est appelée pour récupérer les données de l'image sous forme d'URL
           fileReader.readAsDataURL(file);
         });
       });
+      //Promise.all récupère toutes les URL des images en une seule fois.
       Promise.all(promise)
         .then((images) => {
+          //Si la lecture n'a pas été annulée ou sans erreur on set notre formData.images
           if (!isCancel) {
             setFormData({
               ...formData,
@@ -173,7 +181,9 @@ const FormSell = () => {
         });
     }
     return () => {
+      //Si useEffect appelé avec de nouvelles données on annule lecture du ficher en cours
       isCancel = true;
+      //On supprime les objets fileReader associé
       fileReaders.forEach((fileReader) => {
         if (fileReader.readyState === 1) {
           fileReader.abort();

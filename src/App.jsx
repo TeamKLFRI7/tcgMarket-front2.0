@@ -48,10 +48,10 @@ function App() {
           element={<Game searchResults={searchResults} />}
         />
         <Route
-          path="/set/:id/cartes"
+          path="/jeux/:id/set/:id/cartes"
           element={<Cards searchResults={searchResults} />}
         />
-        <Route path="boutique/:id" element={<Sell />} />
+        <Route path="/jeux/:id/set/:id/cartes/:id/ventes" element={<Sell />} />
         {/* Routes protégées début */}
         <Route
           path="/vendre-mes-cartes"
