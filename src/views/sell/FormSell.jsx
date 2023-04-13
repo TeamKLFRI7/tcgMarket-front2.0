@@ -63,7 +63,7 @@ const FormSell = () => {
     } else if (name === "set") {
       const setIndex = data["hydra:member"][formData.gameIndex].cardSeries[
         formData.seriesIndex
-      ].fkIdCardSet.findIndex((set) => set.id === parseInt(value));
+      ]["fkIdCardSet"].findIndex((set) => set.id === parseInt(value));
       setFormData({
         ...formData,
         [name]: parseInt(value),
@@ -72,13 +72,13 @@ const FormSell = () => {
     } else if (name === "card") {
       const cardIndex = data["hydra:member"][formData.gameIndex].cardSeries[
         formData.seriesIndex
-      ].fkIdCardSet[formData.setIndex].fkIdCar.findIndex(
+      ]["fkIdCardSet"][formData.setIndex].fkIdCar.findIndex(
         (set) => set.id === parseInt(value)
       );
       const cardImage =
         data["hydra:member"][formData.gameIndex].cardSeries[
           formData.seriesIndex
-        ].fkIdCardSet[formData.setIndex].fkIdCar[cardIndex].img;
+        ]["fkIdCardSet"][formData.setIndex].fkIdCar[cardIndex].img;
       setFormData({
         ...formData,
         [name]: value,
@@ -232,7 +232,7 @@ const FormSell = () => {
                     ? data["hydra:member"][formData.gameIndex].cardSeries.map(
                         (serie, index) => (
                           <option value={serie.id} key={index}>
-                            {serie.serieName}
+                            {serie["serieName"]}
                           </option>
                         )
                       )
@@ -251,7 +251,7 @@ const FormSell = () => {
                   {formData.series && !loading
                     ? data["hydra:member"][formData.gameIndex].cardSeries[
                         formData.seriesIndex
-                      ].fkIdCardSet.map((set, index) => (
+                      ]["fkIdCardSet"].map((set, index) => (
                         <option value={set.id} key={index}>
                           {set.setName}
                         </option>
@@ -271,7 +271,7 @@ const FormSell = () => {
                   {formData.set && !loading
                     ? data["hydra:member"][formData.gameIndex].cardSeries[
                         formData.seriesIndex
-                      ].fkIdCardSet[formData.setIndex].fkIdCar.map(
+                      ]["fkIdCardSet"][formData.setIndex].fkIdCar.map(
                         (card, index) => (
                           <option value={card.id} key={index}>
                             {card.name}
