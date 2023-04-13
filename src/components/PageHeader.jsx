@@ -1,7 +1,6 @@
 import "./css/pageHeader.css";
 
 const PageHeader = (props) => {
-  console.log(props);
   return (
     <div className={"pageHead"}>
       <h3>{props.title}</h3>

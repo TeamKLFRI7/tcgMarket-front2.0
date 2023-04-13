@@ -23,13 +23,17 @@ const Card = (props) => {
           <div>Prix : {props.infoCard?.price}€</div>
         </div>
         <PurpleButton
-          style={"card-addButton"}
+          style={styles.cardButton}
           type={"button"}
           children={"Ajouter au panier"}
         />
       </div>
     </div>
   );
+};
+
+const styles = {
+  cardButton: "card-addButton",
 };
 
 export default Card;

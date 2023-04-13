@@ -41,8 +41,6 @@ const NavBar = forwardRef((props, ref) => {
     setShow(!show);
   }
 
-  console.log(show);
-
   return (
     <nav className={"navbar"} ref={ref}>
       <div className="navbar-container">

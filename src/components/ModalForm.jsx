@@ -301,12 +301,12 @@ const ModalForm = ({ setModalOpen }) => {
                   <div className="modalActions">
                     <div className="actionsContainer">
                       <PurpleButton
-                        path={() => console.log()}
                         type={"submit"}
                         children={"Modifier mon profil"}
                       />
                     </div>
                   </div>
+                  <div>{apiError}</div>
                 </Form>
               </div>
             </div>

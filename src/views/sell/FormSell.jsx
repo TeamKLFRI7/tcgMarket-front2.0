@@ -190,7 +190,7 @@ const FormSell = () => {
         }
       });
     };
-  }, [formData.imageFiles]);
+  }, [formData]);
 
   switch (step) {
     case 1:

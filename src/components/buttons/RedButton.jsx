@@ -20,7 +20,6 @@ const RedButton = (props) => {
   const [apiError, setApiError] = useState(null);
   const handleDeleteUser = (id) => {
     if (id) {
-      console.log(apiUrl + "/users/" + id);
       axios
         .delete(apiUrl + "/users/" + id, {
           headers: {
@@ -28,17 +27,14 @@ const RedButton = (props) => {
             "Content-Type": `application/json`,
           },
         })
-        .then((res) => {
+        .then(() => {
           localStorage.removeItem("user");
           localStorage.removeItem("token");
           setApiError(null);
           navigate("/login");
         })
         .catch((err) => {
-          console.log(err);
-          // if (err.response.data.code === 401) {
-          //     setApiError("Lidentifiant ou le mot de passe est invalide.");
-          // }
+          setApiError(err);
         });
     }
   };
@@ -52,6 +48,7 @@ const RedButton = (props) => {
       >
         {props.children}
       </button>
+      <div>{apiError}</div>
     </>
   );
 };
