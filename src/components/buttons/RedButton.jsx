@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./button.css";
-import { getToken } from "../../getToken";
 
 const RedButton = (props) => {
   let apiUrl = process.env.REACT_APP_URL_API;
@@ -10,13 +9,15 @@ const RedButton = (props) => {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    getToken()
-      .then((token) => {
-        setToken(token);
-      })
-      .catch((error) => {
-        console.error("Erreur:", error);
-      });
+    const getToken = async () => {
+      const localToken = localStorage.getItem("token");
+      if (localToken) {
+        setToken(localToken);
+      }
+    };
+    getToken().catch((error) => {
+      console.error("Error fetching token:", error);
+    });
   }, []);
 
   const [apiError, setApiError] = useState(null);

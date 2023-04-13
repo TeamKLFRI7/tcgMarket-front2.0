@@ -3,20 +3,21 @@ import { useGetUserMe } from "../../axios";
 import PurpleButton from "../../components/buttons/PurpleButton";
 import RedButton from "../../components/buttons/RedButton";
 import "./profil.css";
-import { getToken } from "../../getToken";
 
 const Profil = ({ setModalOpen }) => {
   const id = localStorage.getItem("user");
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    getToken()
-      .then((token) => {
-        setToken(token);
-      })
-      .catch((error) => {
-        console.error("Erreur:", error);
-      });
+    const getToken = async () => {
+      const localToken = localStorage.getItem("token");
+      if (localToken) {
+        setToken(localToken);
+      }
+    };
+    getToken().catch((error) => {
+      console.error("Error fetching token:", error);
+    });
   }, []);
 
   const { data, loading } = useGetUserMe();
