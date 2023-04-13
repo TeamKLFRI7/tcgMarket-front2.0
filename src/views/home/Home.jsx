@@ -1,13 +1,12 @@
 import { useGetAllGames } from "../../axios";
 import { IcArrowLeft } from "../../assets/icons/IcArrowLeft";
 import { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./home.css";
 import tcgLogo from "../../assets/img/logo-tcgMarket.png";
 
 const Home = () => {
-  const navigate = useNavigate();
   const { data, loading } = useGetAllGames();
   const [isActive, setActive] = useState("false");
   const toggleGames = () => {
@@ -66,26 +65,30 @@ const Home = () => {
                       />
                     </div>
                   ) : (
-                    <div
-                      style={{
-                        backgroundImage: `url(/${game.name}2.png)`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        height: "100%",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                        cursor: "pointer",
-                      }}
+                    <Link
+                      to={`/jeux/${game.id}`}
+                      style={{ display: "contents" }}
                     >
-                      <img
-                        src={`${game.name}-logo.png`}
-                        className={"logoCardClickable"}
-                        onClick={() => navigate(`/jeux/${game.id}`)}
-                        alt={`${game.name} logo`}
-                      />
-                    </div>
+                      <div
+                        style={{
+                          backgroundImage: `url(/${game.name}2.png)`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          height: "100%",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <img
+                          src={`${game.name}-logo.png`}
+                          className={"logoCardClickable"}
+                          alt={`${game.name} logo`}
+                        />
+                      </div>
+                    </Link>
                   )}
                 </Fragment>
               ))}
@@ -96,4 +99,5 @@ const Home = () => {
     </div>
   );
 };
+
 export default Home;
