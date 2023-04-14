@@ -1,59 +1,103 @@
 import { useGetAllGames } from "../../axios";
-import WhiteButton from "../../components/buttons/WhiteButton";
-import DisabledButton from "../../components/buttons/DisabledButton";
-import home from "../../assets/img/home.png";
-import { Fragment } from "react";
+import { IcArrowLeft } from "../../assets/icons/IcArrowLeft";
+import { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
+
+import "./home.css";
+import tcgLogo from "../../assets/img/logo-tcgMarket.png";
 
 const Home = () => {
   const { data, loading } = useGetAllGames();
+  const [isActive, setActive] = useState(false);
+  const toggleGames = () => {
+    setActive(!isActive);
+  };
+
   return (
-    <div style={styles.mainHome}>
+    <div className={"mainHome"}>
       {loading && <div>Chargement</div>}
       {!loading && (
-        <div style={styles.container}>
-          {data["hydra:member"].map((game) => (
-            <Fragment key={game.id}>
-              {game.isActive === false ? (
-                <DisabledButton type={"button"} children={game.name} />
-              ) : (
-                <WhiteButton
-                  path={`/jeux/${game.id}`}
-                  type={"button"}
-                  children={game.name}
-                />
-              )}
-            </Fragment>
-          ))}
+        <div className={"container"}>
+          <div className={isActive ? "active_home" : "inactive_home"}>
+            <div className="sub-container-1">
+              <img src={tcgLogo} alt="" className="tcg-logo-home" />
+              <h1 className="title-intro">
+                Bienvenue sur <br />
+                Trading Card Games Market !
+              </h1>
+              <p className="text-intro">
+                Retrouvez vos cartes préférées parmis les univers disponibles.
+                <br />
+                Ici vous pouvez consulter, vendre et acheter des cartes
+                Pokémons.
+              </p>
+              <button className="btn-see-games" onClick={toggleGames}>
+                Voir les jeux
+              </button>
+            </div>
+          </div>
+          <div className={isActive ? "inactive_home" : "active_home"}>
+            <button className={"returnToHome"} onClick={toggleGames}>
+              <IcArrowLeft />{" "}
+              <span className="returnText">Revenir à l'accueil</span>
+            </button>
+            <div className="sub-container-2">
+              {data["hydra:member"].map((game) => (
+                <Fragment key={game.id}>
+                  {game.isActive === false ? (
+                    <div
+                      style={{
+                        backgroundImage: `linear-gradient(0deg, rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)), url(/${game.name}.png)`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "100%",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        cursor: "not-allowed",
+                      }}
+                    >
+                      <img
+                        src={`${game.name}-logo.png`}
+                        className={"logoCard"}
+                        alt={`${game.name} logo`}
+                      />
+                    </div>
+                  ) : (
+                    <Link
+                      to={`/jeux/${game.id}`}
+                      style={{ display: "contents" }}
+                    >
+                      <div
+                        style={{
+                          backgroundImage: `url(/${game.name}2.png)`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          height: "100%",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <img
+                          src={`${game.name}-logo.png`}
+                          className={"logoCardClickable"}
+                          alt={`${game.name} logo`}
+                        />
+                      </div>
+                    </Link>
+                  )}
+                </Fragment>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>
   );
-};
-
-const styles = {
-  mainHome: {
-    backgroundImage: `url(${home}), radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(99,106,242,1) 53%)`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "fill",
-    backgroundPosition: "0% 100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    border: "none",
-    marginBottom: "5px",
-    padding: "20px",
-    fontSize: "18px",
-    flexGrow: "1",
-    boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
-    minHeight: "100vh",
-  },
-  container: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  btn: {
-    width: "80%",
-  },
 };
 
 export default Home;

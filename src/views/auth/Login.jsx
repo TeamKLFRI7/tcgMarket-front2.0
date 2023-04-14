@@ -1,64 +1,65 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import YellowButton from "../../components/buttons/YellowButton";
 import "./Connexion.css";
-import { api } from './AuthService';
+import { api } from "./AuthService";
 
-export const Login = (props) => {
+const Login = (props) => {
   const navigate = useNavigate();
   const basicUrl = process.env.REACT_APP_URL_API;
+  const url = process.env.REACT_APP_URL;
 
   const validationSchema = Yup.object({
-    userName: Yup.string().required("Required"),
+    userName: Yup.string()
+      .min(3, "Votre nom d'utilisateur doit faire au mnimum 3 charactères.")
+      .required("Le nom d'utilisateur est obligatoire."),
     password: Yup.string()
-      .min(8, "Votre mot de passe doit faire au mnimum 8 charactères")
-      .required("Required"),
+      .min(8, "Votre mot de passe doit faire au mnimum 8 charactères.")
+      .required("Le mot de passe est obligatoire."),
   });
 
   const [apiError, setApiError] = useState(null);
 
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
-    api
-      .post('/authentication_token', values)
-      .then((res) => {
+    api.post(`${url}/authentication_token`, values).then((res) => {
+      if (res.status === 200 || res.status === 201) {
         setApiError(null);
         localStorage.setItem("token", res.data.token);
         props.setToken(res.data.token);
 
         // -------------------- Récupère le profil utilisateur --------------------
-        axios
-          .get(basicUrl + "/me", {
-            headers: {
-              Authorization: `Bearer ${res.data.token}`,
-              "Content-Type": `application/json`,
-            },
-          })
-          .then((res) => {
-            localStorage.setItem("user", res.data.id);
-            navigate("/profil");
-          })
-          .catch((err) => {
-          });
-        // -------------------- END --------------------
-
-        setSubmitting(false);
-      })
-      .catch((err) => {
-        if (err.response.data.code === 401) {
-          setApiError("L'identifiant et/ou le mot de passe sont invalides.");
-        } else if (err.response.data.code === 403) {
-          setApiError("Vous n'avez pas accès à ces informations.");
-        } else if (err.response.data.code === 404) {
-          setApiError("Page innaccessible.");
-        } else if (err.response.data.code >= 500) {
-          setApiError("Erreur serveur. Veuillez réassyer ultérieurement.");
+        if (res.data.token) {
+          axios
+            .get(basicUrl + "/me", {
+              headers: {
+                Authorization: `Bearer ${res.data.token}`,
+                "Content-Type": `application/json`,
+              },
+            })
+            .then((res) => {
+              localStorage.setItem("user", res.data.id);
+              navigate("/profil");
+            });
         }
-        setSubmitting(false);
-      });
+        // -------------------- END --------------------
+      } else if (res.status === 400 || res.status === 401) {
+        setApiError(
+          "Les champs renseignés sont inexactes et/ou ne correspondent pas aux normes exigées. Veulliez vérifier vos informations."
+        );
+      } else if (res.status === 403) {
+        setApiError("Vous n'avez pas accès à ces informations.");
+      } else if (res.status === 404) {
+        setApiError("Page innaccessible.");
+      } else if (res.status >= 500) {
+        setApiError("Erreur serveur. Veuillez réassyer ultérieurement.");
+      }
+      setApiError(null);
+      setSubmitting(false);
+    });
   };
 
   return (
@@ -73,10 +74,13 @@ export const Login = (props) => {
           <Field
             name="userName"
             type="text"
-            placeholder="Username"
+            placeholder="Nom d'utilisateur"
             className="field"
           />
-          <ErrorMessage name="username" />
+          <ErrorMessage
+            name="userName"
+            render={(msg) => <div className="error-msg">{msg}</div>}
+          />
 
           <Field
             name="password"
@@ -84,13 +88,19 @@ export const Login = (props) => {
             placeholder="Mot de passe"
             className="field"
           />
-          <ErrorMessage name="password" render={msg => <div className="error-msg">{msg}</div>} />
+          <ErrorMessage
+            name="password"
+            render={(msg) => <div className="error-msg">{msg}</div>}
+          />
 
-          <p
-            className="link-btn"
-          >
+          <p className="link-btn">
             Vous n'avez pas de compte?{" "}
-            <span className="span-btn" onClick={() => props.onFormSwitch("register")}>En créer un.</span>
+            <span
+              className="span-btn"
+              onClick={() => props.onFormSwitch("register")}
+            >
+              En créer un.
+            </span>
           </p>
           <p className="error-connection">{apiError}</p>
           <YellowButton path={"#"} type={"submit"} children={"se connecter"} />
@@ -99,3 +109,5 @@ export const Login = (props) => {
     </Formik>
   );
 };
+
+export default Login;

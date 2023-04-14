@@ -5,21 +5,25 @@ import { api } from "./views/auth/AuthService";
 
 let baseUrl = process.env.REACT_APP_URL_API;
 
-const getSeries = () => {
-  axios
-    .get(baseUrl + "/card_series?page=1")
-    .then(() => {
-      // console.log(response.data['hydra:member']);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-getSeries();
+// const getSeries = () => {
+//   axios
+//     .get(baseUrl + "/card_series?page=1")
+//     .then((response) => {
+//       // console.log(response.data['hydra:member']);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+//
+// getSeries();
 
 export let useGetCards = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    setName: undefined,
+    logo: undefined,
+    fkIdCar: undefined,
+  });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
@@ -32,6 +36,7 @@ export let useGetCards = () => {
         setData(response);
       } catch (error) {
         console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -54,7 +59,7 @@ export let useGetAllGames = () => {
         const { data: response } = await axios.get(baseUrl + "/games?page=1");
         setData(response);
       } catch (error) {
-        console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -68,7 +73,9 @@ export let useGetAllGames = () => {
 };
 
 export let useGetGame = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    cardSeries: undefined,
+  });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
@@ -79,6 +86,7 @@ export let useGetGame = () => {
         setData(response);
       } catch (error) {
         console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -92,7 +100,9 @@ export let useGetGame = () => {
 };
 
 export let useGetSell = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    fkIdCardUser: undefined,
+  });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
@@ -103,6 +113,7 @@ export let useGetSell = () => {
         setData(response);
       } catch (error) {
         console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -128,6 +139,7 @@ export let useGetUserMe = () => {
         setData(response);
       } catch (error) {
         console.log(error);
+        return error;
       }
       setLoading(false);
     };
@@ -152,7 +164,10 @@ export let useSearchCard = (name) => {
           setData(response.data);
         } catch (error) {
           console.log(error);
+          return error;
         }
+      } else {
+        setData(null);
       }
     };
 

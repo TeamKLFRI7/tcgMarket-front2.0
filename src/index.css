@@ -1,56 +1,81 @@
+/*blockName*/
+/*blockName_modifierName*/
+/*blockName-elementName*/
+/*blockName-elementName_modifierName*/
 @font-face {
     font-family: 'Roboto';
     src: url('./fonts/Roboto-Thin.ttf') format('truetype');
     font-weight: 100;
     font-style: normal;
-  }
-
-  @font-face {
+}
+@font-face {
     font-family: 'Roboto';
     src: url('./fonts/Roboto-Light.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
-  }
-  @font-face {
+}
+@font-face {
     font-family: 'Roboto';
     src: url('./fonts/Roboto-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
-  }
-  @font-face {
+}
+@font-face {
     font-family: 'Roboto';
     src: url('./fonts/Roboto-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
-  }
-  
-  @font-face {
+}
+@font-face {
     font-family: 'Roboto';
     src: url('./fonts/Roboto-Black.ttf') format('truetype');
     font-weight: 900;
     font-style: normal;
-  }
-
+}
+:root {
+    /*COLOR*/
+    --light-shadow: rgb(188, 188, 188);
+    --dark-shadow: rgb(73, 73, 73);
+    --midBlack-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    --black-shadow: rgba(0, 0, 0, 0.24) 0 0 8px;
+    --black-shadow_bottom: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    --main-color: rgb(100, 106, 234);
+    --secondary-color: #fff;
+    --light-color: #eee;
+    --danger-color: rgb(220, 57, 57);
+    /*FONT-SIZE*/
+    --medium-fontSize: 1.5rem;
+    --large-fontSize: 2rem;
+}
 * {
     font-family: 'Roboto', Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
     text-decoration: none;
     color: #333;
 }
-
 body {
-    margin: 0;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #eee;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--light-color);
 }
-
+img {
+    vertical-align: middle
+}
 .active {
-    color: #eee;
+    color: var(--light-color);
 }
-
 .title {
     font-size: 1rem;
     margin-bottom: 1rem;
+}
+.contents {
+    display: contents;
+}
+@media only screen and (min-width: 600px) {
+    .width90 {
+        width: 90%;
+        margin: auto;
+    }
 }

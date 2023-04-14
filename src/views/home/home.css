@@ -1,0 +1,147 @@
+.active_home {
+    display: flex;
+}
+
+.inactive_home {
+    display: none;
+}
+
+.mainHome {
+    display: flex;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    min-width: 100vw;
+}
+
+.sub-container-1 {
+    background: 
+    linear-gradient(336deg, rgba(99, 106, 242, .9), rgba(0,0,255,0) 80.71%),
+    linear-gradient(127deg, rgba(52, 21, 133, .7), rgba(115, 0, 255, 0) 70.71%),
+    linear-gradient(217deg, rgba(220, 57, 57, .9), rgba(255,0,0,0) 80.71%);     
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+}
+
+.sub-container-2 {
+    display: flex;
+    flex-direction: column;
+    min-width: 100vw;
+}
+.sub-container-2 :nth-child(1) { order: 2; }
+.sub-container-2 :nth-child(2) { order: 3; }
+.sub-container-2 :nth-child(3) { order: 1; }
+
+.logoCard {
+    max-width: 300px;
+}
+
+.logoCardClickable {
+    max-width: 300px;
+}
+
+.title-intro {
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.text-intro {
+    font-size: 1.2rem;
+}
+
+.returnToHome {
+    position: absolute;
+    background-color: #222;
+    border: none;
+    padding: 5px;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+.returnText {
+    color: white;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.tcg-logo-home {
+    width: 70%;
+    margin-bottom: -40px;
+    display: flex;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.btn-see-games {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin: 1.25rem 0;
+    padding: 1.25rem 1.25rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(99, 106, 242);
+    color: #fff;
+    font-size: 16px!important;
+    padding: 15px 30px;
+}
+
+
+@media only screen and (min-width: 1024px) {
+    .inactive_home {
+        display: flex;
+    }
+
+    .returnToHome {
+        display: none;
+    }
+
+    .sub-container-2 {
+        display: flex;
+        flex-direction: column;
+        min-width: 60vw;
+    }
+    .sub-container-2 :nth-child(1) { order: 2; }
+    .sub-container-2 :nth-child(2) { order: 3; }
+    .sub-container-2 :nth-child(3) { order: 1; }
+
+    .btn-see-games {
+        display: none;
+    }
+
+    .logoCard {
+        max-width: 400px;
+    }
+    
+    .logoCardClickable {
+        max-width: 400px;
+    }
+    
+    .title-intro {
+        text-align: center;
+        font-size: 2.2rem;
+    }
+    
+    .text-intro {
+        font-size: 1.4rem;
+    }
+
+    .sub-container-1 {
+        min-width: 40vw;
+    }
+
+    .sub-container-2 {
+        min-width: 60vw;
+    }
+    
+}

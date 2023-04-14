@@ -1,39 +1,79 @@
 .btn {
     position: relative;
-    text-transform: uppercase;
-    font-size: 1.5rem;
     margin: 1.25rem 0;
-    padding: 1.25rem 1.25rem;
-    border-radius: 10px;
-    border: none;
+    padding: 1.25rem;
     cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
 }
-
+.btn_mediumFontSize {
+    font-size: var(--medium-fontSize);
+}
 .yellowBtn {
+    color: white;
     background-color: #E5CD24;
-    color: white;
-    box-shadow: 0 5px 5px rgb(188, 188, 188);
+    box-shadow: 0 5px 5px var(--light-shadow);
 }
-
 .whiteBtn {
-    background-color: white;
     color: #B49F11;
-    box-shadow: 0 5px 5px rgb(73, 73, 73);
+    background-color: white;
+    box-shadow: 0 5px 5px var(--dark-shadow);
 }
-
 .purpleBtn {
-    background-color: rgb(99, 106, 242);
-    color: white;
-    box-shadow: 0 5px 5px rgb(188, 188, 188);
-    font-size: 16px!important;
-    padding: 15px 30px;
-}
-
-.deleteBtn {
-    background-color: rgb(248, 236, 236);
-    color: rgb(220, 57, 57);
-    border: solid 1px rgb(220, 57, 57);
-    box-shadow: 0px 5px 5px rgb(188, 188, 188);
-    font-size: 16px!important;
     padding: 15px 20px;
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+    box-shadow: 0 5px 5px var(--light-shadow);
+}
+.deleteBtn {
+    padding: 15px 20px;
+    color: var(--secondary-color);
+    background-color: var(--danger-color);
+    box-shadow: 0 5px 5px var(--light-shadow);
+}
+.disabledOverlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    text-transform: lowercase;
+    color: var(--secondary-color);
+    border-radius: 10px;
+    background-color: rgb(0 0 0 / .6);
+}
+.card-addButton {
+    width: 100%;
+    max-width: 9rem;
+    padding: .5rem 1rem;
+    text-transform: none;
+}
+@media only screen and (min-width: 600px) {
+    .btn {
+        position: relative;
+        margin: 0;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .btn {
+        position: relative;
+        margin: 1.25rem 5rem;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .btn {
+        position: relative;
+        margin: 1.25rem 3rem;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .btn {
+        position: relative;
+        margin: 1.25rem 3rem;
+    }
 }

@@ -1,0 +1,26 @@
+.pageHead {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: calc(100% - 2rem);
+    height: 8rem;
+    margin: 0 auto 2rem;
+}
+.pageHead-ImgContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 4rem;
+    /* border-radius: .625rem;
+    box-shadow: var(--black-shadow); */
+}
+.pageHead-Img {
+    max-width: 100%;
+    height: 100%;
+}
+.headImg {
+    width: 100%;
+    max-width: 480px;
+    border-radius: .625rem;
+    object-fit: cover;
+}

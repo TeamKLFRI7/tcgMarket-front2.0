@@ -11,60 +11,71 @@ import { IcMesAnnonces } from "../../assets/icons/IcMesAnnonces";
 import { IcSold } from "../../assets/icons/IcSold";
 import { IcCatalogue } from "../../assets/icons/IcCatalogue";
 import TcgLogo from "../../assets/img/logo-tcgMarket.png";
-import "./NavBar.css";
+import "./layout.css";
 import { IcLogout } from "../../assets/icons/IcLogout";
 
 const NavBar = forwardRef((props, ref) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [token, setToken] = useState(null);
+  const [show, setShow] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
 
-  const getToken = async () => {
-    const localToken = await localStorage.getItem("token");
-    if (localToken) setToken(localToken);
-  };
   useEffect(() => {
-    getToken();
+    const getToken = async () => {
+      const localToken = localStorage.getItem("token");
+      if (localToken) {
+        setToken(localToken);
+      }
+    };
+    getToken().catch((error) => {
+      console.error("Error fetching token:", error);
+    });
   }, []);
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
   };
+  const handleDisconnect = () => {
+    if (localStorage.getItem("token")) {
+      localStorage.clear();
+    }
+  };
 
-  function removeToken() {
-    localStorage.clear();
+  function toggleShow() {
+    setShow(!show);
   }
+
   return (
     <nav className={"navbar"} ref={ref}>
       <div className="navbar-container">
         {location.pathname === "/jeux/1" ? (
-          <NavLink
-            to={"/vendre-mes-cartes"}
-            className={({ isActive }) => (isActive ? "active" : "inactive")}
-          >
+          <NavLink to={"/vendre-mes-cartes"} className={"navbar-element_dnone"}>
             <IcPlus />
           </NavLink>
         ) : (
-          <button className={"navbar-button"} onClick={() => navigate(-1)}>
+          <button
+            className={"navbar-button navbar-element_dnone"}
+            onClick={() => navigate(-1)}
+          >
             <IcArrowLeft />
           </button>
         )}
-        <NavLink
-          to={"/"}
-          className={({ isActive }) => (isActive ? "active" : "inactive")}
-        >
+        <NavLink to={"/"} className={"navbar-element_dnone"}>
           <IcHome />
         </NavLink>
-        <div className="menu-icon" onClick={handleShowNavbar}>
+        <div
+          className="menu-icon navbar-element_dnone"
+          onClick={handleShowNavbar}
+        >
           <Hamburger />
         </div>
         <div className={`navElements  ${showNavbar && "active"}`}>
-          <div className={"navElements-header"}>
+          <div className={"navElements-header navbar-element_dnone"}>
             <button
               className={"navElements-headerButton"}
               onClick={handleShowNavbar}
             >
-              <IcXMark color="white" />
+              <IcXMark color={"white"} />
             </button>
             <img
               className={"navElements-headerLogo"}
@@ -73,57 +84,136 @@ const NavBar = forwardRef((props, ref) => {
             />
           </div>
           <ul className={"navElements-ul"}>
-            {token && (
+            <li
+              className={"navElements-li navElements-li_MarginTop0"}
+              onClick={handleShowNavbar}
+            >
+              <NavLink to={"#"}>
+                <span
+                  className={"navElements-linkText navElements-linkText_md"}
+                >
+                  Cartes en ventes
+                  <span className={"navbar-element_dnone"}>
+                    <IcCatalogue />
+                  </span>
+                </span>
+              </NavLink>
+            </li>
+            {token ? (
               <>
                 <li
-                  className={"navElements-li navElements-li_MarginTop"}
+                  className={"navElements-li navbar-element_dnone"}
+                  onClick={handleShowNavbar}
+                >
+                  <NavLink to="/vendre-mes-cartes">
+                    <span className={"navElements-linkText"}>
+                      Vendre mes cartes
+                      <span className={"navbar-element_dnone"}>
+                        <IcSold />
+                      </span>
+                    </span>
+                  </NavLink>
+                </li>
+                <li
+                  className={"navElements-li navbar-element_dnone"}
                   onClick={handleShowNavbar}
                 >
                   <NavLink to="#">
                     <span className={"navElements-linkText"}>
-                      Mes vente en cours
-                      <IcMesAnnonces />
+                      Mes ventes en cours
+                      <span className={"navbar-element_dnone"}>
+                        <IcMesAnnonces />
+                      </span>
                     </span>
                   </NavLink>
                 </li>
-                <li className={"navElements-li"} onClick={handleShowNavbar}>
-                  <NavLink to="/vendre-mes-cartes">
-                    <span className={"navElements-linkText"}>
-                      Vendre mes cartes
-                      <IcSold />
-                    </span>
-                  </NavLink>
-                </li>
-                <li className={"navElements-li"} onClick={handleShowNavbar}>
+                <li
+                  className={"navElements-li navbar-element_dnone"}
+                  onClick={handleShowNavbar}
+                >
                   <NavLink to="/profil">
                     <span className={"navElements-linkText"}>
-                      Mon profile
-                      <IcUser />
+                      Mon profil
+                      <span className={"navbar-element_dnone"}>
+                        <IcUser />
+                      </span>
+                    </span>
+                  </NavLink>
+                </li>
+                <li
+                  className={"navElements-li navbar-element_dnone"}
+                  onClick={handleShowNavbar}
+                >
+                  <NavLink to={"/"} onClick={handleDisconnect}>
+                    <span className={"navElements-linkText"}>
+                      Se déconnecter
+                      <span className={"navbar-element_dnone"}>
+                        <IcLogout />
+                      </span>
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li
+                  className={"navElements-li navbar-element_dnone"}
+                  onClick={handleShowNavbar}
+                >
+                  <NavLink to={"/login"}>
+                    <span className={"navElements-linkText"}>
+                      Inscription / Connexion <IcLogin />
                     </span>
                   </NavLink>
                 </li>
               </>
             )}
-            <li className={"navElements-li"} onClick={handleShowNavbar}>
-              <NavLink to={"#"}>
-                <span className={"navElements-linkText"}>
-                  Cartes en ventes <IcCatalogue />
-                </span>
-              </NavLink>
-            </li>
             {token ? (
-              <li className={"navElements-li"} onClick={handleShowNavbar}>
-                <NavLink to={"/"} onClick={() => removeToken()}>
-                  <span className={"navElements-linkText"}>
-                    Se déconnecter <IcLogout />
-                  </span>
-                </NavLink>
+              <li
+                className={"navElements-li navElements-dropdown"}
+                onClick={toggleShow}
+              >
+                <span
+                  className={"navElements-linkText navElements-linkText_center"}
+                >
+                  Mon compte
+                </span>
+                {show && (
+                  <div className={"navElements-dropdownMenu"}>
+                    <div className={"dropDownMenu-links"}>
+                      <NavLink to={"/profil"}>
+                        <span className={"dropdownMenu-text"}>Mon profil</span>
+                      </NavLink>
+                      <NavLink to={"/vendre-mes-cartes"}>
+                        <span className={"dropdownMenu-text"}>
+                          Vendre mes cartes
+                        </span>
+                      </NavLink>
+                      <NavLink to={"#"}>
+                        <span className={"dropdownMenu-text"}>
+                          Mes ventes en cours
+                        </span>
+                      </NavLink>
+                      <NavLink to={"/"} onClick={handleDisconnect}>
+                        <span
+                          className={"dropdownMenu-text dropdownMenu-text_MB"}
+                        >
+                          Se déconnecter
+                        </span>
+                      </NavLink>
+                    </div>
+                  </div>
+                )}
               </li>
             ) : (
-              <li className={"navElements-li"} onClick={handleShowNavbar}>
+              <li className={"navElements-li navElements-li_md"}>
                 <NavLink to={"/login"}>
-                  <span className={"navElements-linkText"}>
-                    Inscription / Connexion <IcLogin />
+                  <span
+                    className={
+                      "navElements-linkText navElements-linkText_md navElements-linkText_center"
+                    }
+                  >
+                    Se connecter
                   </span>
                 </NavLink>
               </li>

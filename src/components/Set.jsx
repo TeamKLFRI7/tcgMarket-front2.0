@@ -1,39 +1,33 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./css/set.css";
 
-const Set = props => {
-    //console.log(props)
-    return (
-        <>
-        {props.setData.map((set, index) => (
-            <Link to={'/set/' + set.id + '/cartes'} key={index}>
-                <div style={styles.setContainer}>
-                        <img src={set.img} alt={'set icone'} style={styles.setImg}/>
-                        <img src={set.logo} alt={'set logo'} style={styles.setImg}/>
-                </div>
-            </Link>
-        ))}
-        </>
-    )
+const Set = (props) => {
+  return (
+    <>
+      {props.setData.map((set) => (
+        <div className={"setContainer"} key={set.id}>
+          <Link to={"set/" + set.id + "/cartes"} className={"set-link"}>
+            <div className={"set"}>
+              <div className={"set-iconContainer"}>
+                <img
+                  src={set.img}
+                  alt={"set icon"}
+                  className={"set-img icon"}
+                />
+              </div>
+              <div className={"set-logoContainer"}>
+                <img
+                  src={set.logo}
+                  alt={"set logo"}
+                  className={"set-img logo"}
+                />
+              </div>
+            </div>
+          </Link>
+        </div>
+      ))}
+    </>
+  );
 };
 
-const styles = {
-    setContainer: {
-        width: 'calc(100% - 2rem)',
-        minHeight: '3rem',
-        margin: ' 1rem auto 1rem',
-        paddingBottom: '1rem',
-        borderBottom : '1px solid grey',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-
-    setImg: {
-        maxWidth: '50%',
-        maxHeight: '2rem',
-    }
-};
-
-
-
-export default Set
+export default Set;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader";
 import { useGetSelling } from "../../axios";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import game from "../card/Game";
+import axios from "axios";
+import "./sell.css";
 
 const FormSell = () => {
   let apiUrl = process.env.REACT_APP_URL_API;
@@ -63,7 +63,7 @@ const FormSell = () => {
     } else if (name === "set") {
       const setIndex = data["hydra:member"][formData.gameIndex].cardSeries[
         formData.seriesIndex
-      ].fkIdCardSet.findIndex((set) => set.id === parseInt(value));
+      ]["fkIdCardSet"].findIndex((set) => set.id === parseInt(value));
       setFormData({
         ...formData,
         [name]: parseInt(value),
@@ -72,13 +72,13 @@ const FormSell = () => {
     } else if (name === "card") {
       const cardIndex = data["hydra:member"][formData.gameIndex].cardSeries[
         formData.seriesIndex
-      ].fkIdCardSet[formData.setIndex].fkIdCar.findIndex(
+      ]["fkIdCardSet"][formData.setIndex].fkIdCar.findIndex(
         (set) => set.id === parseInt(value)
       );
       const cardImage =
         data["hydra:member"][formData.gameIndex].cardSeries[
           formData.seriesIndex
-        ].fkIdCardSet[formData.setIndex].fkIdCar[cardIndex].img;
+        ]["fkIdCardSet"][formData.setIndex].fkIdCar[cardIndex].img;
       setFormData({
         ...formData,
         [name]: value,
@@ -117,17 +117,6 @@ const FormSell = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const sellData = new FormData();
-    // sellData.append("fkIdUser", 1);
-    // sellData.append("name", formData.name);
-    // sellData.append("quality", formData.quality);
-    // sellData.append("price", formData.price);
-    // sellData.append("card", formData.card);
-    // sellData.append("cardSet", formData.set);
-    // for (let i = 0; i < formData.imageFiles.length; i++) {
-    //   sellData.append("file", formData.imageFiles[i]);
-    // }
-    // sellData.append("fkIdGame", formData.game);
 
     axios
       .postForm(apiUrl + "/sellCard", {
@@ -148,13 +137,18 @@ const FormSell = () => {
       });
   };
   useEffect(() => {
-    const fileReaders = [];
-    let isCancel = false;
+    const fileReaders = []; //On initialise une variable fileReaders qui est un tableau vide
+    let isCancel = false; //On initialise une variable isCancel à False
+    //Si l'utilisateur sélectionne une image
     if (formData.imageFiles.length) {
       const promise = formData.imageFiles.map((file) => {
+        //On créer une nouvelle promesse pour chaque image
         return new Promise((resolve, reject) => {
+          //On utilise la méthode FileReader pour lire le contenu d'un fichier en utilisant l'API File
           const fileReader = new FileReader();
+          //Pour chaque fichier image, un objet FileReader est créé et ajouté au tableau fileReaders
           fileReaders.push(fileReader);
+          //On utilise onload, onabort et onerror de l'objet FileReader pour gérer les différents événements de lecture du fichier
           fileReader.onload = (e) => {
             const { result } = e.target;
             if (result) {
@@ -167,11 +161,14 @@ const FormSell = () => {
           fileReader.onerror = () => {
             reject(new Error("Echec de la lecture du fichier"));
           };
+          //readAsDataURL est appelée pour récupérer les données de l'image sous forme d'URL
           fileReader.readAsDataURL(file);
         });
       });
+      //Promise.all récupère toutes les URL des images en une seule fois.
       Promise.all(promise)
         .then((images) => {
+          //Si la lecture n'a pas été annulée ou sans erreur on set notre formData.images
           if (!isCancel) {
             setFormData({
               ...formData,
@@ -184,14 +181,16 @@ const FormSell = () => {
         });
     }
     return () => {
+      //Si useEffect appelé avec de nouvelles données on annule lecture du ficher en cours
       isCancel = true;
+      //On supprime les objets fileReader associé
       fileReaders.forEach((fileReader) => {
         if (fileReader.readyState === 1) {
           fileReader.abort();
         }
       });
     };
-  }, [formData.imageFiles]);
+  }, [formData]);
 
   switch (step) {
     case 1:
@@ -200,17 +199,17 @@ const FormSell = () => {
           <PageHeader
             title="Vendez vos cartes"
             img={cover}
-            style={styles.style}
+            css={styles.style}
           />
-          <div style={styles.formContainer}>
+          <div className={"formContainer"}>
             <p>1. Sélectionnez une carte :</p>
-            <form onSubmit={nextStep} style={styles.form}>
+            <form onSubmit={nextStep} className={"form"}>
               <div>
                 <select
                   name="game"
                   id="game"
                   onChange={handleChange}
-                  style={styles.formElement}
+                  className={"formElement"}
                 >
                   <option value="">Sélectionnez un jeu</option>
                   {data["hydra:member"]?.map((game, index) => (
@@ -226,14 +225,14 @@ const FormSell = () => {
                   id="series"
                   onChange={handleChange}
                   disabled={!formData.game}
-                  style={styles.formElement}
+                  className={"formElement"}
                 >
                   <option value="">Sélectionnez une série</option>
                   {formData.game && !loading
                     ? data["hydra:member"][formData.gameIndex].cardSeries.map(
                         (serie, index) => (
                           <option value={serie.id} key={index}>
-                            {serie.serieName}
+                            {serie["serieName"]}
                           </option>
                         )
                       )
@@ -246,13 +245,13 @@ const FormSell = () => {
                   id="set"
                   onChange={handleChange}
                   disabled={!formData.series}
-                  style={styles.formElement}
+                  className={"formElement"}
                 >
                   <option value="">Sélectionnez un set</option>
                   {formData.series && !loading
                     ? data["hydra:member"][formData.gameIndex].cardSeries[
                         formData.seriesIndex
-                      ].fkIdCardSet.map((set, index) => (
+                      ]["fkIdCardSet"].map((set, index) => (
                         <option value={set.id} key={index}>
                           {set.setName}
                         </option>
@@ -266,13 +265,13 @@ const FormSell = () => {
                   id="card"
                   onChange={handleChange}
                   disabled={!formData.set}
-                  style={styles.formElement}
+                  className={"formElement"}
                 >
                   <option value="">Sélectionnez une carte</option>
                   {formData.set && !loading
                     ? data["hydra:member"][formData.gameIndex].cardSeries[
                         formData.seriesIndex
-                      ].fkIdCardSet[formData.setIndex].fkIdCar.map(
+                      ]["fkIdCardSet"][formData.setIndex].fkIdCar.map(
                         (card, index) => (
                           <option value={card.id} key={index}>
                             {card.name}
@@ -285,13 +284,13 @@ const FormSell = () => {
               {formData.cardImage ? (
                 <img
                   src={formData.cardImage}
-                  style={styles.cardImage}
+                  className={"cardImage"}
                   alt={"carte sélectionnée"}
                 />
               ) : null}
               <button
                 type="submit"
-                style={styles.step}
+                className={"step"}
                 disabled={!formData.cardImage}
               >
                 Étape suivante
@@ -306,9 +305,9 @@ const FormSell = () => {
           <PageHeader
             title="Vendez vos cartes"
             img={cover}
-            style={styles.style}
+            css={styles.style}
           />
-          <div style={styles.formContainer}>
+          <div className={"formContainer"}>
             <p>2. Informations de ventes :</p>
             <form onSubmit={handleSubmit}>
               <div>
@@ -318,7 +317,7 @@ const FormSell = () => {
                   onChange={handleChange}
                   value={formData.name}
                   placeholder={"nom de votre carte"}
-                  style={styles.formElement}
+                  className={"formElement"}
                 />
               </div>
               <div>
@@ -329,7 +328,7 @@ const FormSell = () => {
                   onChange={handleChange}
                   value={formData.quality}
                   placeholder={"Qualitée"}
-                  style={styles.formElement}
+                  className={"formElement"}
                 />
               </div>
               <div>
@@ -340,17 +339,17 @@ const FormSell = () => {
                   onChange={handleChange}
                   value={formData.price}
                   placeholder={"Prix"}
-                  style={styles.formElement}
+                  className={"formElement"}
                 />
               </div>
-              <div style={styles.fileContainer}>
+              <div className={"formContainer formContainerFile"}>
                 {formData.imageFiles
                   ? formData.images?.map((image, index) => (
                       <img
                         src={image}
                         key={index}
                         alt={"..."}
-                        style={styles.file}
+                        className={"file"}
                       />
                     ))
                   : null}
@@ -364,13 +363,15 @@ const FormSell = () => {
                   multiple
                   onChange={handleChange}
                   disabled={formData.imageFiles.length === 3}
-                  style={styles.inputFile}
+                  className={"inputFile"}
                 />
-                <label htmlFor="image" style={styles.inputLabel}>
+                <label htmlFor="image" className={"inputLabel"}>
                   Ajouter une image
                 </label>
               </div>
-              <button type="submit">Envoyer</button>
+              <button type="submit" className={"sendButton"}>
+                Envoyer
+              </button>
             </form>
           </div>
         </>
@@ -381,67 +382,7 @@ const FormSell = () => {
 };
 
 const styles = {
-  style: {
-    headImg: {
-      objectFit: "fill",
-    },
-  },
-  formContainer: {
-    margin: "0 1rem",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-  formElement: {
-    width: "100%",
-    minHeight: "2rem",
-    marginBottom: "1rem",
-    padding: ".5rem",
-    color: "grey",
-    border: "none",
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    borderRadius: ".625rem",
-  },
-  step: {
-    border: "none",
-    background: "none",
-    color: "#636AF2",
-    fontWeight: "bold",
-  },
-  cardImage: {
-    width: "70%",
-    margin: "0 auto 1rem",
-  },
-  icon: {
-    color: "#636AF2",
-  },
-  inputFile: {
-    width: "0.1px",
-    height: "0.1px",
-    opacity: "0",
-    overflow: "hidden",
-    position: "absolute",
-    zIndex: "-1",
-  },
-  inputLabel: {
-    display: "block",
-    padding: ".5rem",
-    width: "100%",
-    borderRadius: ".625rem",
-    textAlign: "center",
-    color: "white",
-    backgroundColor: "#636AF2",
-  },
-  fileContainer: {
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-  },
-  file: {
-    width: "calc(100% / 3 - .5rem)",
-  },
+  style: "headImg",
 };
 
 export default FormSell;

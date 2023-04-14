@@ -6,21 +6,23 @@ import "./button.css";
 const RedButton = (props) => {
   let apiUrl = process.env.REACT_APP_URL_API;
   const navigate = useNavigate();
-  const [token, setToken] = useState();
+  const [token, setToken] = useState("");
 
-  const getToken = async () => {
-    const localToken = await localStorage.getItem("token");
-
-    if (localToken) setToken(localToken);
-  };
   useEffect(() => {
-    getToken();
+    const getToken = async () => {
+      const localToken = localStorage.getItem("token");
+      if (localToken) {
+        setToken(localToken);
+      }
+    };
+    getToken().catch((error) => {
+      console.error("Error fetching token:", error);
+    });
   }, []);
 
   const [apiError, setApiError] = useState(null);
   const handleDeleteUser = (id) => {
     if (id) {
-      console.log(apiUrl + "/users/" + id);
       axios
         .delete(apiUrl + "/users/" + id, {
           headers: {
@@ -28,17 +30,14 @@ const RedButton = (props) => {
             "Content-Type": `application/json`,
           },
         })
-        .then((res) => {
+        .then(() => {
           localStorage.removeItem("user");
           localStorage.removeItem("token");
           setApiError(null);
           navigate("/login");
         })
         .catch((err) => {
-          console.log(err);
-          // if (err.response.data.code === 401) {
-          //     setApiError("Lidentifiant ou le mot de passe est invalide.");
-          // }
+          setApiError(err);
         });
     }
   };
@@ -52,6 +51,7 @@ const RedButton = (props) => {
       >
         {props.children}
       </button>
+      <div>{apiError}</div>
     </>
   );
 };

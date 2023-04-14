@@ -1,0 +1,105 @@
+.cardsContainer {
+    margin-bottom: 1.5rem;
+}
+.formContainer {
+    margin: 0 auto;
+}
+.formContainerFile {
+    height: 12rem;
+    margin-bottom: 1.5rem;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.formElement {
+    width: 100%;
+    min-height: 2rem;
+    margin-bottom: 1rem;
+    padding: .5rem;
+    color: grey;
+    border: none;
+    border-radius: .625rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+.step {
+    font-weight: bold;
+    color: #636AF2;
+    border: none;
+    background: none;
+}
+.sendButton {
+    font-weight: bold;
+    display: block;
+    margin: 2rem auto 0;
+    color: #636AF2;
+    border: none;
+    background: none;
+}
+.cardImage {
+    width: 70%;
+    margin: 0 auto 1rem;
+}
+.icon {
+    color: #636AF2
+}
+.inputFile {
+    position: absolute;
+    z-index: -1;
+    overflow: hidden;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+}
+.inputLabel {
+    display: block;
+    width: 100%;
+    padding: .5rem;
+    text-align: center;
+    color: white;
+    border-radius: .625rem;
+    background-color: #636AF2;
+}
+.fileContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.file {
+    width: calc(100% / 3);
+    max-height: 100%;
+    padding: 0 .5rem;
+}
+@media only screen and (min-width: 600px) {
+    .sellPage {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .cardsContainer {
+        width: calc(100% / 2);
+        padding: .5rem;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .cardsContainer {
+        width: calc(100% / 3)
+    }
+    .sell-card {
+        align-items: center;
+        width: 100%;
+    }
+    .sell-img {
+        max-height: 9rem;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .cardsContainer {
+        width: calc(100% / 4);
+    }
+    .sell {
+        max-width: 100%;
+        margin: 0;
+    }
+}

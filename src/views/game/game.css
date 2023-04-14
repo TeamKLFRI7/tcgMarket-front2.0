@@ -1,0 +1,23 @@
+.games {
+    margin-bottom: 3rem;
+}
+.search-title {
+    padding-left: 1rem;
+}
+.search-cardContainer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.search-card {
+    position: relative;
+    width: calc(100% / 2 - 1rem);
+    max-width: 11rem;
+    margin-bottom: 1.5rem;
+}
+@media only screen and (max-width: 300px) {
+    .search-card {
+        width: 100%;
+    }
+}
