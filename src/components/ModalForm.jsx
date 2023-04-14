@@ -12,6 +12,7 @@ const ModalForm = ({ setModalOpen }) => {
   const [token, setToken] = useState("");
   const [apiError, setApiError] = useState(null);
   const id = localStorage.getItem("user");
+  const { data, loading } = useGetUserMe();
 
   useEffect(() => {
     const getToken = async () => {
@@ -24,8 +25,6 @@ const ModalForm = ({ setModalOpen }) => {
       console.error("Error fetching token:", error);
     });
   }, []);
-
-  const { data, loading } = useGetUserMe();
 
   let infoSup = "";
   if (data.userInfo) {
@@ -75,24 +74,10 @@ const ModalForm = ({ setModalOpen }) => {
   });
 
   const handleSubmitModifications = (values, { setSubmitting }) => {
-    let newUser = {
-      email: values.email,
-      userName: values.userName,
-      phoneNumber: values.phoneNumber,
-      userInfo: {
-        id: parseInt(id),
-        city: values.city,
-        country: values.country,
-        address: values.address,
-        postalCode: values.postalCode,
-        description: values.description,
-        deliveryAddress: values.deliveryAddress
-      }
-    }
     setSubmitting(true);
     if (id) {
       axios
-        .put(apiUrl + "/users/" + id, newUser, {
+        .put(apiUrl + "/updateUser", values, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": `application/json`,
@@ -118,6 +103,7 @@ const ModalForm = ({ setModalOpen }) => {
       {!loading && (
         <Formik
           initialValues={{
+            userId: data.id || "",
             userName: data.userName || "",
             email: data.email || "",
             phoneNumber: data.phoneNumber || "",
